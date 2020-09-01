@@ -17,11 +17,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-// db.sequelize.sync();
+db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-	res.json({ message: "Sent ton doigt ?" });
+	res.json({ message: "Common GET route works fine !" });
 });
 
 require("./app/routes/utilisateur.routes.js")(app);

@@ -1,5 +1,5 @@
 const db = require("../models");
-const Utilisateur = db.utilisateur;
+const ThumbUp = db.thumbup;
 const Op = db.Sequelize.Op;
 
 // Get likes for message_id

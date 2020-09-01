@@ -1,5 +1,5 @@
 const db = require("../models");
-const Message = db.utilisateur;
+const Message = db.message;
 const Op = db.Sequelize.Op;
 
 // create a Message

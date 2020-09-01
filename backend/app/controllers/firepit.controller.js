@@ -1,11 +1,11 @@
 const db = require("../models");
-const Firepit = db.utilisateur;
+const Firepit = db.firepit;
 const Op = db.Sequelize.Op;
 
 // Create new Firepit
 exports.create = (req, res) => {
 	// Validate request
-	if (!req.body.title) {
+	if (!req.body.sujet) {
 		res.status(400).send({
 			message: "Request content must not be empty",
 		});
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 	const firepit = {
 		sujet: req.body.sujet,
 		portee: req.body.portee,
-		user_fk: req.body.user_id,
+		user_id: req.body.user_id,
 	};
 	// Save Firepit in the database
 	Firepit.create(firepit)
