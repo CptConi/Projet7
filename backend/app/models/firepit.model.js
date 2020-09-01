@@ -4,12 +4,14 @@ module.exports = (sequelize, Sequelize) => {
 	const Firepit = sequelize.define(
 		"firepit",
 		{
+			//-----------------------------------
 			// PK
 			firepit_id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 			},
+			//-----------------------------------
 			// Standard Cols
 			sujet: {
 				type: Sequelize.STRING,
@@ -17,6 +19,7 @@ module.exports = (sequelize, Sequelize) => {
 			portee: {
 				type: Sequelize.STRING,
 			},
+			//-----------------------------------
 			// FK
 			user_fk: {
 				type: Sequelize.INTEGER,
@@ -25,6 +28,7 @@ module.exports = (sequelize, Sequelize) => {
 					key: "id",
 				},
 			},
+			//-----------------------------------
 		},
 		{
 			freezeTableName: true,

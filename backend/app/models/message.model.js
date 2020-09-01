@@ -5,6 +5,7 @@ module.exports = (sequelize, Sequelize) => {
 	const Message = sequelize.define(
 		"message",
 		{
+			//-----------------------------------
 			//PK
 			message_id: {
 				type: Sequelize.INTEGER,
@@ -32,6 +33,7 @@ module.exports = (sequelize, Sequelize) => {
 					key: "firepit_id",
 				},
 			},
+			//-----------------------------------
 		},
 		{
 			freezeTableName: true,

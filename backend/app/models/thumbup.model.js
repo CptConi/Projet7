@@ -5,6 +5,7 @@ module.exports = (sequelize, Sequelize) => {
 	const ThumbUp = sequelize.define(
 		"Thumbup",
 		{
+			//-----------------------------------
 			//PK
 			message_id: {
 				type: Sequelize.INTEGER,
@@ -31,6 +32,7 @@ module.exports = (sequelize, Sequelize) => {
 					key: "message_id",
 				},
 			},
+			//-----------------------------------
 		},
 		{
 			freezeTableName: true,

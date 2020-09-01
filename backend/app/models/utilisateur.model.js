@@ -2,12 +2,14 @@ module.exports = (sequelize, Sequelize) => {
 	const Utilisateur = sequelize.define(
 		"utilisateur",
 		{
+			//-----------------------------------
 			// PK
 			id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				autoIncrement: true,
 			},
+			//-----------------------------------
 			// Standard Cols
 			email: {
 				type: Sequelize.STRING,
@@ -26,9 +28,11 @@ module.exports = (sequelize, Sequelize) => {
 				type: Sequelize.STRING,
 			},
 			isAdmin: {
-				type: Sequelize.BOOLEAN
-			}
+				type: Sequelize.BOOLEAN,
+			},
+			//-----------------------------------
 			// FK
+			//-----------------------------------
 		},
 		{
 			freezeTableName: true,
