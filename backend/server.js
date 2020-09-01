@@ -24,6 +24,9 @@ app.get("/", (req, res) => {
 	res.json({ message: "Sent ton doigt ?" });
 });
 
+require("./app/routes/utilisateur.routes.js")(app);
+require("./app/routes/firepit.routes")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

@@ -3,12 +3,13 @@ module.exports = (app) => {
 
 	var router = require("express").Router();
 
+	router.post("/", firepit.create);
 
-	router.post("/firepit/", firepit.create);
+	// router.get("/:id", firepit.getFirepit);
 
-	router.get("/firepit/:id", firepit.getFirepit);
+	// router.put("/:id", firepit.update);
 
-	router.put("/firepit/:id", firepit.update);
+	// router.delete("/:id", firepit.delete);
 
-	router.delete("firepit/:id", firepit.delete);
+	app.use("/firepit", router);
 };

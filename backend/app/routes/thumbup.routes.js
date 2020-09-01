@@ -3,7 +3,9 @@ module.exports = (app) => {
 
 	var router = require("express").Router();
 
-    router.get("/thumbup/:id", thumbUp.getLikes);
-    
-	router.post("/thumbup/:id", thumbUp.setLikes);
+	// router.get("/:id", thumbUp.getLikes);
+
+	// router.post("/:id", thumbUp.setLikes);
+
+	app.use("/thumbup", router);
 };
