@@ -10,6 +10,10 @@ module.exports = (sequelize, Sequelize) => {
 			message_id: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
+				references: {
+					model: Message,
+					key: "message_id",
+				},
 			},
 			//-----------------------------------
 			// Standard Cols
@@ -18,20 +22,14 @@ module.exports = (sequelize, Sequelize) => {
 			},
 			//-----------------------------------
 			// FK
-			user_fk: {
+			user_id: {
 				type: Sequelize.INTEGER,
 				references: {
 					model: Utilisateur,
 					key: "id",
 				},
 			},
-			message_fk: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: Message,
-					key: "message_id",
-				},
-			},
+
 			//-----------------------------------
 		},
 		{

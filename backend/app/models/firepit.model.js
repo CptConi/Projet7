@@ -21,7 +21,7 @@ module.exports = (sequelize, Sequelize) => {
 			},
 			//-----------------------------------
 			// FK
-			user_fk: {
+			user_id: {
 				type: Sequelize.INTEGER,
 				references: {
 					model: Utilisateur,
