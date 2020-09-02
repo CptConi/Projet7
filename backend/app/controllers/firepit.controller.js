@@ -30,10 +30,66 @@ exports.create = (req, res) => {
 };
 
 // Get Firepit from id
-exports.getFirepit = (req, res) => {};
+exports.getFirepit = (req, res) => {
+	const id = req.params.id;
+
+	Firepit.findByPk(id)
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: "Error retrieving Firepit with id=" + id,
+			});
+		});
+};
 
 // Update Firepit informations: sujet, portee
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+	  const id = req.params.id;
+
+		Firepit.update(req.body, {
+			where: { firepit_id: id },
+		})
+			.then((num) => {
+				if (num == 1) {
+					res.send({
+						message: "Firepit was updated successfully.",
+					});
+				} else {
+					res.send({
+						message: `Cannot update Firepit with id=${id}. Maybe Firepit was not found or req.body is empty!`,
+					});
+				}
+			})
+			.catch((err) => {
+				res.status(500).send({
+					message: "Error updating Firepit with id=" + id,
+				});
+			});
+};
 
 // Delete existing Firepit
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+	  const id = req.params.id;
+
+		Firepit.destroy({
+			where: { firepit_id: id },
+		})
+			.then((num) => {
+				if (num == 1) {
+					res.send({
+						message: "Firepit was deleted successfully!",
+					});
+				} else {
+					res.send({
+						message: `Cannot delete Firepit with id=${id}. Maybe Firepit was not found!`,
+					});
+				}
+			})
+			.catch((err) => {
+				res.status(500).send({
+					message: "Could not delete Firepit with id=" + id,
+				});
+			});
+};
