@@ -5,11 +5,11 @@ module.exports = (app) => {
 
 	router.post("/", firepit.create);
 
-	// router.get("/:id", firepit.getFirepit);
+	router.get("/:id", firepit.getFirepit);
 
-	// router.put("/:id", firepit.update);
+	router.put("/:id", firepit.update);
 
-	// router.delete("/:id", firepit.delete);
+	router.delete("/:id", firepit.delete);
 
 	app.use("/firepit", router);
 };
