@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-db.sequelize.sync();
+db.sequelize.sync({ force: true }).catch((err) => console.log(err));
 
 // simple route
 app.get("/", (req, res) => {
@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/utilisateur.routes.js")(app);
 require("./app/routes/firepit.routes")(app);
+require("./app/routes/message.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
