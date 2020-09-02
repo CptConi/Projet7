@@ -1,6 +1,3 @@
-const { Utilisateur } = require("./utilisateur.model");
-const { Firepit } = require("./firepit.model");
-
 module.exports = (sequelize, Sequelize) => {
 	const Message = sequelize.define(
 		"message",
@@ -19,20 +16,20 @@ module.exports = (sequelize, Sequelize) => {
 			},
 			//-----------------------------------
 			// FK
-			user_id: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: Utilisateur,
-					key: "id",
-				},
-			},
-			firepit_id: {
-				type: Sequelize.INTEGER,
-				references: {
-					model: Firepit,
-					key: "firepit_id",
-				},
-			},
+			// auteur_id: {
+			// 	type: Sequelize.INTEGER,
+			// 	references: {
+			// 		model: Utilisateur,
+			// 		key: "id",
+			// 	},
+			// },
+			// firepit_id: {
+			// 	type: Sequelize.INTEGER,
+			// 	references: {
+			// 		model: Firepit,
+			// 		key: "firepit_id",
+			// 	},
+			// },
 			//-----------------------------------
 		},
 		{
