@@ -19,3 +19,26 @@ exports.update = (req, res) => {};
 
 // Delete User
 exports.delete = (req, res) => {};
+
+//TEST method:
+
+exports.createTestUser = (req, res) => {
+	const randomUser = {
+		email: req.body.email,
+		password: req.body.password,
+		prenom: req.body.prenom,
+		nom: req.body.nom,
+		poste: req.body.poste,
+		isAdmin: true,
+	};
+	// Save Firepit in the database
+	Utilisateur.create(randomUser)
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: err.message || "Maybe Admin already created ?",
+			});
+		});
+};
