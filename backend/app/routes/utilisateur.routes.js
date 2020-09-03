@@ -3,9 +3,9 @@ module.exports = (app) => {
 
 	var router = require("express").Router();
 
-	// router.post("/signup", utilisateur.signUp);
+	router.post("/signup", utilisateur.signUp);
 
-	// router.post("/login", utilisateur.logIn);
+	router.post("/login", utilisateur.logIn);
 
 	// router.get("/:id", utilisateur.getUser);
 

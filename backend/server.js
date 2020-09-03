@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./app/models");
-db.sequelize.sync().catch((err) => console.log(err));
+db.sequelize.sync({force:true}).catch((err) => console.log(err));
 
 // simple route
 app.get("/", (req, res) => {
