@@ -6,14 +6,13 @@
 			<label for="email">Votre Mot de Passe 🔣</label>
 			<input type="password" v-model="password" id="password" required />
 
-			<button @click.prevent="Signup()"><strong>Créer un compte</strong></button>
+			<button @click.prevent="signup"><strong>Créer un compte</strong></button>
 		</form>
 		<a @click.prevent="asAnAccount()">J'ai déjà un compte !</a>
 	</div>
 </template>
 
 <script>
-const axios = require('axios');
 export default {
 	name: "Signup",
 	data() {
@@ -23,23 +22,27 @@ export default {
 		};
 	},
 	methods: {
-		async Signup() {
-			try {
-				const response = await axios.post("http://localhost:8080/user/signup", {
-					email : this.email,
-					password : this.password
-				});
-				if(response.status === 201){
-					console.log('Utilisateur créé avec l\'adresse mail ' + JSON.stringify(response.data.email));
-					// Appel de LOGIN() dans la foulée, pour entre autre délivrer le token
+		signup() {
+			this.$signup.save({ email: this.email, password: this.password }).then(
+				(response) => {
+					if (response.status === 201) {
+						console.log(
+							"Utilisateur créé avec l'adresse mail " +
+								JSON.stringify(response.data.email)
+						);
+					}
+				},
+				(responseError) => {
+					console.log("ERREUR SERVEUR", responseError);
 				}
-			} catch (err) {
-				console.log(err);
-			}
+			);
 		},
 		asAnAccount() {
 			this.$emit("as-an-account");
 		},
+	},
+	mounted() {
+		this.$signup = this.$resource("user/signup");
 	},
 };
 </script>

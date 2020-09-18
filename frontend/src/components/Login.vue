@@ -1,21 +1,19 @@
 <template>
 	<div class="login">
-		
-			<form>
-				<label for="email">Votre email 💌</label>
-				<input type="email" v-model="email" id="email" required />
-				<label for="email">Votre Mot de Passe 🔣</label>
-				<input type="password" v-model="password" id="password" required />
+		<form>
+			<label for="email">Votre email 💌</label>
+			<input type="email" v-model="email" id="email" required />
+			<label for="email">Votre Mot de Passe 🔣</label>
+			<input type="password" v-model="password" id="password" required />
 
-				<button @click.prevent="LogIn()"><strong>Se connecter</strong></button>
-			</form>
-			<a @click.prevent="asAnAccount()">Je n'ai pas de compte</a>
-		
+			<button @click.prevent="logIn"><strong>Se connecter</strong></button>
+		</form>
+		<a @click.prevent="asAnAccount()">Je n'ai pas de compte</a>
 	</div>
 </template>
 
 <script>
-const axios = require("axios");
+import { mapState } from "vuex";
 export default {
 	name: "Login",
 	components: {},
@@ -25,30 +23,32 @@ export default {
 			password: "",
 		};
 	},
-	props: {
-		msg: String,
-	},
+
+	computed: { ...mapState(["user"]) },
 	methods: {
-		async LogIn() {
-			try {
-				const response = await axios.post("http://localhost:8080/user/login", {
-					email: this.email,
-					password: this.password
-				});
-				if(response.status === 200){
-					// Utilisateur connecté !
-					console.log('Utilisateur connecté !')
-					//Pour récupérer le token et l'adresse mail de connexion:
-					//response.data.email
-					//response.data.token
+		logIn() {
+			this.$login.save({ email: this.email, password: this.password }).then(
+				(response) => {
+					if (response.status === 200) {
+						// Utilisateur connecté !
+						// Récupération du token en réponse:
+						this.user.token = response.data.token;
+						// Puis de l'adresse mail vérifiée:
+						this.user.email = response.data.email;
+					}
+				},
+				(responseError) => {
+					console.log("ERREUR D'AUTHENTIFICATION", responseError);
 				}
-			} catch (err) {
-				console.log(err);
-			}
+			);
 		},
+
 		asAnAccount() {
 			this.$emit("as-an-account");
 		},
+	},
+	mounted() {
+		this.$login = this.$resource("user/login");
 	},
 };
 </script>
@@ -72,6 +72,4 @@ form {
 		margin-bottom: 2em;
 	}
 }
-
-
 </style>
