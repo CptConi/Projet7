@@ -2,8 +2,7 @@
 	<div class="home">
 		<Title>{{ displayTitle }}</Title>
 		<transition name="fade" mode="out-in">
-			<Login v-if="asAccount" v-on:as-an-account="asAccount = !asAccount" />
-			<Signup v-if="!asAccount" v-on:as-an-account="asAccount = !asAccount" />
+			<AuthForm></AuthForm>
 		</transition>
 		<FirepitAnimated />
 	</div>
@@ -11,20 +10,21 @@
 
 <script>
 // @ is an alias to /src
-import Login from "@/components/Login.vue";
+import AuthForm from "../components/AuthForm";
 import Title from "@/components/Title.vue";
-import Signup from "@/components/Signup.vue";
 import FirepitAnimated from "@/components/Firepit-Animated.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "Authentification",
-	components: { Login, Title, Signup, FirepitAnimated },
+	components: { AuthForm, Title, FirepitAnimated },
 	data() {
 		return {
 			asAccount: false,
 		};
 	},
 	computed: {
+		...mapState([]),
 		displayTitle() {
 			if (this.asAccount) {
 				return "🔥 Il reste une place autour du feu 🔥";
@@ -34,11 +34,17 @@ export default {
 		},
 	},
 
-	methods: {},
+	methods: {
+		...mapActions(['accountExists','accountDoNotExists']),
+	},
+	beforeMount() {
+		
+	},
 };
 </script>
 
 <style lang="scss">
+//Animations
 .fade-enter-active,
 .fade-leave-active {
 	transition: all 0.25s ease-in-out;

@@ -18,7 +18,7 @@ exports.signUp = (req, res) => {
 				.then(() =>
 					res.status(201).json({
 						message: "Utilisateur créé !",
-						email: user.email
+						email: user.email,
 					})
 				)
 				.catch((error) => res.status(400).json({ error }));
@@ -41,6 +41,7 @@ exports.logIn = (req, res) => {
 					}
 					res.status(200).json({
 						email: user.email,
+						id: user.id,
 						token: jwt.sign(
 							{ email: user.email },
 							"0F63B0D55976EEDCD6ED195A53000F570A161762",
