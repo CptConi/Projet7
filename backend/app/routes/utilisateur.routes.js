@@ -11,7 +11,7 @@ module.exports = (app) => {
 
 	// router.get("/", utilisateur.getUsers);
 
-	// router.put("/:id", utilisateur.update);
+	router.put("/", utilisateur.update);
 
 	// router.delete("/:id", utilisateur.delete);
 

@@ -63,7 +63,25 @@ exports.getUser = (req, res) => {};
 exports.getUsers = (req, res) => {};
 
 // Update User informations / profile
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+	Utilisateur.update(req.body, { where: { email: req.body.email } })
+		.then((code) => {
+			if (code == 1) {
+				res.send({
+					message: "User was updated successfully.",
+				});
+			} else {
+				res.send({
+					message: `Cannot update User with email=${email}. Maybe User was not found or req.body is empty!`,
+				});
+			}
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: "Error updating User with email=" + email + 'Error:' + err,
+			});
+		});
+};
 
 // Delete User
 exports.delete = (req, res) => {};
