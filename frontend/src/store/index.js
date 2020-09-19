@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
 	//====================================STATE=============================
 	state: {
-		existingAccount: false,
+		existingAccount: true,
 		user: {
 			email: "",
 			token: "",

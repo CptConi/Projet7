@@ -37,10 +37,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import LS from '../services/StorageManager'
+import userService from '../services/UserService'
+
 export default {
 	data() {
 		return {
-			email: "",
+			
 			prenom: "",
 			nom: "",
 			poste: "",
@@ -49,7 +52,10 @@ export default {
 	methods: {
 		...mapActions(["userUpdateCommonInfos"]),
 		submitChanges() {
-			//TODO >>> PUT ACCOUNT + MAJ store Vuex sur code retour 200
+			userService.update(this);
+			LS.set('prenom', this.prenom);
+			LS.set('nom', this.nom);
+			LS.set('poste', this.poste);
 			this.userUpdateCommonInfos({
 				prenom: this.prenom,
 				nom: this.nom,
@@ -66,8 +72,20 @@ export default {
 		...mapState(["user"]),
 	},
 	mounted(){
-		this.$delete = this.$resource('user/delete');
-		this.$update = this.$resource('user/update');
+		this.$user = this.$resource('user');
+		//Auto-fill inputs
+		if (LS.get("email")) {
+			this.user.email = LS.get("email");
+		}
+		if(LS.get('prenom')){
+			this.prenom = LS.get('prenom');
+		}
+		if(LS.get('nom')){
+			this.nom = LS.get('nom');
+		}
+		if(LS.get('poste')){
+			this.poste = LS.get('poste');
+		}
 	}
 };
 </script>
@@ -76,8 +94,14 @@ export default {
 .profile__Form {
 	display: flex;
 	margin: auto;
+	padding: 1.5em;
 	flex-direction: column;
-	width: 40%;
+	width: 100%;
+
+	background-color: rgba(0,0,0,0.15);
+	backdrop-filter: blur(8px);
+	border-radius: 10px;
+
 	& .informative {
 		display: flex;
 		margin: auto;
@@ -86,6 +110,20 @@ export default {
 	& .modifiable {
 		border-radius: 8px;
 		border-color: gray;
+		& input{
+			margin-top: 0.5em;
+			border-radius: 5px;
+			border: none;
+			height: 1.5em;
+			text-align: center;
+		}
+		& select{
+			margin-top: 0.5em;
+			border-radius: 5px;
+			border: none;
+			height: 1.5em;
+			text-align: center;
+		}
 	}
 }
 
@@ -97,6 +135,7 @@ input {
 	border-radius: 3px;
 	border: none;
 	cursor: pointer;
+	transition: transform 0.1s;
 	&.validate {
 		width: 180px;
 		height: 60px;
@@ -105,6 +144,7 @@ input {
 		background-color: lightgreen;
 		&:hover{
 			background-color: rgb(12, 196, 12);
+			transform: scale(1.05);
 		}
 	}
 	&.deleteAccount {
@@ -115,6 +155,7 @@ input {
 		margin-top: 1em;
 		&:hover {
 			background-color: rgb(196,12,12);
+			transform: scale(0.95);
 		}
 	}
 }

@@ -1,17 +1,64 @@
 <template>
 	<div>
-        <ProfileForm></ProfileForm>
-    </div>
+		<div class="settings__panel">
+			<transition name="slide">
+				<Settings v-show="settingsOpen"></Settings>
+			</transition>
+		</div>
+		<button class="settings__btn" @click="settingsOpen = !settingsOpen"></button>
+	</div>
 </template>
 
 <script>
-import ProfileForm from "../components/ProfileForm";
+import Settings from "../components/Settings";
+import { mapState } from "vuex";
 
 export default {
-	components: { ProfileForm },
+	data() {
+		return {
+			settingsOpen: true,
+		};
+	},
+	components: { Settings },
+	computed: {
+		...mapState(["user"]),
+	},
 };
 </script>
 
 <style lang="scss">
+.settings {
+    &__btn{
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        background: url('../assets/settings_btn.png') no-repeat;
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
 
+        border: none;
+        outline: none;
+        cursor: pointer;
+
+        transition: all 0.2s;
+
+        &:hover{
+            transform: scale(1.1);
+        }
+    }
+	&__panel {
+		position: fixed;
+        top: 60px;
+	}
+}
+
+.slide-enter-active,
+.slide-leave-active {
+	transition: all 0.5s ease-in;
+}
+.slide-enter,
+.slide-leave-to {
+	transform: translateX(-100%);
+}
 </style>

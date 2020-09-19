@@ -1,16 +1,16 @@
 export default {
-
+	
     
-	logIn() {
-		this.$login.save({ email: this.email, password: this.password }).then(
+	logIn(objRef) {
+		objRef.$login.save({ email: objRef.email, password: objRef.password }).then(
 			(response) => {
 				if (response.status === 200) {
 					// Utilisateur connecté !
-					this.userUpdateLoginInfos({
+					objRef.userUpdateLoginInfos({
 						email: response.data.email,
 						token: response.data.token,
 					});
-					this.$router.push({ name: "Home" });
+					objRef.$router.push({ name: "Home" });
 				}
 			},
 			(responseError) => {
@@ -19,15 +19,15 @@ export default {
 		);
     },
     
-	signup() {
-		this.$signup.save({ email: this.email, password: this.password }).then(
+	signup(objRef) {
+		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
 			(response) => {
 				if (response.status === 201) {
 					console.log(
 						"Utilisateur créé avec l'adresse mail " +
 							JSON.stringify(response.data.email)
 					);
-					this.logIn();
+					objRef.logIn();
 				}
 			},
 			(responseError) => {
