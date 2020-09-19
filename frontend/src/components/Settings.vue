@@ -38,25 +38,24 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import LS from '../services/StorageManager'
-import userService from '../services/UserService'
+import LS from "../services/StorageManager";
+import userService from "../services/UserService";
 
 export default {
 	data() {
 		return {
-			
 			prenom: "",
 			nom: "",
 			poste: "",
 		};
 	},
 	methods: {
-		...mapActions(["userUpdateCommonInfos"]),
+		...mapActions(["userUpdateCommonInfos", "userInitFromLS"]),
 		submitChanges() {
 			userService.update(this);
-			LS.set('prenom', this.prenom);
-			LS.set('nom', this.nom);
-			LS.set('poste', this.poste);
+			LS.set("prenom", this.prenom);
+			LS.set("nom", this.nom);
+			LS.set("poste", this.poste);
 			this.userUpdateCommonInfos({
 				prenom: this.prenom,
 				nom: this.nom,
@@ -65,32 +64,25 @@ export default {
 		},
 		deleteAccount() {
 			if (window.confirm("Etes-vous certain de vouloir supprimer votre compte ?")) {
-				//TODO >>>> DELETE ACCOUNT
+				userService.destroy(this);
 			}
 		},
-		closeSettings(){
-			this.$emit('close-settings')
-		}
+		closeSettings() {
+			this.$emit("close-settings");
+		},
 	},
 	computed: {
 		...mapState(["user"]),
 	},
-	mounted(){
-		this.$user = this.$resource('user');
+	mounted() {
+		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
-		if (LS.get("email")) {
-			this.user.email = LS.get("email");
-		}
-		if(LS.get('prenom')){
-			this.prenom = LS.get('prenom');
-		}
-		if(LS.get('nom')){
-			this.nom = LS.get('nom');
-		}
-		if(LS.get('poste')){
-			this.poste = LS.get('poste');
-		}
-	}
+		LS.initVuexUser(this);
+		this.user.email = LS.user.email;
+		this.prenom = LS.user.prenom;
+		this.nom = LS.user.nom;
+		this.poste = LS.user.poste;
+	},
 };
 </script>
 
@@ -102,7 +94,7 @@ export default {
 	flex-direction: column;
 	width: 100%;
 
-	background-color: rgba(0,0,0,0.15);
+	background-color: rgba(0, 0, 0, 0.15);
 	backdrop-filter: blur(8px);
 	border-radius: 10px;
 
@@ -114,14 +106,14 @@ export default {
 	& .modifiable {
 		border-radius: 8px;
 		border-color: gray;
-		& input{
+		& input {
 			margin-top: 0.5em;
 			border-radius: 5px;
 			border: none;
 			height: 1.5em;
 			text-align: center;
 		}
-		& select{
+		& select {
 			margin-top: 0.5em;
 			border-radius: 5px;
 			border: none;
@@ -140,15 +132,14 @@ input {
 	border: none;
 	cursor: pointer;
 	transition: transform 0.1s;
-	&.exit{
-		
+	&.exit {
 		background-color: transparent;
 		color: white;
 		position: fixed;
 		right: 10px;
 		top: 10px;
 		outline: none;
-		&:hover{
+		&:hover {
 			transform: scale(1.5);
 		}
 	}
@@ -158,7 +149,7 @@ input {
 		margin-top: 2em;
 		margin-left: auto;
 		background-color: lightgreen;
-		&:hover{
+		&:hover {
 			background-color: rgb(12, 196, 12);
 			transform: scale(1.05);
 		}
@@ -170,7 +161,7 @@ input {
 		margin-left: auto;
 		margin-top: 1em;
 		&:hover {
-			background-color: rgb(196,12,12);
+			background-color: rgb(196, 12, 12);
 			transform: scale(0.95);
 		}
 	}

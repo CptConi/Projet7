@@ -7,13 +7,13 @@ module.exports = (app) => {
 
 	router.post("/login", utilisateur.logIn);
 
-	// router.get("/:id", utilisateur.getUser);
+	router.get("/:id", utilisateur.getUser);
 
-	// router.get("/", utilisateur.getUsers);
+	router.get("/", utilisateur.getUsers);
 
-	router.put("/", utilisateur.update);
+	router.put("/:id", utilisateur.update);
 
-	// router.delete("/:id", utilisateur.delete);
+	router.delete("/:id", utilisateur.delete);
 
 
 	//Automatic create super user

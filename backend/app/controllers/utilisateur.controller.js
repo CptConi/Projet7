@@ -57,14 +57,26 @@ exports.logIn = (req, res) => {
 };
 
 // Get User informations
-exports.getUser = (req, res) => {};
+exports.getUser = (req, res) => {
+	Utilisateur.findOne({ where: { id: req.params.id } })
+		.then((data) => res.send(data))
+		.catch((err) => {
+			err.message || "Error while retrieving users with id= " + id;
+		});
+};
 
 // Get User list
-exports.getUsers = (req, res) => {};
+exports.getUsers = (req, res) => {
+	Utilisateur.findAll()
+		.then((data) => res.send(data))
+		.catch((err) => {
+			err.message || "Error while retrieving users list from Database";
+		});
+};
 
 // Update User informations / profile
 exports.update = (req, res) => {
-	Utilisateur.update(req.body, { where: { email: req.body.email } })
+	Utilisateur.update(req.body, { where: { id: req.params.id } })
 		.then((code) => {
 			if (code == 1) {
 				res.send({
@@ -78,13 +90,31 @@ exports.update = (req, res) => {
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: "Error updating User with email=" + email + 'Error:' + err,
+				message: "Error updating User with email=" + email + "|| Error:" + err,
 			});
 		});
 };
 
 // Delete User
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+	Utilisateur.destroy({ where: { id: req.params.id } })
+		.then((code) => {
+			if (code == 1) {
+				res.send({
+					message: "User was deleted successfully!",
+				});
+			} else {
+				res.send({
+					message: `Cannot delete User with id=${id}. Maybe User was not found!`,
+				});
+			}
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: "Could not delete User with id=" + id + " || Error:" + err,
+			});
+		});
+};
 
 //TEST method:
 

@@ -27,6 +27,11 @@ class LocalStorageManager {
 		this.user.poste = this.get('poste');
 	}
 
+	initVuexUser(refObj){
+		this.initUser();
+		refObj.userInitFromLS(this.user);
+	}
+
 	set(pKey, pValue) {
 		let tempStorageObj = this.getAll();
 		for (let prop in tempStorageObj) {

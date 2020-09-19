@@ -23,6 +23,9 @@ export default new Vuex.Store({
 	//=================================MUTATIONS============================
 	mutations: {
 		//User
+		SET_USER(state, pUser) {
+			state.user = pUser;
+		},
 		SET_EMAIL(state, pEmail) {
 			state.user.email = pEmail;
 		},
@@ -51,6 +54,9 @@ export default new Vuex.Store({
 	},
 	//==================================ACTIONS=============================
 	actions: {
+		userInitFromLS(context, pUser) {
+			context.commit("SET_USER", pUser);
+		},
 		userUpdateLoginInfos(context, pInfos) {
 			//Update mail and Token infos into store
 			context.commit("SET_EMAIL", pInfos.email);

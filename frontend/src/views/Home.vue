@@ -1,16 +1,20 @@
 <template>
-	<div >
+	<div>
+		<!-- SETTINGS -->
 		<div class="settings__panel">
 			<transition name="slide">
 				<Settings v-show="settingsOpen" v-on:close-settings="settingsOpen = false"></Settings>
 			</transition>
 		</div>
 		<button class="settings__btn" @click.stop="settingsOpen = !settingsOpen"></button>
+		<!-- FIREPITS // POSTS -->
+		<Firepit></Firepit>
 	</div>
 </template>
 
 <script>
 import Settings from "../components/Settings";
+import Firepit from "../components/Firepit"
 import { mapState } from "vuex";
 
 export default {
@@ -19,7 +23,7 @@ export default {
 			settingsOpen: true,
 		};
 	},
-	components: { Settings },
+	components: { Settings, Firepit },
 	computed: {
 		...mapState(["user"]),
 	},

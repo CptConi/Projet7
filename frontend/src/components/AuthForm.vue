@@ -22,7 +22,6 @@
 			</form>
 			<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
 		</div>
-		
 	</div>
 </template>
 
@@ -37,12 +36,20 @@ export default {
 		return {
 			email: "",
 			password: "",
+			logSuccess: false,
 		};
 	},
 	computed: {
 		...mapState(["user", "existingAccount"]),
-		whatsInLocalStorage() {
-			return LS.get("email");
+	},
+	watch: {
+		logSuccess() {
+			if (this.logSuccess) {
+				LS.set("email", this.email);
+				LS.set("token", this.user.token);
+				LS.set("id", this.user.id);
+				this.$router.push({ name: "Home" });
+			}
 		},
 	},
 	methods: {
@@ -51,7 +58,6 @@ export default {
 			auth.signup(this);
 		},
 		logIn() {
-			LS.set('email', this.email)
 			auth.logIn(this);
 		},
 		asAnAccount() {
@@ -63,7 +69,6 @@ export default {
 				this.accountExists();
 			}
 		},
-		
 	},
 	mounted() {
 		this.$signup = this.$resource("user/signup");
