@@ -1,11 +1,11 @@
 <template>
-	<div>
+	<div >
 		<div class="settings__panel">
 			<transition name="slide">
-				<Settings v-show="settingsOpen"></Settings>
+				<Settings v-show="settingsOpen" v-on:close-settings="settingsOpen = false"></Settings>
 			</transition>
 		</div>
-		<button class="settings__btn" @click="settingsOpen = !settingsOpen"></button>
+		<button class="settings__btn" @click.stop="settingsOpen = !settingsOpen"></button>
 	</div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<form class="profile__Form">
+			<button class="btn exit" @click.prevent="closeSettings">X</button>
 			<h1>Votre profile</h1>
 			<div class="informative">
 				<label for="email">Votre email professionnel:</label>
@@ -67,6 +68,9 @@ export default {
 				//TODO >>>> DELETE ACCOUNT
 			}
 		},
+		closeSettings(){
+			this.$emit('close-settings')
+		}
 	},
 	computed: {
 		...mapState(["user"]),
@@ -136,6 +140,18 @@ input {
 	border: none;
 	cursor: pointer;
 	transition: transform 0.1s;
+	&.exit{
+		
+		background-color: transparent;
+		color: white;
+		position: fixed;
+		right: 10px;
+		top: 10px;
+		outline: none;
+		&:hover{
+			transform: scale(1.5);
+		}
+	}
 	&.validate {
 		width: 180px;
 		height: 60px;
