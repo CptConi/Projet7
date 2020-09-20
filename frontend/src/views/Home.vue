@@ -1,9 +1,14 @@
 <template>
 	<div>
+		<!-- TEST -->
+		<Test></Test>
 		<!-- SETTINGS -->
 		<div class="settings__panel">
 			<transition name="slide">
-				<Settings v-show="settingsOpen" v-on:close-settings="settingsOpen = false"></Settings>
+				<Settings
+					v-show="settingsOpen"
+					v-on:close-settings="settingsOpen = false"
+				></Settings>
 			</transition>
 		</div>
 		<button class="settings__btn" @click.stop="settingsOpen = !settingsOpen"></button>
@@ -14,7 +19,8 @@
 
 <script>
 import Settings from "../components/Settings";
-import Firepit from "../components/Firepit"
+import Firepit from "../components/Firepit";
+import Test from "../components/Test"
 import { mapState } from "vuex";
 
 export default {
@@ -23,7 +29,7 @@ export default {
 			settingsOpen: true,
 		};
 	},
-	components: { Settings, Firepit },
+	components: { Settings, Firepit, Test },
 	computed: {
 		...mapState(["user"]),
 	},
@@ -32,28 +38,28 @@ export default {
 
 <style lang="scss">
 .settings {
-    &__btn{
-        position: fixed;
-        left: 10px;
-        top: 10px;
-        background: url('../assets/settings_btn.png') no-repeat;
-        width: 50px;
-        height: 50px;
-        background-size: 100%;
+	&__btn {
+		position: fixed;
+		left: 10px;
+		top: 10px;
+		background: url("../assets/settings_btn.png") no-repeat;
+		width: 50px;
+		height: 50px;
+		background-size: 100%;
 
-        border: none;
-        outline: none;
-        cursor: pointer;
+		border: none;
+		outline: none;
+		cursor: pointer;
 
-        transition: all 0.2s;
+		transition: all 0.2s;
 
-        &:hover{
-            transform: scale(1.1);
-        }
-    }
+		&:hover {
+			transform: scale(1.1);
+		}
+	}
 	&__panel {
 		position: fixed;
-        top: 60px;
+		top: 60px;
 	}
 }
 
