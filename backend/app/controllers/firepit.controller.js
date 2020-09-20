@@ -20,7 +20,7 @@ exports.create = (req, res) => {
 	// Save Firepit in the database
 	Firepit.create(firepit)
 		.then((data) => {
-			res.send(data);
+			res.status(201).send(data);
 		})
 		.catch((err) => {
 			res.status(500).send({
