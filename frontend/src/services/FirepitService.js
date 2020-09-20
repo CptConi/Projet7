@@ -1,5 +1,19 @@
 export default {
-    //TODO CREATE FIREPIT
+	//TODO CREATE FIREPIT
+	createFirepit(objRef) {
+		objRef.$firepit
+			.save({ sujet: objRef.sujet, portee: objRef.portee, user_id: objRef.user.id })
+			.then(
+				(response) => {
+					if (response.status === 201) {
+						console.log("Firepit créé " + response.data);
+					}
+				},
+				(responseError) => {
+					console.log("ERREUR SERVEUR", responseError);
+				}
+			);
+	},
 
 	//Return one Firepit
 	getOne(objRef, pId) {
@@ -39,8 +53,8 @@ export default {
 					id: objRef.firepit.id,
 				},
 				{
-                    sujet: objRef.firepit.sujet,
-                    portee: objRef.firepit.portee
+					sujet: objRef.firepit.sujet,
+					portee: objRef.firepit.portee,
 				}
 			)
 			.then(

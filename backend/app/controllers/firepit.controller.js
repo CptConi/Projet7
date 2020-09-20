@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 	const firepit = {
 		sujet: req.body.sujet,
 		portee: req.body.portee,
-		user_id: req.body.user_id,
+		utilisateurId: req.body.user_id,
 	};
 	// Save Firepit in the database
 	Firepit.create(firepit)

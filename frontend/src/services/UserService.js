@@ -1,4 +1,26 @@
 export default {
+	//Create user for Testing methods
+	createTestUser(objRef) {
+		objRef.$createUser
+			.save({
+				email: objRef.email,
+				password: objRef.password,
+				prenom: objRef.prenom,
+				nom: objRef.nom,
+				poste: objRef.poste,
+			})
+			.then(
+				(response) => {
+					if (response.status === 201) {
+						console.log("user créé " + response.data.message);
+					}
+				},
+				(responseError) => {
+					console.log("ERREUR SERVEUR", responseError);
+				}
+			);
+	},
+
 	//Return one user
 	getOne(objRef, pId) {
 		objRef.$user.get({ id: pId }).then(

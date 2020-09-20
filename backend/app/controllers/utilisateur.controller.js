@@ -130,7 +130,7 @@ exports.createTestUser = (req, res) => {
 	// Save Firepit in the database
 	Utilisateur.create(randomUser)
 		.then((data) => {
-			res.send(data);
+			res.status(201).send(data);
 		})
 		.catch((err) => {
 			res.status(500).send({
