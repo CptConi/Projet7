@@ -1,25 +1,18 @@
 <template>
-	<div>
-		<p>{{reqResponse}}</p>
-	</div>
+	<div></div>
 </template>
 
 <script>
-import userService from "../services/UserService";
 export default {
-	name: 'Firepit',
+	name: "Firepit",
 	data() {
-		return {
-			reqResponse:'',
-		};
-    },
-    computed: {
-        
-    },
+		return {};
+	},
+	computed: {},
 
-    mounted(){
+	mounted() {
 		this.$user = this.$resource("user{/id}");
-    }
+	},
 };
 </script>
 
