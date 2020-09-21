@@ -7,6 +7,8 @@ module.exports = (app) => {
 
 	router.get("/:id", firepit.getFirepit);
 
+	router.get("/", firepit.getAll);
+
 	router.put("/:id", firepit.update);
 
 	router.delete("/:id", firepit.delete);

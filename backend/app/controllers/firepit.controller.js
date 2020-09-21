@@ -44,6 +44,15 @@ exports.getFirepit = (req, res) => {
 		});
 };
 
+// Get entire Firepit List:
+exports.getAll = (req, res)=>{
+	Firepit.findAll()
+		.then((data) => res.send(data))
+		.catch((err) => {
+			err.message || "Error while retrieving Firepit list from Database";
+		});
+}
+
 // Update Firepit informations: sujet, portee
 exports.update = (req, res) => {
 	  const id = req.params.id;

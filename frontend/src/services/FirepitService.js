@@ -1,12 +1,12 @@
 export default {
-	//TODO CREATE FIREPIT
-	createFirepit(objRef) {
+	// !!!!!!!!!!!!!!!!!!!!!!! TEST METHODS !!!!!!!!!!!!!!!!!!!!
+	createTestFirepit(objRef) {
 		objRef.$firepit
 			.save({ sujet: objRef.sujet, portee: objRef.portee, user_id: objRef.user.id })
 			.then(
 				(response) => {
 					if (response.status === 201) {
-						console.log("Firepit créé " + response.data);
+						console.log("Firepit créé :'" + response.data.sujet + "'");
 					}
 				},
 				(responseError) => {
@@ -14,7 +14,7 @@ export default {
 				}
 			);
 	},
-
+	// ------------------------PROD-----------------------------
 	//Return one Firepit
 	getOne(objRef, pId) {
 		objRef.$firepit.get({ id: pId }).then(
