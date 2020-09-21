@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<!-- TEST -->
-		<Test></Test>
 		<!-- SETTINGS -->
 		<div class="settings__panel">
 			<transition name="slide">
@@ -20,7 +18,6 @@
 <script>
 import Settings from "../components/Settings";
 import Firepit from "../components/Firepit";
-import Test from "../components/Test"
 import { mapState } from "vuex";
 
 export default {
@@ -29,7 +26,7 @@ export default {
 			settingsOpen: false,
 		};
 	},
-	components: { Settings, Firepit, Test },
+	components: { Settings, Firepit },
 	computed: {
 		...mapState(["user"]),
 	},

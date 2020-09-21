@@ -1,8 +1,16 @@
 <template>
 	<div id="app">
+		<Test></Test>
 		<router-view />
 	</div>
 </template>
+
+<script>
+import Test from "./components/Test";
+export default {
+	components: { Test },
+};
+</script>
 
 <style lang="scss">
 #app {

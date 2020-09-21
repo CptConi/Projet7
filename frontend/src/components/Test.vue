@@ -1,16 +1,31 @@
 <template>
-	<div class="Test__Component">
-		<h1>Zone de test</h1>
-		<p>
-			A utiliser dans l'ordre pour éviter les erreurs de dépendances de clés en base de
-			donnée:
-		</p>
-		<div>
-			<div class="user">
-				<button type="button" class="btn btn-info btn-sm" @click="createUsers">1 - Create users</button>
+	<div class="Test__Component container-fluid border-rounded mb-2">
+		<div class="bg-dark pb-2">
+			<h3>Zone de test</h3>
+			<div>
+				<small>
+					A utiliser dans l'ordre:
+				</small>
+				<div class="btn-group">
+					<button type="button" class="btn btn-outline-light btn-sm" @click="createUsers">
+						1 - Create users
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-secondary btn-sm"
+						@click="createFirepits"
+					>
+						3 - Create firepits
+					</button>
+					<button
+						type="button"
+						class="btn btn-outline-secondary btn-sm"
+						@click="createMessages"
+					>
+						4 - Create messages
+					</button>
+				</div>
 			</div>
-			<button type="button" class="btn btn-info btn-sm" @click="createFirepits">3 - Create firepits</button>
-			<button type="button" class="btn btn-info btn-sm" @click="createMessages">4 - Create messages</button>
 		</div>
 	</div>
 </template>
@@ -146,7 +161,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-
-
-</style>
+<style scoped lang="scss"></style>
