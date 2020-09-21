@@ -14,9 +14,7 @@
 
 	margin: 0;
 }
-body {
-	background-color: #222034;
-}
+
 a {
 	font-weight: bold;
 	color: #dfa019;

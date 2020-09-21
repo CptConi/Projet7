@@ -26,7 +26,7 @@ import { mapState } from "vuex";
 export default {
 	data() {
 		return {
-			settingsOpen: true,
+			settingsOpen: false,
 		};
 	},
 	components: { Settings, Firepit, Test },
@@ -58,7 +58,6 @@ export default {
 		}
 	}
 	&__panel {
-		position: fixed;
 		top: 60px;
 	}
 }

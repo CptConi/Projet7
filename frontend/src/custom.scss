@@ -1,0 +1,7 @@
+//Ce fichier permet d'override les variables BootStrap 4 pour un custom Theme.
+
+$body-bg:  #222034;
+$card-bg: rgba(white,0.1);
+
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';

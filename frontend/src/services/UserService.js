@@ -1,4 +1,5 @@
 export default {
+	// !!!!!!!!!!!!!!!!!!!!!!! TEST METHODS !!!!!!!!!!!!!!!!!!!!
 	//Create user for Testing methods
 	createTestUser(objRef) {
 		objRef.$createUser
@@ -12,7 +13,7 @@ export default {
 			.then(
 				(response) => {
 					if (response.status === 201) {
-						console.log("user créé " + response.data.message);
+						console.log("user créé :" + response.data.email);
 					}
 				},
 				(responseError) => {
@@ -21,6 +22,7 @@ export default {
 			);
 	},
 
+	// ------------------------PROD-----------------------------
 	//Return one user
 	getOne(objRef, pId) {
 		objRef.$user.get({ id: pId }).then(

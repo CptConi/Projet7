@@ -7,10 +7,10 @@
 		</p>
 		<div>
 			<div class="user">
-				<button class="btn" @click="createUsers">1 - Create users</button>
+				<button type="button" class="btn btn-info btn-sm" @click="createUsers">1 - Create users</button>
 			</div>
-			<button class="btn" @click="createFirepits">3 - Create firepits</button>
-			<button class="btn" @click="createMessages">4 - Create messages</button>
+			<button type="button" class="btn btn-info btn-sm" @click="createFirepits">3 - Create firepits</button>
+			<button type="button" class="btn btn-info btn-sm" @click="createMessages">4 - Create messages</button>
 		</div>
 	</div>
 </template>
@@ -95,6 +95,16 @@ export default {
 					portee: "Tout le monde",
 					id: 6,
 				},
+				{
+					sujet: "Avada Kedavra !",
+					portee: "Tout le monde",
+					id: 2,
+				},
+				{
+					sujet: "Monsieur Potter ...",
+					portee: "Tout le monde",
+					id: 1,
+				},
 			],
 		};
 	},
@@ -106,7 +116,7 @@ export default {
 				this.sujet = firepit.sujet;
 				this.portee = firepit.portee;
 				this.user.id = firepit.id;
-				FirepitService.createFirepit(this);
+				FirepitService.createTestFirepit(this);
 			}
 		},
 		createMessages() {
@@ -137,13 +147,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.Test__Component {
-	display: flex;
-	flex-direction: column;
-}
-.btn {
-	cursor: pointer;
-	margin-left: 1em;
-	margin-right: 1em;
-}
+
+
 </style>
