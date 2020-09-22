@@ -1,32 +1,35 @@
 <template>
-	<div>
-		<div class="firepits">
-			<div class="container">
-				<div class="row">
-					<!-- New Firepit -->
-					<div class="card newFirepit col-md-3">
-						<div class="card-title">
-							Nouveau sujet
-						</div>
-						<div class="card-body">
-							<img src="../assets/add_Firepit.png" alt="" class="card-img" />
-						</div>
+	<div class="firepits">
+		<b-container>
+			<!-- New Firepit -->
+			<b-row class="justify-content-center mb-4">
+				<b-card title="Nouveau Sujet">
+					<b-button variant="outline" class="btn-circle">
+						<b-icon-plus-circle class="addFirepit"></b-icon-plus-circle>
+					</b-button>
+				</b-card>
+			</b-row>
+
+			<!-- Existing Firepits -->
+			<b-row>
+				<b-card-group deck class="justify-content-center">
+					<div v-for="fp in reqResponse" :key="fp.firepit_id">
+						<b-card class="mb-4">
+							<b-card-title class="h2">{{ fp.sujet }}</b-card-title>
+							<b-card-text>
+								<p>Créé par: {{ fp.utilisateurId }}</p>
+							</b-card-text>
+							<b-button variant="outline-success" class="mb-3">
+								S'assoir autour du feu <b-icon-chat-left-dots-fill class="ml-2"></b-icon-chat-left-dots-fill>
+							</b-button>
+							<b-card-text class="small text-muted pb-0"
+								>Allumé le: {{ fp.createdAt.substr(0, 10) }}</b-card-text
+							>
+						</b-card>
 					</div>
-					<!-- Existing Firepits -->
-					<div class="card col-md-3" v-for="fp in reqResponse" :key="fp.firepit_id">
-						<div class="card-body">
-							<h5 class="card-title">
-								{{ fp.sujet }}
-							</h5>
-							<p class="card-text">Créé par: {{ fp.utilisateurId }}</p>
-							<p class="card-footer text-muted small">
-								Allumé le: {{ fp.createdAt.substr(0, 10) }}
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+				</b-card-group>
+			</b-row>
+		</b-container>
 	</div>
 </template>
 
@@ -54,5 +57,11 @@ export default {
 <style lang="scss">
 .firepits {
 	margin-top: 5em;
+}
+
+.addFirepit {
+	width: 90px;
+	height: 90px;
+	color: white;
 }
 </style>

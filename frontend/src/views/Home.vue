@@ -3,13 +3,13 @@
 		<!-- SETTINGS -->
 		<div class="settings__panel">
 			<transition name="slide">
-				<Settings
-					v-show="settingsOpen"
-					v-on:close-settings="settingsOpen = false"
-				></Settings>
 			</transition>
 		</div>
-		<button class="settings__btn" @click.stop="settingsOpen = !settingsOpen"></button>
+		<b-button variant="outline" v-b-toggle.settings-sidebar class="settings__btn"><b-icon-file-person class="settings__btn"></b-icon-file-person></b-button>
+		<b-sidebar id="settings-sidebar" title="Votre Profil" shadow bg-variant="dark" text-variant="light" width=75%>
+			<div class="p-5"></div>	
+				<Settings></Settings>
+		</b-sidebar>
 		<!-- FIREPITS // POSTS -->
 		<Firepit></Firepit>
 	</div>
@@ -37,26 +37,13 @@ export default {
 .settings {
 	&__btn {
 		position: fixed;
-		left: 10px;
-		top: 10px;
-		background: url("../assets/settings_btn.png") no-repeat;
-		width: 50px;
-		height: 50px;
-		background-size: 100%;
-
-		border: none;
-		outline: none;
-		cursor: pointer;
-
-		transition: all 0.2s;
-
-		&:hover {
-			transform: scale(1.1);
-		}
+		left: 15px;
+		top: 15px;
+		width: 40px;
+		height: 40px;
+		color:white;
 	}
-	&__panel {
-		top: 60px;
-	}
+	
 }
 
 .slide-enter-active,

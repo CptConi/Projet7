@@ -1,32 +1,27 @@
 <template>
-	<div class="Test__Component container-fluid border-rounded mb-2">
-		<div class="bg-dark pb-2">
-			<h3>Zone de test</h3>
-			<div>
-				<small>
-					A utiliser dans l'ordre:
-				</small>
-				<div class="btn-group">
-					<button type="button" class="btn btn-outline-light btn-sm" @click="createUsers">
-						1 - Create users
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-secondary btn-sm"
-						@click="createFirepits"
-					>
-						3 - Create firepits
-					</button>
-					<button
-						type="button"
-						class="btn btn-outline-secondary btn-sm"
-						@click="createMessages"
-					>
-						4 - Create messages
-					</button>
-				</div>
-			</div>
-		</div>
+	<div class="Test__Component">
+		<b-container fluid>
+			<b-row class="bg-dark">
+				<b-col sm='5'>
+					<h3>Zone de test</h3>
+				</b-col>
+				<b-col>
+					<b-row>
+						<b-button-group class="pt-1">
+							<b-button variant="outline-light" size="sm" @click="createUsers">
+								1 - Create users
+							</b-button>
+							<b-button variant="outline-secondary" size="sm" @click="createFirepits">
+								2 - Create firepits
+							</b-button>
+							<b-button variant="outline-secondary" size="sm" @click="createMessages">
+								3 - Create messages
+							</b-button>
+						</b-button-group>
+					</b-row>
+				</b-col>
+			</b-row>
+		</b-container>
 	</div>
 </template>
 

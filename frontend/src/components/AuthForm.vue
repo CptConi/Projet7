@@ -1,27 +1,75 @@
 <template>
 	<div class="AuthForm">
-		<div v-if="!existingAccount">
-			<form>
-				<label for="email">Votre email 💌</label>
-				<input type="email" v-model="email" id="email" required />
-				<label for="email">Votre Mot de Passe 🔣</label>
-				<input type="password" v-model="password" id="password" required />
+		<b-container>
+			<div v-if="!existingAccount">
+				<b-form class="my-5">
+					<b-form-group
+						label="Votre adresse email:"
+						id="input-group-1"
+						label-for="email"
+						description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
+					>
+						<b-form-input
+							id="email"
+							v-model="email"
+							type="email"
+							required
+							placeholder="Email"
+						></b-form-input
+					>
+					</b-form-group>
+					<b-form-group label="Votre mot de passe:"
+						id="input-group-2"
+						label-for="password">
+					<b-form-input
+					
+							id="password"
+							v-model="password"
+							type="password"
+							required
+							placeholder="Mot de passe"
+						></b-form-input>
+					</b-form-group>
 
-				<button @click.prevent="signup"><strong>Créer un compte</strong></button>
-			</form>
-			<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
-		</div>
-		<div v-else>
-			<form>
-				<label for="email">Votre email 💌</label>
-				<input type="email" v-model="email" id="email" required />
-				<label for="email">Votre Mot de Passe 🔣</label>
-				<input type="password" v-model="password" id="password" required />
+					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn">Se connecter</b-button>
+				</b-form>
+				<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
+			</div>
+			<div v-else>
+				<b-form class="my-5">
+					<b-form-group
+						label="Votre adresse email:"
+						id="input-group-1"
+						label-for="email"
+						description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
+					>
+						<b-form-input
+							id="email"
+							v-model="email"
+							type="email"
+							required
+							placeholder="Email"
+						></b-form-input
+					>
+					</b-form-group>
+					<b-form-group label="Votre mot de passe:"
+						id="input-group-2"
+						label-for="password">
+					<b-form-input
+					
+							id="password"
+							v-model="password"
+							type="password"
+							required
+							placeholder="Mot de passe"
+						></b-form-input>
+					</b-form-group>
 
-				<button @click.prevent="logIn"><strong>Se connecter</strong></button>
-			</form>
-			<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
-		</div>
+					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn">Se connecter</b-button>
+				</b-form>
+				<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
+			</div>
+		</b-container>
 	</div>
 </template>
 
@@ -86,19 +134,5 @@ export default {
 h3 {
 	margin: 40px 0 0;
 }
-button {
-	padding: 2em;
-	border-radius: 5px;
-}
-form {
-	display: flex;
-	flex-direction: column;
-	width: 30vh;
-	justify-content: space-between;
-	margin: auto;
-	margin-bottom: 2em;
-	& input {
-		margin-bottom: 2em;
-	}
-}
+
 </style>

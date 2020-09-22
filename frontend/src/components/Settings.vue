@@ -1,38 +1,55 @@
 <template>
 	<div>
-		<form class="profile__Form">
-			<button class="btn exit" @click.prevent="closeSettings">X</button>
-			<h1>Votre profile</h1>
-			<div class="informative">
-				<label for="email">Votre email professionnel:</label>
-				<h3>{{ user.email }}</h3>
-			</div>
-			<fieldset class="modifiable">
-				<label for="prenom">Votre Prénom:</label>
-				<br />
-				<input type="text" name="prenom" v-model="prenom" required />
-				<br />
-				<label for="prenom">Votre Nom:</label>
-				<br />
-				<input type="text" name="nom" v-model="nom" required />
-				<br />
-				<label for="poste">Votre poste au sein de la société</label>
-				<br />
-				<select name="poste" required v-model="poste">
-					<option value="1">Employé</option>
-					<option value="2">Manager</option>
-					<option value="3">Membre des ressources Humaines</option>
-					<option value="3">Chargé de communication</option>
-					<option value="4">PDG</option>
-				</select>
-			</fieldset>
-			<button class="btn validate" @click.prevent="submitChanges">
+		<b-alert show dismissible>
+			<p for="email">Vous êtes connecté(e) en tant que:</p>
+			<h3>{{ user.email }}</h3>
+		</b-alert>
+
+		<b-form class="profile__Form">
+			<b-form-group label="Votre Prénom:" id="input-group-1" label-for="prenom">
+				<b-form-input
+					id="prenom"
+					v-model="prenom"
+					type="text"
+					required
+					placeholder="Prénom"
+				></b-form-input>
+			</b-form-group>
+			<b-form-group
+				label="Votre nom:"
+				id="input-group-2"
+				label-for="nom"
+				description="Il s'agit d'un outil de communication professionel. Merci d'utiliser votre véritable identitée."
+			>
+				<b-form-input
+					id="nom"
+					v-model="nom"
+					type="text"
+					required
+					placeholder="Nom"
+				></b-form-input>
+			</b-form-group>
+			<b-form-group description="Votre poste au sein de Groupomania">
+				<b-form-select v-model="poste" :options="options"></b-form-select
+			></b-form-group>
+
+			<b-button
+				variant="success"
+				class="ml-auto mt-5"
+				size="lg"
+				@click.prevent="submitChanges"
+			>
 				Je valide ces informations
-			</button>
-			<button class="btn deleteAccount" @click.prevent="deleteAccount">
+			</b-button>
+		</b-form>
+			<b-button
+				variant="outline-danger"
+				class="mt-2 mx-auto mb-5"
+				size="sm"
+				@click.prevent="deleteAccount"
+			>
 				Supprimer le profil
-			</button>
-		</form>
+			</b-button>
 	</div>
 </template>
 
@@ -47,6 +64,13 @@ export default {
 			prenom: "",
 			nom: "",
 			poste: "",
+			options: [
+				{ value: null, text: "Votre poste au sein de la société", disabled: true },
+				{ value: 1, text: "Employé" },
+				{ value: 2, text: "Manager" },
+				{ value: 3, text: "Membre des Ressources Humaines" },
+				{ value: 4, text: "Direction" },
+			],
 		};
 	},
 	methods: {
@@ -86,84 +110,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .profile__Form {
-	display: flex;
-	margin: auto;
 	padding: 1.5em;
-	flex-direction: column;
-	width: 100%;
-
 	background-color: rgba(0, 0, 0, 0.15);
-	backdrop-filter: blur(8px);
-	border-radius: 10px;
-
-	& .informative {
-		display: flex;
-		margin: auto;
-		flex-direction: column;
-	}
-	& .modifiable {
-		border-radius: 8px;
-		border-color: gray;
-		& input {
-			margin-top: 0.5em;
-			border-radius: 5px;
-			border: none;
-			height: 1.5em;
-			text-align: center;
-		}
-		& select {
-			margin-top: 0.5em;
-			border-radius: 5px;
-			border: none;
-			height: 1.5em;
-			text-align: center;
-		}
-	}
-}
-
-input {
-	margin-bottom: 2em;
-}
-
-.btn {
-	border-radius: 3px;
-	border: none;
-	cursor: pointer;
-	transition: transform 0.1s;
-	&.exit {
-		background-color: transparent;
-		color: white;
-		position: fixed;
-		right: 10px;
-		top: 10px;
-		outline: none;
-		&:hover {
-			transform: scale(1.5);
-		}
-	}
-	&.validate {
-		width: 180px;
-		height: 60px;
-		margin-top: 2em;
-		margin-left: auto;
-		background-color: lightgreen;
-		&:hover {
-			background-color: rgb(12, 196, 12);
-			transform: scale(1.05);
-		}
-	}
-	&.deleteAccount {
-		background-color: lightcoral;
-		width: 100px;
-		height: 60px;
-		margin-left: auto;
-		margin-top: 1em;
-		&:hover {
-			background-color: rgb(196, 12, 12);
-			transform: scale(0.95);
-		}
-	}
 }
 </style>
