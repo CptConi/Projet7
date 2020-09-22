@@ -15,7 +15,7 @@ export default new Vuex.Store({
 			poste: "",
 			id: "",
 		},
-		post: {},
+		firepit: { id: "" },
 		message: {},
 	},
 	//==================================GETTERS=============================
@@ -51,6 +51,10 @@ export default new Vuex.Store({
 		UNSET_EXISTING_ACCOUNT(state) {
 			state.existingAccount = false;
 		},
+		//-------
+		SET_FIREPIT_ID(state, pId) {
+			state.firepit.id = pId;
+		},
 	},
 	//==================================ACTIONS=============================
 	actions: {
@@ -74,6 +78,9 @@ export default new Vuex.Store({
 		},
 		accountDoNotExists(context) {
 			context.commit("UNSET_EXISTING_ACCOUNT");
+		},
+		setFirepitId(context, pId) {
+			context.commit("SET_FIREPIT_ID", pId);
 		},
 	},
 	modules: {},

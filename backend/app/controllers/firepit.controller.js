@@ -39,7 +39,7 @@ exports.getFirepit = (req, res) => {
 		})
 		.catch((err) => {
 			res.status(500).send({
-				message: "Error retrieving Firepit with id=" + id,
+				message: err + " Error retrieving Firepit with id=" + id,
 			});
 		});
 };

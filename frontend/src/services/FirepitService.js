@@ -15,11 +15,28 @@ export default {
 			);
 	},
 	// ------------------------PROD-----------------------------
+
+	createFirepit(objRef) {
+		objRef.$firepit
+			.save({ sujet: objRef.form.sujet, portee: objRef.portee, user_id: objRef.user.id })
+			.then(
+				(response) => {
+					if (response.status === 201) {
+						console.log("Firepit créé :'" + response.data.sujet + "'");
+						objRef.firepitCreated(response.data.firepit_id);
+					}
+				},
+				(responseError) => {
+					console.log("ERREUR SERVEUR", responseError);
+				}
+			);
+	},
+
 	//Return one Firepit
 	getOne(objRef, pId) {
 		objRef.$firepit.get({ id: pId }).then(
 			(response) => {
-				objRef.reqResponse = response.body;
+				objRef.firepitGetOneResponse(response.body);
 			},
 			(responseError) => {
 				console.log(
@@ -35,8 +52,6 @@ export default {
 		objRef.$firepit.query({}).then(
 			(response) => {
 				objRef.reqResponse = response.body;
-				// AFFICHAGE DEBUG
-				console.log(response.body);
 			},
 			(responseError) => {
 				console.log(

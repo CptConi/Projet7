@@ -30,12 +30,25 @@ exports.create = (req, res) => {
 };
 
 // Get Messages list
-exports.getMessages = (req, res) => {};
+exports.getMessages = (req, res) => {
+	Message.findAll({
+		where: { firepit_id: req.body.firepid_id },
+		include: ["utilisateur"] 
+	})
+	.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: err.message || "Some error occurred while creating the Message.",
+			});
+		});
+};
 
 // Get Messagefrom id
 exports.getMessage = (req, res) => {};
 
-// ----------------------After this line, function may be useless
+// ----------------------After this line, function may not be implemented
 // // Update Message
 // exports.update = (req, res) => {};
 

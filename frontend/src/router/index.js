@@ -2,6 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Authentification from "../views/Authentification.vue";
 import Home from "../views/Home.vue"
+import FirepitView from "../views/FirepitView";
+
 
 Vue.use(VueRouter);
 
@@ -15,6 +17,11 @@ const routes = [
 		path: "/home",
 		name: "Home",
 		component: Home,
+	},
+	{
+		path: "/firepit/:id",
+		name: "Firepitview",
+		component: FirepitView,
 	},
 	{
 		path: "*",

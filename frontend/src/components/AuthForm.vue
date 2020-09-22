@@ -62,6 +62,7 @@
 							type="password"
 							required
 							placeholder="Mot de passe"
+							@keyup.enter="logIn"
 						></b-form-input>
 					</b-form-group>
 
