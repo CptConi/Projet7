@@ -8,13 +8,13 @@
 				<b-col>
 					<b-row>
 						<b-button-group class="pt-1">
-							<b-button variant="outline-light" size="sm" @click="createUsers">
+							<b-button variant="outline-primary" size="sm" @click="createUsers">
 								1 - Create users
 							</b-button>
-							<b-button variant="outline-secondary" size="sm" @click="createFirepits">
+							<b-button variant="outline-info" size="sm" @click="createFirepits">
 								2 - Create firepits
 							</b-button>
-							<b-button variant="outline-secondary" size="sm" @click="createMessages">
+							<b-button variant="outline-light" size="sm" @click="createMessages">
 								3 - Create messages
 							</b-button>
 						</b-button-group>
@@ -133,7 +133,7 @@ export default {
 			console.log("Méthode createMessages pas encore implémentée, Work in progress");
 		},
 		createUsers() {
-			console.log("Méthode createUsers lancée");
+			console.warn("Méthode createUsers lancée");
 			for (let user of this.userList) {
 				window.setTimeout(() => {
 					console.log("Création du compte: " + user.prenom + " " + user.nom);
