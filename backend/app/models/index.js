@@ -24,13 +24,22 @@ db.message = require("./message.model.js")(sequelize, Sequelize);
 db.thumbup = require("./thumbup.model.js")(sequelize, Sequelize);
 
 //Foreign Key Management:
-db.utilisateur.hasMany(db.firepit);
-db.firepit.belongsTo(db.utilisateur);
+db.utilisateur.hasMany(db.firepit, { as: "firepit" });
+db.firepit.belongsTo(db.utilisateur, {
+	foreignKey: "utilisateurId",
+	as: "utilisateur",
+});
 
-db.firepit.hasMany(db.message);
-db.message.belongsTo(db.firepit);
-db.utilisateur.hasMany(db.message);
-db.message.belongsTo(db.utilisateur);
+db.firepit.hasMany(db.message, { as: "message" });
+db.message.belongsTo(db.firepit, {
+	foreignKey: "firepitId",
+	as: "firepit",
+});
+db.utilisateur.hasMany(db.message, { as: "message" });
+db.message.belongsTo(db.utilisateur, {
+	foreignKey: "utilisateurId",
+	as: "utilisateur",
+});
 
 db.utilisateur.hasMany(db.thumbup);
 db.thumbup.belongsTo(db.utilisateur);

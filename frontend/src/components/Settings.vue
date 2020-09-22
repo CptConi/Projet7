@@ -35,7 +35,7 @@
 
 			<b-button
 				variant="success"
-				class="ml-auto mt-5"
+				class="ml-auto mt-4"
 				size="lg"
 				@click.prevent="submitChanges"
 			>
@@ -44,7 +44,7 @@
 		</b-form>
 			<b-button
 				variant="outline-danger"
-				class="mt-2 mx-auto mb-5"
+				class="mt-2 mx-auto"
 				size="sm"
 				@click.prevent="deleteAccount"
 			>

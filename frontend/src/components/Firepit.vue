@@ -17,7 +17,7 @@
 						<b-card class="mb-4">
 							<b-card-title class="h2">{{ fp.sujet }}</b-card-title>
 							<b-card-text>
-								<p>Créé par: {{ fp.utilisateurId }}</p>
+								<p>Créé par: {{ fp.utilisateur.prenom }} {{fp.utilisateur.nom}}</p>
 							</b-card-text>
 							<b-button variant="outline-success" class="mb-3">
 								S'assoir autour du feu <b-icon-chat-left-dots-fill class="ml-2"></b-icon-chat-left-dots-fill>
@@ -40,10 +40,14 @@ export default {
 	name: "Firepit",
 	data() {
 		return {
-			reqResponse: "",
+			reqResponse:""
 		};
 	},
-	computed: {},
+	computed: {
+		// reqResponse(){
+		// 	return reqResponse;
+		// }
+	},
 
 	mounted() {
 		this.$user = this.$resource("user{/id}");

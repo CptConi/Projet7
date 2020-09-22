@@ -13,7 +13,7 @@ export default {
 			.then(
 				(response) => {
 					if (response.status === 201) {
-						console.log("user créé :" + response.data.email);
+						console.log(response.body.message);
 					}
 				},
 				(responseError) => {

@@ -15,9 +15,8 @@ module.exports = (app) => {
 
 	router.delete("/:id", utilisateur.delete);
 
-
-	//Automatic create super user
-	router.post('/create', utilisateur.createTestUser);
+	//Test create users route
+	router.post("/create", utilisateur.createTestUser);
 
 	app.use("/user", router);
 };

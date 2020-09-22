@@ -35,6 +35,8 @@ export default {
 		objRef.$firepit.query({}).then(
 			(response) => {
 				objRef.reqResponse = response.body;
+				// AFFICHAGE DEBUG
+				console.log(response.body);
 			},
 			(responseError) => {
 				console.log(

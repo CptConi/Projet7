@@ -116,25 +116,30 @@ exports.delete = (req, res) => {
 		});
 };
 
+
+
 //TEST method:
 
 exports.createTestUser = (req, res) => {
-	const randomUser = {
-		email: req.body.email,
-		password: req.body.password,
-		prenom: req.body.prenom,
-		nom: req.body.nom,
-		poste: req.body.poste,
-		isAdmin: true,
-	};
-	// Save Firepit in the database
-	Utilisateur.create(randomUser)
-		.then((data) => {
-			res.status(201).send(data);
+	bcrypt
+		.hash(req.body.password, 10)
+		.then((hash) => {
+			const randomUser = {
+				email: req.body.email,
+				password: hash,
+				prenom: req.body.prenom,
+				nom: req.body.nom,
+				poste: req.body.poste,
+
+			};
+			Utilisateur.create(randomUser)
+				.then(() =>
+					res.status(201).json({
+						message: "Utilisateur créé :" + req.body.email,
+						
+					})
+				)
+				.catch((error) => res.status(400).json({ error }));
 		})
-		.catch((err) => {
-			res.status(500).send({
-				message: err.message || "Maybe Admin already created ?",
-			});
-		});
+		.catch((error) => res.status(500).json({ error }));
 };
