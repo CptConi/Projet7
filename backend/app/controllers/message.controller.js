@@ -32,8 +32,24 @@ exports.create = (req, res) => {
 // Get Messages list
 exports.getMessages = (req, res) => {
 	Message.findAll({
-		 where: { firepitId: req.body.id },
-		include: ["utilisateur"]
+		include: ["utilisateur", "firepit"],
+	})
+		.then((data) => {
+			res.send(data);
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: err.message || "Some error occurred while creating the Message.",
+			});
+		});
+};
+
+// Get Messages list from specified firepit
+exports.getMessagesFromFirepit = (req, res) => {
+	const id = req.params.id;
+	Message.findAll({
+		where: { firepitId: id },
+		include: ["utilisateur"],
 	})
 		.then((data) => {
 			res.send(data);

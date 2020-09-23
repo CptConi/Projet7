@@ -23,7 +23,9 @@
 			<b-row>
 				<b-col id="message-panel" class=""></b-col>
 			</b-row>
-			<b-button size="lg" variant="warning" id=message-button @click.stop="getAllMessages">Récupération des messages</b-button>
+			<b-button size="lg" variant="warning" id="message-button" @click.stop="getAllMessages"
+				>Récupération des messages</b-button
+			>
 		</b-container>
 		<MessageSender class="fixed-bottom"></MessageSender>
 	</div>
@@ -33,7 +35,7 @@
 import { mapState, mapActions } from "vuex";
 import FirepitService from "../services/FirepitService";
 import MessageSender from "../components/MessageSender";
-import MessageService from '../services/MessageService';
+import MessageService from "../services/MessageService";
 export default {
 	name: "FirepitView",
 	components: { MessageSender },
@@ -51,16 +53,17 @@ export default {
 		firepitGetOneResponse(response) {
 			this.currentFirepit = response;
 		},
-		getAllMessages(){
-			MessageService.getMessagesByFirepit(this, this.firepit.id)
-		}
+		getAllMessages() {
+			MessageService.getMessagesByFirepit(this, this.firepit.id);
+		},
 	},
 	beforeMount() {
 		this.setFirepitId(this.$route.params.id);
 	},
 	mounted() {
 		this.$firepit = this.$resource("firepit{/id}");
-		this.$message = this.$resource("message{/id}");
+		this.$message = this.$resource("message");
+		this.$messageFromFirepit = this.$resource("message/fromfirepit{/id}");
 		FirepitService.getOne(this, this.firepit.id);
 	},
 };
@@ -75,7 +78,7 @@ export default {
 	height: 100vh;
 }
 
-#message-button{
+#message-button {
 	transform: translateY(-500px);
 }
 </style>

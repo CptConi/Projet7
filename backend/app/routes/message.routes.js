@@ -9,5 +9,7 @@ module.exports = (app) => {
 
 	router.get("/", message.getMessages);
 
+	router.get("/fromfirepit/:id", message.getMessagesFromFirepit);
+
 	app.use("/message", router);
 };
