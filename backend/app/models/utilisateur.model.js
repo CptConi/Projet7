@@ -4,11 +4,11 @@ module.exports = (sequelize, Sequelize) => {
 		{
 			//-----------------------------------
 			// PK
-			id: {
-				type: Sequelize.INTEGER,
-				primaryKey: true,
-				autoIncrement: true,
-			},
+			// utilisateurId: {
+			// 	type: Sequelize.INTEGER,
+			// 	primaryKey: true,
+			// 	autoIncrement: true,
+			// },
 			//-----------------------------------
 			// Standard Cols
 			email: {

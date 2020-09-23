@@ -2,7 +2,7 @@ export default {
 	// !!!!!!!!!!!!!!!!!!!!!!! TEST METHODS !!!!!!!!!!!!!!!!!!!!
 	createTestFirepit(objRef) {
 		objRef.$firepit
-			.save({ sujet: objRef.sujet, portee: objRef.portee, user_id: objRef.user.id })
+			.save({ sujet: objRef.sujet, portee: objRef.portee, utilisateurId: objRef.user.id })
 			.then(
 				(response) => {
 					if (response.status === 201) {
@@ -14,6 +14,7 @@ export default {
 				}
 			);
 	},
+
 	// ------------------------PROD-----------------------------
 
 	createFirepit(objRef) {
@@ -23,7 +24,7 @@ export default {
 				(response) => {
 					if (response.status === 201) {
 						console.log("Firepit créé :'" + response.data.sujet + "'");
-						objRef.firepitCreated(response.data.firepit_id);
+						objRef.firepitCreated(response.data.id);
 					}
 				},
 				(responseError) => {

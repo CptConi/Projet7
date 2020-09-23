@@ -14,13 +14,13 @@ exports.create = (req, res) => {
 	// Create a Message
 	const message = {
 		content: req.body.content,
-		firepit_id: req.body.firepit_id,
-		auteur_id: req.body.user_id,
+		firepitId: req.body.firepitId,
+		utilisateurId: req.body.utilisateurId,
 	};
 	// Save Message in the database
 	Message.create(message)
 		.then((data) => {
-			res.send(data);
+			res.status(201).send(data);
 		})
 		.catch((err) => {
 			res.status(500).send({
@@ -32,10 +32,10 @@ exports.create = (req, res) => {
 // Get Messages list
 exports.getMessages = (req, res) => {
 	Message.findAll({
-		where: { firepit_id: req.body.firepid_id },
-		include: ["utilisateur"] 
+		 where: { firepitId: req.body.id },
+		include: ["utilisateur"]
 	})
-	.then((data) => {
+		.then((data) => {
 			res.send(data);
 		})
 		.catch((err) => {

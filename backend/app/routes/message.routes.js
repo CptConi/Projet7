@@ -7,7 +7,7 @@ module.exports = (app) => {
 
 	// router.get("/:id", message.getmessage);
 
-	// router.get("/", message.getmessages);
+	router.get("/", message.getMessages);
 
 	app.use("/message", router);
 };

@@ -16,7 +16,6 @@ export default new Vuex.Store({
 			id: "",
 		},
 		firepit: { id: "" },
-		message: {},
 	},
 	//==================================GETTERS=============================
 	getters: {},

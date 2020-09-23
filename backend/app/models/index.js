@@ -41,10 +41,10 @@ db.message.belongsTo(db.utilisateur, {
 	as: "utilisateur",
 });
 
-db.utilisateur.hasMany(db.thumbup);
-db.thumbup.belongsTo(db.utilisateur);
+// db.utilisateur.hasMany(db.thumbup);
+// db.thumbup.belongsTo(db.utilisateur);
 
-db.message.hasOne(db.thumbup);
-db.thumbup.belongsTo(db.message);
+// db.message.hasOne(db.thumbup);
+// db.thumbup.belongsTo(db.message);
 
 module.exports = db;

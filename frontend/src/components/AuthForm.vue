@@ -15,14 +15,14 @@
 							type="email"
 							required
 							placeholder="Email"
-						></b-form-input
-					>
+						></b-form-input>
 					</b-form-group>
-					<b-form-group label="Votre mot de passe:"
+					<b-form-group
+						label="Votre mot de passe:"
 						id="input-group-2"
-						label-for="password">
-					<b-form-input
-					
+						label-for="password"
+					>
+						<b-form-input
 							id="password"
 							v-model="password"
 							type="password"
@@ -31,7 +31,9 @@
 						></b-form-input>
 					</b-form-group>
 
-					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn">Se connecter</b-button>
+					<b-button variant="success" size="lg" class="mt-3" @click.prevent="signup"
+						>Créer un compte</b-button
+					>
 				</b-form>
 				<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
 			</div>
@@ -49,14 +51,14 @@
 							type="email"
 							required
 							placeholder="Email"
-						></b-form-input
-					>
+						></b-form-input>
 					</b-form-group>
-					<b-form-group label="Votre mot de passe:"
+					<b-form-group
+						label="Votre mot de passe:"
 						id="input-group-2"
-						label-for="password">
-					<b-form-input
-					
+						label-for="password"
+					>
+						<b-form-input
 							id="password"
 							v-model="password"
 							type="password"
@@ -66,7 +68,9 @@
 						></b-form-input>
 					</b-form-group>
 
-					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn">Se connecter</b-button>
+					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn"
+						>Se connecter</b-button
+					>
 				</b-form>
 				<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
 			</div>
@@ -85,6 +89,8 @@ export default {
 		return {
 			email: "",
 			password: "",
+			id:"",
+			token:'',
 			logSuccess: false,
 		};
 	},
@@ -94,9 +100,16 @@ export default {
 	watch: {
 		logSuccess() {
 			if (this.logSuccess) {
+				let userInfos = {
+					email: this.email,
+					token: this.token,
+					id: this.id,
+				};
+				this.userUpdateLoginInfos(userInfos);
+				
 				LS.set("email", this.email);
-				LS.set("token", this.user.token);
-				LS.set("id", this.user.id);
+				LS.set("token", this.token);
+				LS.set("id", this.id);
 				this.$router.push({ name: "Home" });
 			}
 		},
@@ -135,5 +148,4 @@ export default {
 h3 {
 	margin: 40px 0 0;
 }
-
 </style>

@@ -2,10 +2,10 @@
 	<div class="Test__Component">
 		<b-container fluid>
 			<b-row class="bg-dark">
-				<b-col sm='5'>
+				<b-col sm="5">
 					<h3>Zone de test</h3>
 				</b-col>
-				<b-col>
+				<b-col sm="6">
 					<b-row>
 						<b-button-group class="pt-1">
 							<b-button variant="outline-primary" size="sm" @click="createUsers">
@@ -19,6 +19,11 @@
 							</b-button>
 						</b-button-group>
 					</b-row>
+				</b-col>
+				<b-col sm="1">
+					<b-button variant="outline" @click.stop="goToAuth"
+						><b-icon-house class="home-button"></b-icon-house
+					></b-button>
 				</b-col>
 			</b-row>
 		</b-container>
@@ -120,7 +125,7 @@ export default {
 	},
 	methods: {
 		createFirepits() {
-			console.log("Méthode createFirepits en cours d'implémentation, Work in progress");
+			console.warn("Méthode createFirepits lancée");
 			//TEST:
 			for (let firepit of this.firepitList) {
 				this.sujet = firepit.sujet;
@@ -130,7 +135,7 @@ export default {
 			}
 		},
 		createMessages() {
-			console.log("Méthode createMessages pas encore implémentée, Work in progress");
+			console.warn("Méthode createMessages pas encore implémentée, Work in progress");
 		},
 		createUsers() {
 			console.warn("Méthode createUsers lancée");
@@ -146,6 +151,9 @@ export default {
 				}, 3000);
 			}
 		},
+		goToAuth() {
+			this.$router.push({ name: 'Authentification' });
+		},
 	},
 	mounted() {
 		this.$firepit = this.$resource("firepit{/id}");
@@ -156,4 +164,10 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.home-button{
+	width:18px;
+	height: 18px;
+	color: white;
+}
+	</style>

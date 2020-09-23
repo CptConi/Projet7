@@ -4,11 +4,11 @@ module.exports = (sequelize, Sequelize) => {
 		{
 			//-----------------------------------
 			// PK
-			firepit_id: {
-				type: Sequelize.INTEGER,
-				primaryKey: true,
-				autoIncrement: true,
-			},
+			// firepitId: {
+			// 	type: Sequelize.INTEGER,
+			// 	primaryKey: true,
+			// 	autoIncrement: true,
+			// },
 			//-----------------------------------
 			// Standard Cols
 			sujet: {

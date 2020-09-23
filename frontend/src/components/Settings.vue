@@ -42,14 +42,14 @@
 				Je valide ces informations
 			</b-button>
 		</b-form>
-			<b-button
-				variant="outline-danger"
-				class="mt-2 mx-auto"
-				size="sm"
-				@click.prevent="deleteAccount"
-			>
-				Supprimer le profil
-			</b-button>
+		<b-button
+			variant="outline-danger"
+			class="mt-2 mx-auto"
+			size="sm"
+			@click.prevent="deleteAccount"
+		>
+			Supprimer le profil
+		</b-button>
 	</div>
 </template>
 
@@ -102,6 +102,12 @@ export default {
 		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
 		LS.initVuexUser(this);
+		this.userUpdateCommonInfos({
+			prenom: LS.user.prenom,
+			nom: LS.user.nom,
+			poste: LS.user.poste,
+		});
+		//A modifier, doit employer une Action et COMMIT:
 		this.user.email = LS.user.email;
 		this.prenom = LS.user.prenom;
 		this.nom = LS.user.nom;

@@ -15,7 +15,7 @@ exports.create = (req, res) => {
 	const firepit = {
 		sujet: req.body.sujet,
 		portee: req.body.portee,
-		utilisateurId: req.body.user_id,
+		utilisateurId: req.body.utilisateurId,
 	};
 	// Save Firepit in the database
 	Firepit.create(firepit)
@@ -58,7 +58,7 @@ exports.update = (req, res) => {
 	const id = req.params.id;
 
 	Firepit.update(req.body, {
-		where: { firepit_id: id },
+		where: { firepitId: id },
 	})
 		.then((num) => {
 			if (num == 1) {
@@ -83,7 +83,7 @@ exports.delete = (req, res) => {
 	const id = req.params.id;
 
 	Firepit.destroy({
-		where: { firepit_id: id },
+		where: { firepitId: id },
 	})
 		.then((num) => {
 			if (num == 1) {

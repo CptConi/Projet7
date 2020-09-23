@@ -54,6 +54,8 @@
 <script>
 import { mapState } from "vuex";
 import FirepitService from "../services/FirepitService";
+import MessageService from "../services/MessageService";
+
 export default {
 	name: "NewFirepitModal",
 	data() {
@@ -69,13 +71,19 @@ export default {
 			FirepitService.createFirepit(this);
 		},
 		firepitCreated(firepitId) {
-			console.log("Je m'en vais vers d'autrs horizons >> id: " + firepitId);
+			MessageService.createMessageFromParams(
+				this,
+				this.form.firstMessage,
+				firepitId,
+				this.user.id
+			);
 			// Once firepit created, we can navigate to it
 			this.$router.push({ name: "Firepitview", params: { id: firepitId } });
 		},
 	},
 	mounted() {
 		this.$firepit = this.$resource("firepit{/id}");
+		this.$message = this.$resource("message{/id}");
 	},
 };
 </script>

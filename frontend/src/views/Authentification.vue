@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<Title>{{ displayTitle }}</Title>
+		<Title class="mt-3">{{ displayTitle }}</Title>
 		<transition name="fade" mode="out-in">
 			<AuthForm></AuthForm>
 		</transition>

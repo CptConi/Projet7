@@ -4,11 +4,9 @@ export default {
 			(response) => {
 				if (response.status === 200) {
 					// Utilisateur connecté !
-					objRef.userUpdateLoginInfos({
-						email: response.data.email,
-						token: response.data.token,
-						id: response.data.id,
-					});
+
+					objRef.id = response.data.id;
+					objRef.token = response.data.token;
 					objRef.logSuccess = true;
 				}
 			},
@@ -35,7 +33,7 @@ export default {
 		);
 	},
 
-	createUser(objRef){
+	createUser(objRef) {
 		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
 			(response) => {
 				if (response.status === 201) {
@@ -49,5 +47,5 @@ export default {
 				console.log("ERREUR SERVEUR", responseError);
 			}
 		);
-	}
+	},
 };

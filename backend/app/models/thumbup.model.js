@@ -4,7 +4,7 @@ module.exports = (sequelize, Sequelize) => {
 		{
 			//-----------------------------------
 			//PK
-			message_id: {
+			messageId: {
 				type: Sequelize.INTEGER,
 				primaryKey: true,
 				// references: {

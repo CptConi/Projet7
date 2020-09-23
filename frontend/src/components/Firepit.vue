@@ -20,7 +20,7 @@
 			<!-- Existing Firepits -->
 			<b-row>
 				<b-card-group deck class="justify-content-center">
-					<div v-for="fp in reqResponse" :key="fp.firepit_id">
+					<div v-for="fp in reqResponse" :key="fp.id">
 						<b-card class="mb-4">
 							<b-card-title class="h2">{{ fp.sujet }}</b-card-title>
 							<b-card-text>
@@ -28,7 +28,7 @@
 									Créé par: {{ fp.utilisateur.prenom }} {{ fp.utilisateur.nom }}
 								</p>
 							</b-card-text>
-							<b-button variant="outline-success" class="mb-3">
+							<b-button @click.stop="goToFirepit(fp.id)" variant="outline-success" class="mb-3">
 								S'assoir autour du feu
 								<b-icon-chat-left-dots-fill
 									class="ml-2"
@@ -74,6 +74,9 @@ export default {
 		refreshFirepits() {
 			FirepitService.getAll(this);
 		},
+		goToFirepit(firepitId){
+			this.$router.push({ name: "Firepitview", params: { id: firepitId } });
+		}
 	},
 
 	mounted() {
