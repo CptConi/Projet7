@@ -2,7 +2,7 @@
 	<div>
 		<b-container fluid class="sticky-top" id="top-panel">
 			<b-row>
-				<h1 class="mx-auto mt-3 bg-dark col-10 rounded">
+				<h1 class="mx-auto mt-3 bg-dark col-9 rounded">
 					{{ currentFirepit.sujet }}
 				</h1>
 			</b-row>
@@ -33,7 +33,9 @@
 				</b-col>
 			</b-row>
 		</b-container>
-		<MessageSender class="fixed-bottom"></MessageSender>
+		<MessageSender class="fixed-bottom shadow-lg"></MessageSender>
+		<SettingsButton></SettingsButton>
+		<goToHomeButton></goToHomeButton>
 	</div>
 </template>
 
@@ -41,11 +43,14 @@
 import { mapState, mapActions } from "vuex";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
+
+import goToHomeButton from '../components/Buttons/GoToHomeButton'
+import SettingsButton from '../components/Buttons/SettingsButton'
 import MessageSender from "../components/MessageSender";
 import Message from "../components/Message";
 export default {
 	name: "FirepitView",
-	components: { MessageSender, Message },
+	components: { MessageSender, Message, SettingsButton, goToHomeButton },
 	data() {
 		return {
 			currentFirepit: "",
@@ -89,13 +94,13 @@ export default {
 <style scoped lang="scss">
 #firepit-infos{
 	background-color: rgba(255,255,255,0.2);
+	backdrop-filter: blur(5px);
 	border-radius: 10px;
 	margin:0;
-	padding-bottom:-50px;
 }
 
 #message-panel {
-	height: 100vh;
+	// height: 100vh;
 	margin-bottom: 150px;
 }
 

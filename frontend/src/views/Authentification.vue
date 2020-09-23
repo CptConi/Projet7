@@ -1,6 +1,6 @@
 <template>
 	<div class="home">
-		<Title class="mt-3">{{ displayTitle }}</Title>
+		<h1 class="mt-3">{{ displayTitle }}</h1>
 		<transition name="fade" mode="out-in">
 			<AuthForm></AuthForm>
 		</transition>
@@ -11,7 +11,6 @@
 <script>
 // @ is an alias to /src
 import AuthForm from "../components/AuthForm";
-import Title from "@/components/Title.vue";
 import FirepitAnimated from "@/components/Firepit-Animated.vue";
 
 import LS from "../services/StorageManager";
@@ -19,7 +18,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "Authentification",
-	components: { AuthForm, Title, FirepitAnimated },
+	components: { AuthForm, FirepitAnimated },
 	data() {
 		return {
 		};
