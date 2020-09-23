@@ -42,7 +42,7 @@ export default {
 	getMessagesByFirepit(objRef, pId) {
 		objRef.$messageFromFirepit.query({ id : pId }).then(
 			(response) => {
-				if (response.status === 201) {
+				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList
 					objRef.messagesList = response.data;
 				}
