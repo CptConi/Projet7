@@ -40,6 +40,7 @@ export default {
 		sendMessage() {
 			MessageService.createMessage(this);
 			this.message = "";
+			this.$emit('messageSent');
 		},
 	},
 	mounted() {

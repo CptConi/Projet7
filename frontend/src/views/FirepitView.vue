@@ -10,14 +10,10 @@
 				</div>
 			</b-row>
 			<b-row id="firepit-infos" v-if="!loading">
-				<p class="mx-auto mb-0">
-					🔥 Allumé par {{ auteurFirepit }}
-				</p>
+				<p class="mx-auto mb-0">🔥 Allumé par {{ auteurFirepit }}</p>
 				<p class="mx-auto mb-0">Le {{ currentFirepit.createdAt.substr(0, 10) }}</p>
 			</b-row>
-			<b-row id="firepit-infos" v-else>
-				
-			</b-row>
+			<b-row id="firepit-infos" v-else> </b-row>
 		</b-container>
 		<b-container fluid>
 			<b-row>
@@ -35,7 +31,7 @@
 				</b-col>
 			</b-row>
 		</b-container>
-		<MessageSender class="fixed-bottom shadow-lg"></MessageSender>
+		<MessageSender class="fixed-bottom shadow-lg" v-on:messageSent="scrollBottom"></MessageSender>
 		<SettingsButton></SettingsButton>
 		<goToHomeButton></goToHomeButton>
 	</div>
@@ -63,11 +59,11 @@ export default {
 	},
 	computed: {
 		...mapState(["firepit", "user"]),
-		auteurFirepit(){
-			if(this.currentFirepit.utilisateur == null){
-				return 'Utilisateur non trouvé'
-			}else{
-				return this.currentFirepit.utilisateur.prenom +' '+ this.currentFirepit.utilisateur.nom
+		auteurFirepit() {
+			if (this.currentFirepit.utilisateur == null) {
+				return "Utilisateur non trouvé";
+			} else {
+				return this.currentFirepit.utilisateur.prenom + " " + this.currentFirepit.utilisateur.nom;
 			}
 		},
 	},
@@ -76,6 +72,9 @@ export default {
 
 		getAllMessages() {
 			MessageService.getMessagesByFirepit(this, this.firepit.id);
+		},
+		scrollBottom() {
+			window.scrollTo(0, document.body.scrollHeight);
 		},
 	},
 	beforeMount() {
@@ -86,12 +85,13 @@ export default {
 		this.$message = this.$resource("message");
 		this.$messageFromFirepit = this.$resource("message/fromfirepit{/id}");
 		FirepitService.getOne(this, this.firepit.id);
-
-		//loop de récupération des messages:
+		//loop de refresh des messages:
 		this.timer = window.setInterval(() => {
 			console.log("FirepitView Component currently refreshing messagesList");
 			this.getAllMessages();
 		}, 1000);
+
+		this.scrollBottom();
 	},
 	beforeDestroy() {
 		clearInterval(this.timer);

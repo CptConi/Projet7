@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-container :class="style">
+		<b-container :class="style" class="mb-3">
 			<b-row>
 				<small class="auteur font-italic">
 					{{ auteur }}
