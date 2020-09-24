@@ -33,7 +33,7 @@ exports.create = (req, res) => {
 exports.getFirepit = (req, res) => {
 	const id = req.params.id;
 
-	Firepit.findByPk(id, { include: ["message", "utilisateur"] })
+	Firepit.findByPk(id, { include: ["utilisateur"] })
 		.then((data) => {
 			res.send(data);
 		})
@@ -46,7 +46,7 @@ exports.getFirepit = (req, res) => {
 
 // Get entire Firepit List:
 exports.getAll = (req, res) => {
-	Firepit.findAll({ include: ["utilisateur"] })
+	Firepit.findAll({ include: ["message","utilisateur"] })
 		.then((data) => res.send(data))
 		.catch((err) => {
 			err.message || "Error while retrieving Firepit list from Database";

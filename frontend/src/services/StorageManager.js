@@ -11,7 +11,7 @@ class LocalStorageManager {
 	};
 
 	asAccount() {
-		if (localStorage.getItem(LOCALSTORAGE_NAME)) {
+		if (localStorage.getItem(LOCALSTORAGE_NAME + '_email')) {
 			return true;
 		} else {
 			return false;

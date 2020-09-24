@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<Test></Test>
+		<Test v-show="testZoneVisible"></Test>
 		<router-view />
 	</div>
 </template>
@@ -8,6 +8,12 @@
 <script>
 import Test from "./components/Test";
 export default {
+	name: "App",
+	data() {
+		return {
+			testZoneVisible: true,
+		};
+	},
 	components: { Test },
 };
 </script>
