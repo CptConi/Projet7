@@ -1,6 +1,5 @@
 export default {
 	createMessage(objRef) {
-		// this.objRef.$message.save()
 		objRef.$message
 			.save({
 				content: objRef.message,
@@ -20,7 +19,6 @@ export default {
 	},
 
 	createMessageFromParams(objRef, pMessage, pFirepitId, pUserId) {
-		// this.objRef.$message.save()
 		objRef.$message
 			.save({
 				content: pMessage,
@@ -40,7 +38,7 @@ export default {
 	},
 
 	getMessagesByFirepit(objRef, pId) {
-		objRef.$messageFromFirepit.query({ id : pId }).then(
+		objRef.$messageFromFirepit.query({ id: pId }).then(
 			(response) => {
 				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList

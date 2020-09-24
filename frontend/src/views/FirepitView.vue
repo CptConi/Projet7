@@ -11,10 +11,12 @@
 			</b-row>
 			<b-row id="firepit-infos" v-if="!loading">
 				<p class="mx-auto mb-0">
-					🔥 Allumé par {{ currentFirepit.utilisateur.prenom }}
-					{{ currentFirepit.utilisateur.nom }}
+					🔥 Allumé par {{ auteurFirepit }}
 				</p>
 				<p class="mx-auto mb-0">Le {{ currentFirepit.createdAt.substr(0, 10) }}</p>
+			</b-row>
+			<b-row id="firepit-infos" v-else>
+				
 			</b-row>
 		</b-container>
 		<b-container fluid>
@@ -56,11 +58,18 @@ export default {
 			currentFirepit: "",
 			messagesList: [],
 			timer: "",
-			loading:true
+			loading: true,
 		};
 	},
 	computed: {
 		...mapState(["firepit", "user"]),
+		auteurFirepit(){
+			if(this.currentFirepit.utilisateur == null){
+				return 'Utilisateur non trouvé'
+			}else{
+				return this.currentFirepit.utilisateur.prenom +' '+ this.currentFirepit.utilisateur.nom
+			}
+		},
 	},
 	methods: {
 		...mapActions(["setFirepitId"]),
