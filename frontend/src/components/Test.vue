@@ -1,7 +1,12 @@
 <template>
 	<div class="Test__Component">
+		<b-button id="showPanel" variant="outline" size="sm" @click="isVisible = !isVisible">
+			<h4>
+				<b-icon-tools></b-icon-tools>
+			</h4>
+		</b-button>
 		<b-container fluid>
-			<b-row class="bg-dark">
+			<b-row class="bg-dark" v-show="isVisible">
 				<b-col sm="5">
 					<h3>Zone de test</h3>
 				</b-col>
@@ -21,9 +26,7 @@
 					</b-row>
 				</b-col>
 				<b-col sm="1">
-					<b-button variant="outline" @click.stop="goToAuth"
-						><b-icon-house class="home-button"></b-icon-house
-					></b-button>
+					<b-button variant="outline" @click.stop="goToAuth"><b-icon-house class="home-button"></b-icon-house></b-button>
 				</b-col>
 			</b-row>
 		</b-container>
@@ -38,6 +41,7 @@ export default {
 	name: "Test",
 	data() {
 		return {
+			isVisible: true,
 			email: "",
 			password: "",
 			prenom: "",
@@ -152,7 +156,7 @@ export default {
 			}
 		},
 		goToAuth() {
-			this.$router.push({ name: 'Authentification' });
+			this.$router.push({ name: "Authentification" });
 		},
 	},
 	mounted() {
@@ -165,9 +169,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home-button{
-	width:18px;
+.home-button {
+	width: 18px;
 	height: 18px;
 	color: white;
 }
-	</style>
+
+#showPanel {
+	position: fixed;
+	top: 60px;
+	left: 10px;
+	color: white;
+	z-index: 1000000000;
+}
+</style>
