@@ -11,7 +11,7 @@
 			</b-row>
 			<b-row id="firepit-infos" v-if="!loading">
 				<p class="mx-auto mb-0">🔥 Allumé par {{ auteurFirepit }}</p>
-				<p class="mx-auto mb-0">Le {{ currentFirepit.createdAt.substr(0, 10) }}</p>
+				<p class="mx-auto mb-0">Allumé {{ formatedDate }}</p>
 			</b-row>
 			<b-row id="firepit-infos" v-else> </b-row>
 		</b-container>
@@ -41,6 +41,7 @@
 import { mapState, mapActions } from "vuex";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
+import DateManager from '../services/DateManager'
 
 import goToHomeButton from "../components/Buttons/GoToHomeButton";
 import SettingsButton from "../components/Buttons/SettingsButton";
@@ -66,6 +67,13 @@ export default {
 				return this.currentFirepit.utilisateur.prenom + " " + this.currentFirepit.utilisateur.nom;
 			}
 		},
+		formatedDate(){
+			if(this.loading){
+				return 0
+			}else{
+				return DateManager.formatDate(this.currentFirepit.createdAt);
+			}
+		}
 	},
 	methods: {
 		...mapActions(["setFirepitId"]),

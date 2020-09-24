@@ -10,7 +10,7 @@
 							S'assoir autour du feu
 							<b-icon-chat-left-dots-fill class="ml-2"></b-icon-chat-left-dots-fill>
 						</b-button>
-						<b-card-text class="small text-muted pb-0">Allumé le: {{ date }}</b-card-text>
+						<b-card-text class="small text-muted pb-0">Allumé {{ formatedDate }}</b-card-text>
 					</b-card>
 			</b-card-group>
 		
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import DateManager from '../services/DateManager';
 
 export default {
 	name: "Firepit",
@@ -26,6 +27,9 @@ export default {
 	computed: {
 		auteur(){
 			return this.prenom + ' ' + this.nom;
+		},
+		formatedDate(){
+			return DateManager.formatDate(this.date);
 		}
 	},
 	methods: {

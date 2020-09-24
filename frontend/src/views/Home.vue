@@ -46,7 +46,7 @@
 <script>
 import FirepitService from "../services/FirepitService";
 import { mapState, mapActions } from "vuex";
-import LS from "../services/StorageManager"
+import LS from "../services/StorageManager";
 
 import NewFirePitModal from "../components/NewFirepitModal";
 import FirepitAnimated from "../components/Firepit-Animated";
@@ -70,7 +70,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions(['userInitFromParams']),
+		...mapActions(["userInitFromParams"]),
 		refreshFirepits() {
 			FirepitService.getAll(this);
 		},
