@@ -67,9 +67,11 @@ export default {
 		...mapState(["user"]),
 	},
 	methods: {
+		// Méthode appelée lors de la validation du firepit
 		sendFirepit() {
 			FirepitService.createFirepit(this);
 		},
+		// Callback appelée lorsque le firepit est créé.
 		firepitCreated(firepitId) {
 			MessageService.createMessageFromParams(
 				this,

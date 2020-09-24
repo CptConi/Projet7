@@ -85,9 +85,9 @@ export default {
 	mounted() {
 		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
-		this.prenom = LS.get("prenom");
-		this.nom = LS.get("nom");
-		this.poste = LS.get("poste");
+		this.prenom = this.user.prenom
+		this.nom = this.user.nom
+		this.poste = this.user.poste;
 	},
 };
 </script>

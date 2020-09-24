@@ -24,7 +24,7 @@
 			<!-- Existing Firepits -->
 			<b-row class="justify-content-around mb-3">
 				<Firepit
-				v-show="!loader"
+					v-show="!loader"
 					v-for="fp in reqResponse"
 					:key="fp.id"
 					:sujet="fp.sujet"
@@ -35,14 +35,20 @@
 				></Firepit>
 			</b-row>
 		</b-container>
+		<!-- Modal New Firepit Integration Component -->
+		<b-container>
+			<NewFirePitModal></NewFirePitModal>
+		</b-container>
 		<FirepitAnimated></FirepitAnimated>
 	</div>
 </template>
 
 <script>
 import FirepitService from "../services/FirepitService";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
+import LS from "../services/StorageManager"
 
+import NewFirePitModal from "../components/NewFirepitModal";
 import FirepitAnimated from "../components/Firepit-Animated";
 import SettingsButton from "../components/Buttons/SettingsButton";
 import GoToHomeButton from "../components/Buttons/GoToHomeButton";
@@ -53,10 +59,10 @@ export default {
 		return {
 			refreshSpin: false,
 			reqResponse: "",
-			loader:true,
+			loader: true,
 		};
 	},
-	components: { SettingsButton, Firepit, FirepitAnimated, GoToHomeButton },
+	components: { SettingsButton, Firepit, FirepitAnimated, GoToHomeButton, NewFirePitModal },
 	computed: {
 		...mapState(["user"]),
 		spinAnimation() {
@@ -64,24 +70,29 @@ export default {
 		},
 	},
 	methods: {
+		...mapActions(['userInitFromParams']),
 		refreshFirepits() {
 			FirepitService.getAll(this);
 		},
 	},
-	watch:{
-		reqResponse(){
-			if(this.reqResponse === ""){
+	watch: {
+		reqResponse() {
+			if (this.reqResponse === "") {
 				this.loader = true;
-			}else{
+			} else {
 				this.loader = false;
 			}
-		}
+		},
 	},
 	mounted() {
 		this.$user = this.$resource("user{/id}");
 		this.$firepit = this.$resource("firepit{/id}");
 
 		FirepitService.getAll(this);
+
+		//Mise à jour des infos contenues dans VueX via LocalStorage
+		LS.initUser();
+		this.userInitFromParams(LS.user);
 	},
 };
 </script>

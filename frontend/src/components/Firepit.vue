@@ -13,19 +13,15 @@
 						<b-card-text class="small text-muted pb-0">Allumé le: {{ date }}</b-card-text>
 					</b-card>
 			</b-card-group>
-		<!-- Modal New Firepit Integration Component -->
-		<b-container>
-			<NewFirePitModal></NewFirePitModal>
-		</b-container>
+		
 	</div>
 </template>
 
 <script>
-import NewFirePitModal from "../components/NewFirepitModal";
 
 export default {
 	name: "Firepit",
-	components: { NewFirePitModal },
+	components: {  },
 	props: { sujet: String, prenom: String, nom: String, date: String, id: Number },
 	computed: {
 		auteur(){
