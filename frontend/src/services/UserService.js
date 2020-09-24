@@ -30,10 +30,7 @@ export default {
 				objRef.reqResponse = response.body;
 			},
 			(responseError) => {
-				console.log(
-					"An error occured while trying to communicate with Database",
-					responseError
-				);
+				console.log("An error occured while trying to communicate with Database", responseError);
 			}
 		);
 	},
@@ -45,10 +42,7 @@ export default {
 				objRef.reqResponse = response.body;
 			},
 			(responseError) => {
-				console.log(
-					"An error occured while trying to communicate with Database",
-					responseError
-				);
+				console.log("An error occured while trying to communicate with Database", responseError);
 			}
 		);
 	},
@@ -75,6 +69,18 @@ export default {
 					console.log(responseError);
 				}
 			);
+	},
+
+	//Delete > Update to empty
+	updateDelete(objRef) {
+		objRef.$user.update({ id: objRef.user.id }, { email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" }).then(
+			(response) => {
+				console.log(response.body.message);
+			},
+			(responseError) => {
+				console.log(responseError);
+			}
+		);
 	},
 
 	//Delete user in DB

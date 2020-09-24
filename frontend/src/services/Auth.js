@@ -7,6 +7,10 @@ export default {
 
 					objRef.id = response.data.id;
 					objRef.token = response.data.token;
+					objRef.prenom = response.data.prenom;
+					objRef.nom = response.data.nom;
+					objRef.poste = response.data.poste;
+
 					objRef.logSuccess = true;
 				}
 			},
@@ -20,10 +24,7 @@ export default {
 		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
 			(response) => {
 				if (response.status === 201) {
-					console.log(
-						"Utilisateur créé avec l'adresse mail " +
-							JSON.stringify(response.data.email)
-					);
+					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
 					objRef.logIn();
 				}
 			},
@@ -37,10 +38,7 @@ export default {
 		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
 			(response) => {
 				if (response.status === 201) {
-					console.log(
-						"Utilisateur créé avec l'adresse mail " +
-							JSON.stringify(response.data.email)
-					);
+					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
 				}
 			},
 			(responseError) => {

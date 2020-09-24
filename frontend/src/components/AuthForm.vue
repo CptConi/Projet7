@@ -91,6 +91,9 @@ export default {
 			password: "",
 			id:"",
 			token:'',
+			prenom:'',
+			nom:'',
+			poste:'',
 			logSuccess: false,
 		};
 	},
@@ -103,19 +106,25 @@ export default {
 				let userInfos = {
 					email: this.email,
 					token: this.token,
+					prenom: this.prenom,
+					nom: this.nom,
+					poste: this.poste,
 					id: this.id,
 				};
-				this.userUpdateLoginInfos(userInfos);
-				
-				LS.set("email", this.email);
-				LS.set("token", this.token);
-				LS.set("id", this.id);
+				this.userInitFromParams(userInfos)
+
+				LS.set("email", this.user.email);
+				LS.set("token", this.user.token);
+				LS.set('prenom', this.user.prenom);
+				LS.set('nom', this.user.nom);
+				LS.set('poste', this.user.poste);
+				LS.set("id", this.user.id);
 				this.$router.push({ name: "Home" });
 			}
 		},
 	},
 	methods: {
-		...mapActions(["userUpdateLoginInfos", "accountDoNotExists", "accountExists"]),
+		...mapActions(["userInitFromParams", "accountDoNotExists", "accountExists"]),
 		signup() {
 			auth.signup(this);
 		},

@@ -29,7 +29,7 @@ class LocalStorageManager {
 
 	initVuexUser(refObj) {
 		this.initUser();
-		refObj.userInitFromLS(this.user);
+		refObj.userInitFromParams(this.user);
 	}
 
 	set(pKey, pValue) {

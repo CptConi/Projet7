@@ -57,7 +57,7 @@ export default new Vuex.Store({
 	},
 	//==================================ACTIONS=============================
 	actions: {
-		userInitFromLS(context, pUser) {
+		userInitFromParams(context, pUser) {
 			context.commit("SET_USER", pUser);
 		},
 		userUpdateLoginInfos(context, pInfos) {

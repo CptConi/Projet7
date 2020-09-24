@@ -2,18 +2,13 @@
 	<div>
 		<b-alert show dismissible>
 			<p for="email">Vous êtes connecté(e) en tant que:</p>
-			<h3>{{ user.email }}</h3>
+			<h3 v-if="user.email">{{ user.email }}</h3>
+			<h3 v-else>{{email}}</h3>
 		</b-alert>
 
 		<b-form class="profile__Form">
 			<b-form-group label="Votre Prénom:" id="input-group-1" label-for="prenom">
-				<b-form-input
-					id="prenom"
-					v-model="prenom"
-					type="text"
-					required
-					placeholder="Prénom"
-				></b-form-input>
+				<b-form-input id="prenom" v-model="prenom" type="text" required placeholder="Prénom"></b-form-input>
 			</b-form-group>
 			<b-form-group
 				label="Votre nom:"
@@ -21,33 +16,17 @@
 				label-for="nom"
 				description="Il s'agit d'un outil de communication professionel. Merci d'utiliser votre véritable identitée."
 			>
-				<b-form-input
-					id="nom"
-					v-model="nom"
-					type="text"
-					required
-					placeholder="Nom"
-				></b-form-input>
+				<b-form-input id="nom" v-model="nom" type="text" required placeholder="Nom"></b-form-input>
 			</b-form-group>
 			<b-form-group description="Votre poste au sein de Groupomania">
 				<b-form-select v-model="poste" :options="options"></b-form-select
 			></b-form-group>
 
-			<b-button
-				variant="success"
-				class="ml-auto mt-4"
-				size="lg"
-				@click.prevent="submitChanges"
-			>
+			<b-button variant="success" class="ml-auto mt-4" size="lg" @click.prevent="submitChanges">
 				Je valide ces informations
 			</b-button>
 		</b-form>
-		<b-button
-			variant="outline-danger"
-			class="mt-2 mx-auto"
-			size="sm"
-			@click.prevent="deleteAccount"
-		>
+		<b-button variant="outline-danger" class="mt-2 mx-auto" size="sm" @click.prevent="deleteAccount">
 			Supprimer le profil
 		</b-button>
 	</div>
@@ -74,7 +53,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(["userUpdateCommonInfos", "userInitFromLS"]),
+		...mapActions(["userUpdateCommonInfos", "userInitFromParams"]),
 		submitChanges() {
 			userService.update(this);
 			LS.set("prenom", this.prenom);
@@ -88,7 +67,9 @@ export default {
 		},
 		deleteAccount() {
 			if (window.confirm("Etes-vous certain de vouloir supprimer votre compte ?")) {
-				userService.destroy(this);
+				// Il faut en fait effectuer un update en retirant toutes les infos pour empêcher la reconnection au compte.
+				userService.updateDelete(this);
+				this.$router.push({ name: "Authentification" });
 			}
 		},
 		closeSettings() {
@@ -97,21 +78,16 @@ export default {
 	},
 	computed: {
 		...mapState(["user"]),
+		email() {
+			return LS.get("email");
+		},
 	},
 	mounted() {
 		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
-		LS.initVuexUser(this);
-		this.userUpdateCommonInfos({
-			prenom: LS.user.prenom,
-			nom: LS.user.nom,
-			poste: LS.user.poste,
-		});
-		//A modifier, doit employer une Action et COMMIT:
-		this.user.email = LS.user.email;
-		this.prenom = LS.user.prenom;
-		this.nom = LS.user.nom;
-		this.poste = LS.user.poste;
+		this.prenom = LS.get("prenom");
+		this.nom = LS.get("nom");
+		this.poste = LS.get("poste");
 	},
 };
 </script>
