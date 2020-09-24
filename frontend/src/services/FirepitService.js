@@ -37,7 +37,8 @@ export default {
 	getOne(objRef, pId) {
 		objRef.$firepit.get({ id: pId }).then(
 			(response) => {
-				objRef.firepitGetOneResponse(response.body);
+				objRef.currentFirepit = response.body;
+				objRef.loading = false;
 			},
 			(responseError) => {
 				console.log(

@@ -38,7 +38,7 @@ export default {
 		...mapActions(["accountExists", "accountDoNotExists"]),
 		},
 	mounted() {
-		console.log("Cheking if LocalStorage Key exists \n >", LS.asAccount());
+		
 		if(LS.asAccount){
 			this.accountExists();
 		}else{

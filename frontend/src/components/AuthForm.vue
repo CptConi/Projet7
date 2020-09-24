@@ -124,10 +124,8 @@ export default {
 		},
 		asAnAccount() {
 			if (this.existingAccount) {
-				console.log("Account do not exist.", this.existingAccount);
 				this.accountDoNotExists();
 			} else {
-				console.log("Account exists.", this.existingAccount);
 				this.accountExists();
 			}
 		},

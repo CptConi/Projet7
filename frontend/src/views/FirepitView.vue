@@ -1,22 +1,22 @@
 <template>
 	<div>
 		<b-container fluid class="sticky-top" id="top-panel">
-			<b-row>
-				<h1 class="mx-auto mt-3 bg-dark col-9 rounded">
-					{{ currentFirepit.sujet }}
-				</h1>
+			<b-row class="mb-2">
+				<div class="mx-auto mt-3 bg-dark col-9 rounded">
+					<h1 v-if="!loading">
+						{{ currentFirepit.sujet }}
+					</h1>
+					<div v-else><b-skeleton> </b-skeleton><b-skeleton> </b-skeleton></div>
+				</div>
 			</b-row>
-			<b-row id="firepit-infos">
+			<b-row id="firepit-infos" v-if="!loading">
 				<p class="mx-auto mb-0">
 					🔥 Allumé par {{ currentFirepit.utilisateur.prenom }}
 					{{ currentFirepit.utilisateur.nom }}
 				</p>
-				<p class="mx-auto mb-0">
-					Le {{ currentFirepit.createdAt.substr(0, 10) }}
-				</p>
+				<p class="mx-auto mb-0">Le {{ currentFirepit.createdAt.substr(0, 10) }}</p>
 			</b-row>
 		</b-container>
-		<b-container> </b-container>
 		<b-container fluid>
 			<b-row>
 				<b-col id="message-panel" class="pt-2">
@@ -44,8 +44,8 @@ import { mapState, mapActions } from "vuex";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
 
-import goToHomeButton from '../components/Buttons/GoToHomeButton'
-import SettingsButton from '../components/Buttons/SettingsButton'
+import goToHomeButton from "../components/Buttons/GoToHomeButton";
+import SettingsButton from "../components/Buttons/SettingsButton";
 import MessageSender from "../components/MessageSender";
 import Message from "../components/Message";
 export default {
@@ -56,6 +56,7 @@ export default {
 			currentFirepit: "",
 			messagesList: [],
 			timer: "",
+			loading:true
 		};
 	},
 	computed: {
@@ -63,9 +64,7 @@ export default {
 	},
 	methods: {
 		...mapActions(["setFirepitId"]),
-		firepitGetOneResponse(response) {
-			this.currentFirepit = response;
-		},
+
 		getAllMessages() {
 			MessageService.getMessagesByFirepit(this, this.firepit.id);
 		},
@@ -92,16 +91,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#firepit-infos{
-	background-color: rgba(255,255,255,0.2);
+#firepit-infos {
+	background-color: rgba(255, 255, 255, 0.2);
 	backdrop-filter: blur(5px);
 	border-radius: 10px;
-	margin:0;
+	margin: 0;
 }
 
 #message-panel {
 	// height: 100vh;
 	margin-bottom: 150px;
 }
-
 </style>

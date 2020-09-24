@@ -24,6 +24,7 @@
 			<!-- Existing Firepits -->
 			<b-row class="justify-content-around mb-3">
 				<Firepit
+				v-show="!loader"
 					v-for="fp in reqResponse"
 					:key="fp.id"
 					:sujet="fp.sujet"
@@ -52,6 +53,7 @@ export default {
 		return {
 			refreshSpin: false,
 			reqResponse: "",
+			loader:true,
 		};
 	},
 	components: { SettingsButton, Firepit, FirepitAnimated, GoToHomeButton },
@@ -65,6 +67,15 @@ export default {
 		refreshFirepits() {
 			FirepitService.getAll(this);
 		},
+	},
+	watch:{
+		reqResponse(){
+			if(this.reqResponse === ""){
+				this.loader = true;
+			}else{
+				this.loader = false;
+			}
+		}
 	},
 	mounted() {
 		this.$user = this.$resource("user{/id}");

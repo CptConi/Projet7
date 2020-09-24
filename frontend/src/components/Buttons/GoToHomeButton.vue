@@ -1,9 +1,7 @@
 <template>
 	<div>
 		<b-button variant="outline" size="sm" class="goToHome__btn" @click.stop="goToHome">
-			<h2>
-				<b-icon-house class="goToHome__icon"></b-icon-house>
-			</h2>
+				<b-icon-house class="goToHome__btn"></b-icon-house>
 		</b-button>
 	</div>
 </template>
@@ -26,10 +24,10 @@ export default {
 		left: 60px;
 		top: 10px;
 		color: white;
-		width: 50px;
-		height: 50px;
+		width: 45px;
+		height: 45px;
+		z-index:100000000000000;
 	}
-	&--icon {
-	}
+	
 }
 </style>
