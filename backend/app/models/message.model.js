@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
 			//-----------------------------------
 			// Standard Cols
 			content: {
-				type: Sequelize.STRING,
+				type: Sequelize.TEXT,
 			},
 			//-----------------------------------
 			// FK
