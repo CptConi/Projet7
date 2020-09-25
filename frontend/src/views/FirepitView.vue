@@ -116,6 +116,9 @@ export default {
 	beforeDestroy() {
 		clearInterval(this.timer);
 	},
+	// beforeRouteEnter (to, from, next) {
+		//Verification de l'Authentification 
+	// }
 };
 </script>
 
@@ -128,7 +131,6 @@ export default {
 }
 
 #message-panel {
-	// height: 100vh;
 	margin-bottom: 150px;
 }
 

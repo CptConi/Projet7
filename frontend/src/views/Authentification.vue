@@ -1,9 +1,11 @@
 <template>
 	<div class="home">
-		<h1 class="mt-3">{{ displayTitle }}</h1>
+		<h1 id="mainTitle" class="display-1">Firepit</h1>
 		<transition name="fade" mode="out-in">
-			<AuthForm></AuthForm>
+			<h2 class="mt-3" v-if="existingAccount" key=1>🔥 Il reste une place autour du feu 🔥</h2>
+			<h2 class="mt-3" v-else key=2>🔥 Bienvenue sur Firepit 🔥</h2>
 		</transition>
+		<AuthForm></AuthForm>
 		<FirepitAnimated />
 	</div>
 </template>
@@ -20,11 +22,10 @@ export default {
 	name: "Authentification",
 	components: { AuthForm, FirepitAnimated },
 	data() {
-		return {
-		};
+		return {};
 	},
 	computed: {
-		...mapState(['existingAccount']),
+		...mapState(["existingAccount"]),
 		displayTitle() {
 			if (this.existingAccount) {
 				return "🔥 Il reste une place autour du feu 🔥";
@@ -36,12 +37,11 @@ export default {
 
 	methods: {
 		...mapActions(["accountExists", "accountDoNotExists"]),
-		},
+	},
 	mounted() {
-		
-		if(LS.asAccount){
+		if (LS.asAccount) {
 			this.accountExists();
-		}else{
+		} else {
 			this.accountDoNotExists();
 		}
 	},
@@ -49,6 +49,10 @@ export default {
 </script>
 
 <style lang="scss">
+#mainTitle {
+	font-family: "kaushan script";
+}
+
 //Animations
 .fade-enter-active,
 .fade-leave-active {

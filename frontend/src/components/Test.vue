@@ -6,20 +6,20 @@
 			</h4>
 		</b-button>
 		<b-container fluid>
-			<b-row class="bg-dark" v-show="isVisible">
+			<b-row class="bg-secondary text-dark" v-show="isVisible">
 				<b-col sm="5">
-					<h3>Zone de test</h3>
+					<h3>🔧Zone de test🔨</h3>
 				</b-col>
 				<b-col sm="6">
 					<b-row>
 						<b-button-group class="pt-1">
-							<b-button variant="outline-primary" size="sm" @click="createUsers">
+							<b-button variant="primary" size="sm" @click="createUsers">
 								1 - Create users
 							</b-button>
-							<b-button variant="outline-info" size="sm" @click="createFirepits">
+							<b-button variant="info" size="sm" @click="createFirepits">
 								2 - Create firepits
 							</b-button>
-							<b-button variant="outline-light" size="sm" @click="createMessages">
+							<b-button variant="light" size="sm" @click="createMessages">
 								3 - Create messages
 							</b-button>
 						</b-button-group>

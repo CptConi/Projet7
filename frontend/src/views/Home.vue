@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Navbar></Navbar>
+		<Navbar   class="sticky-top"></Navbar>
 		<!-- FIREPITS // POSTS -->
 		<b-container>
 			<!-- New Firepit -->
@@ -91,6 +91,9 @@ export default {
 		LS.initUser();
 		this.userInitFromParams(LS.user);
 	},
+	// beforeRouteEnter (to, from, next) {
+		//Verification de l'Authentification 
+	// }
 };
 </script>
 

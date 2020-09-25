@@ -19,7 +19,10 @@ export default {
 
 	createFirepit(objRef) {
 		objRef.$firepit
-			.save({ sujet: objRef.form.sujet, portee: objRef.portee, utilisateurId: objRef.user.id })
+			.save(
+				{ sujet: objRef.form.sujet, portee: objRef.portee, utilisateurId: objRef.user.id },
+				
+			)
 			.then(
 				(response) => {
 					if (response.status === 201) {

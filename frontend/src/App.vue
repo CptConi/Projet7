@@ -7,6 +7,7 @@
 
 <script>
 import Test from "./components/Test";
+
 export default {
 	name: "App",
 	data() {
@@ -15,6 +16,10 @@ export default {
 		};
 	},
 	components: { Test },
+	mounted(){
+		this.$signup = this.$resource("user/signup");
+		this.$login = this.$resource("user/login");
+	}
 };
 </script>
 

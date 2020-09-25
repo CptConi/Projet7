@@ -89,7 +89,7 @@ export default {
 		& .message {
 			background-color: rgb(37, 153, 207);
 			color: black;
-			border-radius: 10px 10px 10px 0px;
+			border-radius: 20px 20px 20px 0px;
 			padding-top: 0.3rem;
 			padding-bottom: 0.3rem;
 			overflow-wrap: break-word;
@@ -104,7 +104,7 @@ export default {
 			margin-left: auto;
 			background-color: #e4e4e4;
 			color: black;
-			border-radius: 10px 0px 10px 10px;
+			border-radius: 20px 0px 20px 20px;
 			padding-top: 0.3rem;
 			padding-bottom: 0.3rem;
 			overflow-wrap: break-word;

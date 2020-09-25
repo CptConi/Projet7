@@ -1,79 +1,51 @@
 <template>
 	<div class="AuthForm">
 		<b-container>
-			<div v-if="!existingAccount">
-				<b-form class="my-5">
-					<b-form-group
-						label="Votre adresse email:"
-						id="input-group-1"
-						label-for="email"
-						description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
-					>
-						<b-form-input
-							id="email"
-							v-model="email"
-							type="email"
-							required
-							placeholder="Email"
-						></b-form-input>
-					</b-form-group>
-					<b-form-group
-						label="Votre mot de passe:"
-						id="input-group-2"
-						label-for="password"
-					>
-						<b-form-input
-							id="password"
-							v-model="password"
-							type="password"
-							required
-							placeholder="Mot de passe"
-						></b-form-input>
-					</b-form-group>
+			<transition name="fade" mode="out-in">
+				<div v-if="!existingAccount" key=1>
+					<b-form class="my-5">
+						<b-form-group
+							label="Votre adresse email:"
+							id="input-group-1"
+							label-for="email"
+							description="Votre adresse mail sera utilisée comme identifiant de connexion"
+						>
+							<b-form-input id="email" v-model="email" type="email" required placeholder="Email"></b-form-input>
+						</b-form-group>
+						<b-form-group label="Votre mot de passe:" id="input-group-2" label-for="password">
+							<b-form-input id="password" v-model="password" type="password" required placeholder="Mot de passe" ></b-form-input>
+						</b-form-group>
 
-					<b-button variant="success" size="lg" class="mt-3" @click.prevent="signup"
-						>Créer un compte</b-button
-					>
-				</b-form>
-				<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
-			</div>
-			<div v-else>
-				<b-form class="my-5">
-					<b-form-group
-						label="Votre adresse email:"
-						id="input-group-1"
-						label-for="email"
-						description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
-					>
-						<b-form-input
-							id="email"
-							v-model="email"
-							type="email"
-							required
-							placeholder="Email"
-						></b-form-input>
-					</b-form-group>
-					<b-form-group
-						label="Votre mot de passe:"
-						id="input-group-2"
-						label-for="password"
-					>
-						<b-form-input
-							id="password"
-							v-model="password"
-							type="password"
-							required
-							placeholder="Mot de passe"
-							@keyup.enter="logIn"
-						></b-form-input>
-					</b-form-group>
+						<b-button variant="success" size="lg" class="mt-3" @click.prevent="signup">Créer un compte</b-button>
+					</b-form>
+					<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
+				</div>
+				<div v-else key=2>
+					<b-form class="my-5">
+						<b-form-group
+							label="Votre adresse email:"
+							id="input-group-1"
+							label-for="email"
+							description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
+						>
+							<b-form-input id="email" v-model="email" type="email" required placeholder="Email"></b-form-input>
+						</b-form-group>
+						<b-form-group label="Votre mot de passe:" id="input-group-2" label-for="password">
+							<b-form-input
+								id="password"
+								v-model="password"
+								type="password"
+								required
+								placeholder="Mot de passe"
+								@keyup.enter="logIn"
+							></b-form-input>
+						</b-form-group>
 
-					<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn"
-						>Se connecter</b-button
-					>
-				</b-form>
-				<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
-			</div>
+						<b-button variant="success" size="lg" class="mt-3" @click.prevent="logIn">Se connecter</b-button>
+					</b-form>
+					<a @click.prevent="asAnAccount">Je n'ai pas de compte</a>
+				</div>
+			</transition>
 		</b-container>
 	</div>
 </template>
@@ -89,11 +61,11 @@ export default {
 		return {
 			email: "",
 			password: "",
-			id:"",
-			token:'',
-			prenom:'',
-			nom:'',
-			poste:'',
+			id: "",
+			token: "",
+			prenom: "",
+			nom: "",
+			poste: "",
 			logSuccess: false,
 		};
 	},
@@ -111,13 +83,13 @@ export default {
 					poste: this.poste,
 					id: this.id,
 				};
-				this.userInitFromParams(userInfos)
+				this.userInitFromParams(userInfos);
 
 				LS.set("email", this.user.email);
 				LS.set("token", this.user.token);
-				LS.set('prenom', this.user.prenom);
-				LS.set('nom', this.user.nom);
-				LS.set('poste', this.user.poste);
+				LS.set("prenom", this.user.prenom);
+				LS.set("nom", this.user.nom);
+				LS.set("poste", this.user.poste);
 				LS.set("id", this.user.id);
 				this.$router.push({ name: "Home" });
 			}
@@ -152,7 +124,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-h3 {
-	margin: 40px 0 0;
-}
 </style>

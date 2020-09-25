@@ -34,16 +34,16 @@ export default {
 		);
 	},
 
-	createUser(objRef) {
-		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
-			(response) => {
-				if (response.status === 201) {
-					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
-				}
-			},
-			(responseError) => {
-				console.log("ERREUR SERVEUR", responseError);
-			}
-		);
-	},
+// 	createUser(objRef) {
+// 		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
+// 			(response) => {
+// 				if (response.status === 201) {
+// 					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
+// 				}
+// 			},
+// 			(responseError) => {
+// 				console.log("ERREUR SERVEUR", responseError);
+// 			}
+// 		);
+// 	},
 };
