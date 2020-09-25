@@ -26,6 +26,7 @@
 							:prenom="msg.utilisateur.prenom"
 							:nom="msg.utilisateur.nom"
 							:utilisateurId="msg.utilisateurId"
+							:id="msg.id"
 						></Message>
 					</div>
 				</b-col>

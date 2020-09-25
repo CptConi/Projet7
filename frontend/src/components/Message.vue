@@ -6,10 +6,12 @@
 					{{ auteur }}
 				</small>
 			</b-row>
-			<b-row>
-				<div class="message col-6" v-html="formatedContent"></div>
-				
+			<b-row :id="formatedId">
+				<p class="message col-6" v-html="formatedContent"></p>
 			</b-row>
+			<!-- <b-row>
+				<div class="message messageImage__container col-6" v-if="image" v-html="image"></div>
+			</b-row> -->
 		</b-container>
 	</div>
 </template>
@@ -19,7 +21,12 @@ import { mapState } from "vuex";
 
 export default {
 	name: "Message",
-	props: { content: String, prenom: String, nom: String, utilisateurId: Number },
+	props: { content: String, prenom: String, nom: String, utilisateurId: Number, id: Number },
+	data() {
+		return {
+			image: "",
+		};
+	},
 	computed: {
 		...mapState(["user"]),
 		formatedContent() {
@@ -27,7 +34,7 @@ export default {
 
 			//On vérifie si une url est présente dans le content:
 			let formatedMessage = this.urlify(this.content);
-			return formatedMessage;
+			return formatedMessage + this.image;
 		},
 		auteur() {
 			return this.prenom + " " + this.nom;
@@ -40,6 +47,9 @@ export default {
 				return "message__received";
 			}
 		},
+		formatedId() {
+			return "messageID_" + this.id;
+		},
 	},
 	methods: {
 		urlify(pText) {
@@ -47,18 +57,15 @@ export default {
 			return pText.replace(urlRegex, (url) => {
 				this.url = url;
 				if (!this.isThisAnImage(url)) {
-					return '<a href="' + url + '" target="_blank" @mouseover="metaDatas">' + url + "</a>";
+					//Classic URL
+					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0,30)+"..."+ "</a>";
 				} else {
-					return (
-						`<a href="' ` +
+					//Image URL
+					this.image =
+						`<a href="` + url + `" target="_blank" class="">` +  `<img class="img-fluid" style="position=relative;" src="` +
 						url +
-						`" target="_blank" >` +
-						`<img src="` +
-						url +
-						`" class="img-fluid" >
-					</a>
-					`
-					);
+						`" ></a>`;
+					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0,30)+"..." + "</a>";
 				}
 			});
 		},
@@ -71,6 +78,10 @@ export default {
 
 <style lang="scss">
 .message {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
 	&__sent {
 		& .auteur {
 			margin-right: auto;
@@ -82,9 +93,7 @@ export default {
 			padding-top: 0.3rem;
 			padding-bottom: 0.3rem;
 			overflow-wrap: break-word;
-			& a{
-				color: indigo;
-			}
+			
 		}
 	}
 	&__received {
@@ -101,13 +110,25 @@ export default {
 			overflow-wrap: break-word;
 		}
 	}
-	& img {
-		z-index: 1000;
-		object-fit: fill;
+	& img{
 		position: relative;
-		bottom: 0;
-		// left: 25%;
-		transform: translateX(-75%);
+		bottom:0;
+		z-index: 1000000;
 	}
+}
+
+.messageImage {
+	position: relative;
+	&__container{
+		height: 100%;
+	}
+}
+
+#messageImage {
+	position: fixed;
+}
+
+.link {
+	color: indigo;
 }
 </style>

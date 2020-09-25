@@ -110,7 +110,7 @@ export default {
 			portee: "",
 			firepitList: [
 				{
-					sujet: "Quelqu'un aurait-il vu mon rat Croutard ?",
+					sujet: "Quelqu'un aurait-il vu mon flacon de potion ?",
 					portee: "Tout le monde",
 					id: 6,
 				},
@@ -120,7 +120,7 @@ export default {
 					id: 2,
 				},
 				{
-					sujet: "Monsieur Potter ...",
+					sujet: "A tous les eleves ...",
 					portee: "Tout le monde",
 					id: 1,
 				},
@@ -144,7 +144,7 @@ export default {
 		createUsers() {
 			console.warn("Méthode createUsers lancée");
 			for (let user of this.userList) {
-				window.setTimeout(() => {
+				// window.setTimeout(() => {
 					console.log("Création du compte: " + user.prenom + " " + user.nom);
 					this.email = user.email;
 					this.password = user.password;
@@ -152,7 +152,7 @@ export default {
 					this.nom = user.nom;
 					this.poste = user.poste;
 					UserService.createTestUser(this);
-				}, 3000);
+				// }, 3000);
 			}
 		},
 		goToAuth() {
