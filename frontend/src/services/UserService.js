@@ -1,3 +1,5 @@
+const userURL = "http://localhost:8080/user";
+
 export default {
 	// !!!!!!!!!!!!!!!!!!!!!!! TEST METHODS !!!!!!!!!!!!!!!!!!!!
 	//Create user for Testing methods
@@ -25,73 +27,80 @@ export default {
 	// ------------------------PROD-----------------------------
 	//Return one user
 	getOne(objRef, pId) {
-		objRef.$user.get({ id: pId }).then(
-			(response) => {
+		objRef.$http
+			.get(userURL, { params: { id: pId } })
+			.then((response) => {
 				objRef.reqResponse = response.body;
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log("An error occured while trying to communicate with Database", responseError);
-			}
-		);
+			});
 	},
 
 	//Return entire users list
 	getAll(objRef) {
-		objRef.$user.query({}).then(
-			(response) => {
+		objRef.$http
+			.get(userURL)
+			.then((response) => {
 				objRef.reqResponse = response.body;
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log("An error occured while trying to communicate with Database", responseError);
-			}
-		);
+			});
 	},
 
 	//Update user [firstname / lastname / job] in DB
 	update(objRef) {
-		objRef.$user
+		objRef.$http
 			.update(
+				userURL,
 				{
-					id: objRef.user.id,
+					params: {
+						id: objRef.user.id,
+					},
 				},
 				{
-					email: objRef.user.email,
-					prenom: objRef.prenom,
-					nom: objRef.nom,
-					poste: objRef.poste,
+					data: {
+						email: objRef.user.email,
+						prenom: objRef.prenom,
+						nom: objRef.nom,
+						poste: objRef.poste,
+					},
 				}
 			)
-			.then(
-				(response) => {
-					console.log(response.body.message);
-				},
-				(responseError) => {
-					console.log(responseError);
-				}
-			);
+			.then((response) => {
+				console.log(response.body.message);
+			})
+			.catch((responseError) => {
+				console.log(responseError);
+			});
 	},
 
 	//Delete > Update to empty
 	updateDelete(objRef) {
-		objRef.$user.update({ id: objRef.user.id }, { email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" }).then(
-			(response) => {
+		objRef.$http
+			.update(
+				userURL,
+				{ params: { id: objRef.user.id } },
+				{ data: { email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" } }
+			)
+			.then((response) => {
 				console.log(response.body.message);
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log(responseError);
-			}
-		);
+			});
 	},
 
 	//Delete user in DB
 	destroy(objRef) {
-		objRef.$user.delete({ id: objRef.user.id }).then(
-			(response) => {
+		objRef.$http
+			.delete(userURL, { params: { id: objRef.user.id } })
+			.then((response) => {
 				console.log(response.body.message);
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log(responseError);
-			}
-		);
+			});
 	},
 };

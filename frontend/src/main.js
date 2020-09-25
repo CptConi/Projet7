@@ -3,19 +3,22 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VueResource from "vue-resource";
+import axios from "axios";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
-// Install BootstrapVue
+//*********************** Install BootstrapVue ******************/
 Vue.use(BootstrapVue);
-// Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
-
 import "./custom.scss";
+/****************************************************************/
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$http = axios;
+	
+Vue.prototype.$http.default.baseURL = "http://localhost:8080";
+
 Vue.use(VueResource);
-Vue.http.options.root = "http://localhost:8080";
 
 new Vue({
 	router,

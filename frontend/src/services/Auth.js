@@ -1,7 +1,11 @@
+const URL = "http://localhost:8080";
+
 export default {
 	logIn(objRef) {
-		objRef.$login.save({ email: objRef.email, password: objRef.password }).then(
-			(response) => {
+		const loginURL = URL + "/user/login";
+		objRef.$http
+			.post(loginURL, { email: objRef.email, password: objRef.password })
+			.then((response) => {
 				if (response.status === 200) {
 					// Utilisateur connecté !
 
@@ -13,37 +17,24 @@ export default {
 
 					objRef.logSuccess = true;
 				}
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log("ERREUR D'AUTHENTIFICATION : \n", responseError.body.error);
-			}
-		);
+			});
 	},
 
 	signup(objRef) {
-		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
-			(response) => {
+		const signupURL = URL + "/user/signup";
+		objRef.$http
+			.post(signupURL, { email: objRef.email, password: objRef.password })
+			.then((response) => {
 				if (response.status === 201) {
 					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
 					objRef.logIn();
 				}
-			},
-			(responseError) => {
+			})
+			.catch((responseError) => {
 				console.log("ERREUR SERVEUR", responseError);
-			}
-		);
+			});
 	},
-
-// 	createUser(objRef) {
-// 		objRef.$signup.save({ email: objRef.email, password: objRef.password }).then(
-// 			(response) => {
-// 				if (response.status === 201) {
-// 					console.log("Utilisateur créé avec l'adresse mail " + JSON.stringify(response.data.email));
-// 				}
-// 			},
-// 			(responseError) => {
-// 				console.log("ERREUR SERVEUR", responseError);
-// 			}
-// 		);
-// 	},
 };
