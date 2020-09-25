@@ -25,9 +25,7 @@
 						</b-button-group>
 					</b-row>
 				</b-col>
-				<b-col sm="1">
-					<b-button variant="outline" @click.stop="goToAuth"><b-icon-house class="home-button"></b-icon-house></b-button>
-				</b-col>
+				
 			</b-row>
 		</b-container>
 	</div>
