@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<!-- BUTTONS -->
-		<SettingsButton></SettingsButton>
-		<GoToHomeButton></GoToHomeButton>
+		<Navbar></Navbar>
 		<!-- FIREPITS // POSTS -->
 		<b-container>
 			<!-- New Firepit -->
@@ -48,10 +46,9 @@ import FirepitService from "../services/FirepitService";
 import { mapState, mapActions } from "vuex";
 import LS from "../services/StorageManager";
 
+import Navbar from "../components/Navbar";
 import NewFirePitModal from "../components/NewFirepitModal";
 import FirepitAnimated from "../components/Firepit-Animated";
-import SettingsButton from "../components/Buttons/SettingsButton";
-import GoToHomeButton from "../components/Buttons/GoToHomeButton";
 import Firepit from "../components/Firepit";
 
 export default {
@@ -62,7 +59,7 @@ export default {
 			loader: true,
 		};
 	},
-	components: { SettingsButton, Firepit, FirepitAnimated, GoToHomeButton, NewFirePitModal },
+	components: { Firepit, FirepitAnimated, Navbar, NewFirePitModal },
 	computed: {
 		...mapState(["user"]),
 		spinAnimation() {

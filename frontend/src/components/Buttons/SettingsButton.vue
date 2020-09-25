@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<!-- SETTINGS -->
-		<b-button variant="outline" v-b-toggle.settings-sidebar class="settings__btn"
+		<b-button variant="outline" v-b-toggle.settings-sidebar class="text-white settings__btn"
 			><b-icon-file-person class="settings__btn"></b-icon-file-person
-		></b-button>
+		>Profil</b-button>
 		<b-sidebar
 			id="settings-sidebar"
 			title="Votre Profil"
@@ -32,13 +32,8 @@ export default {
 <style lang="scss">
 .settings {
 	&__btn {
-		position: fixed;
-		left: 15px;
-		top: 15px;
-		width: 40px;
-		height: 40px;
 		color: white;
-		z-index:100000000000000;
+		outline: none;
 
 	}
 }

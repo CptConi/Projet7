@@ -1,40 +1,46 @@
 <template>
 	<div>
-		<b-container fluid class="sticky-top" id="top-panel">
-			<b-row class="mb-2">
-				<div class="mx-auto mt-3 bg-dark col-9 rounded">
-					<h1 v-if="!loading">
-						{{ currentFirepit.sujet }}
-					</h1>
-					<div v-else><b-skeleton> </b-skeleton><b-skeleton> </b-skeleton></div>
-				</div>
-			</b-row>
-			<b-row id="firepit-infos" v-if="!loading">
-				<p class="mx-auto mb-0">🔥 Allumé par {{ auteurFirepit }}</p>
-				<p class="mx-auto mb-0">Allumé {{ formatedDate }}</p>
-			</b-row>
-			<b-row id="firepit-infos" v-else> </b-row>
-		</b-container>
+		<div  class="sticky-top">
+			<Navbar></Navbar>
+			<b-container fluid class="sticky-top" id="top-panel">
+				<b-row class="mb-2">
+					<div class="mx-auto mt-3 bg-dark col-9 rounded">
+						<h1 v-if="!loading">
+							{{ currentFirepit.sujet }}
+						</h1>
+						<div v-else><b-skeleton> </b-skeleton><b-skeleton> </b-skeleton></div>
+					</div>
+				</b-row>
+				<b-row id="firepit-infos" v-if="!loading">
+					<p class="mx-auto mb-0">🔥 Allumé par {{ auteurFirepit }}</p>
+					<p class="mx-auto mb-0">Allumé {{ formatedDate }}</p>
+				</b-row>
+				<b-row id="firepit-infos" v-else> </b-row>
+			</b-container>
+		</div>
 		<b-container fluid>
 			<b-row>
 				<b-col id="message-panel" class="pt-2">
-					<div>
+					<div v-if="messagesList.length > 0">
 						<Message
 							v-for="msg in messagesList"
 							:key="msg.id"
 							:content="msg.content"
-							:prenom="msg.utilisateur.prenom"
-							:nom="msg.utilisateur.nom"
+							:prenom="msg.utilisateur.prenom || 'Utilisateur '"
+							:nom="msg.utilisateur.nom || 'Supprimé'"
 							:utilisateurId="msg.utilisateurId"
 							:id="msg.id"
 						></Message>
+					</div>
+					<div class="loaderSpinner" v-else>
+						<div class="spinner-border" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
 					</div>
 				</b-col>
 			</b-row>
 		</b-container>
 		<MessageSender class="fixed-bottom shadow-lg" v-on:messageSent="scrollBottom"></MessageSender>
-		<SettingsButton></SettingsButton>
-		<goToHomeButton></goToHomeButton>
 	</div>
 </template>
 
@@ -45,13 +51,12 @@ import MessageService from "../services/MessageService";
 import DateManager from "../services/DateManager";
 import LS from "../services/StorageManager";
 
-import goToHomeButton from "../components/Buttons/GoToHomeButton";
-import SettingsButton from "../components/Buttons/SettingsButton";
+import Navbar from "../components/Navbar";
 import MessageSender from "../components/MessageSender";
 import Message from "../components/Message";
 export default {
 	name: "FirepitView",
-	components: { MessageSender, Message, SettingsButton, goToHomeButton },
+	components: { MessageSender, Message, Navbar },
 	data() {
 		return {
 			currentFirepit: "",
@@ -86,7 +91,6 @@ export default {
 		scrollBottom() {
 			window.scrollTo(0, document.body.scrollHeight);
 		},
-
 	},
 	beforeMount() {
 		this.setFirepitId(this.$route.params.id);
@@ -100,12 +104,14 @@ export default {
 		this.timer = window.setInterval(() => {
 			console.log("FirepitView Component currently refreshing messagesList");
 			this.getAllMessages();
-		}, 1000);
+		}, 3000);
 
 		//Mise à jour des infos contenues dans VueX via LocalStorage
 		LS.initUser();
 		this.userInitFromParams(LS.user);
-		this.$nextTick(()=>{this.scrollBottom()});
+		this.$nextTick(() => {
+			this.scrollBottom();
+		});
 	},
 	beforeDestroy() {
 		clearInterval(this.timer);
@@ -124,5 +130,9 @@ export default {
 #message-panel {
 	// height: 100vh;
 	margin-bottom: 150px;
+}
+
+.loaderSpinner {
+	transform: translateY(200px);
 }
 </style>
