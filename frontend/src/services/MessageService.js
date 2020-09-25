@@ -38,7 +38,7 @@ export default {
 	getMessagesByFirepit(objRef, pId) {
 		const URL = messageURL + "/fromfirepit";
 		objRef.$http
-			.get(URL, { params: { id: pId } })
+			.get(URL + "/" + pId)
 			.then((response) => {
 				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList

@@ -34,7 +34,7 @@ export default {
 	//Return one Firepit
 	getOne(objRef, pId) {
 		objRef.$http
-			.get(firepitURL, { params: { id: pId } })
+			.get(firepitURL + "/" + pId)
 			.then((response) => {
 				objRef.currentFirepit = response.body;
 				objRef.loading = false;
@@ -59,20 +59,10 @@ export default {
 	//Update Firepit [Sujet / portee] in DB
 	update(objRef) {
 		objRef.$http
-			.update(
-				firepitURL,
-				{
-					params: {
-						id: objRef.firepit.id,
-					},
-				},
-				{
-					data: {
-						sujet: objRef.firepit.sujet,
-						portee: objRef.firepit.portee,
-					},
-				}
-			)
+			.update(firepitURL + "/" + objRef.firepit.id, {
+				sujet: objRef.firepit.sujet,
+				portee: objRef.firepit.portee,
+			})
 			.then((response) => {
 				console.log(response.body.message);
 			})
@@ -84,7 +74,7 @@ export default {
 	//Delete firepit in DB
 	destroy(objRef) {
 		objRef.$http
-			.delete(firepitURL, { params: { id: objRef.firepit.id } })
+			.delete(firepitURL + "/" + objRef.firepit.id)
 			.then((response) => {
 				console.log(response.body.message);
 			})
