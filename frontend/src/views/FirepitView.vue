@@ -42,7 +42,8 @@
 import { mapState, mapActions } from "vuex";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
-import DateManager from '../services/DateManager'
+import DateManager from "../services/DateManager";
+import LS from "../services/StorageManager";
 
 import goToHomeButton from "../components/Buttons/GoToHomeButton";
 import SettingsButton from "../components/Buttons/SettingsButton";
@@ -68,16 +69,16 @@ export default {
 				return this.currentFirepit.utilisateur.prenom + " " + this.currentFirepit.utilisateur.nom;
 			}
 		},
-		formatedDate(){
-			if(this.loading){
-				return 0
-			}else{
+		formatedDate() {
+			if (this.loading) {
+				return 0;
+			} else {
 				return DateManager.formatDate(this.currentFirepit.createdAt);
 			}
-		}
+		},
 	},
 	methods: {
-		...mapActions(["setFirepitId"]),
+		...mapActions(["setFirepitId", "userInitFromParams"]),
 
 		getAllMessages() {
 			MessageService.getMessagesByFirepit(this, this.firepit.id);
@@ -99,6 +100,10 @@ export default {
 			console.log("FirepitView Component currently refreshing messagesList");
 			this.getAllMessages();
 		}, 1000);
+
+		//Mise à jour des infos contenues dans VueX via LocalStorage
+		LS.initUser();
+		this.userInitFromParams(LS.user);
 
 		this.scrollBottom();
 	},
