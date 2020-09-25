@@ -113,7 +113,7 @@ export default {
 	& img{
 		position: relative;
 		bottom:0;
-		z-index: 1000000;
+		z-index: 1000;
 	}
 }
 

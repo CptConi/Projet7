@@ -86,6 +86,7 @@ export default {
 		scrollBottom() {
 			window.scrollTo(0, document.body.scrollHeight);
 		},
+
 	},
 	beforeMount() {
 		this.setFirepitId(this.$route.params.id);
@@ -104,8 +105,7 @@ export default {
 		//Mise à jour des infos contenues dans VueX via LocalStorage
 		LS.initUser();
 		this.userInitFromParams(LS.user);
-
-		this.scrollBottom();
+		this.$nextTick(()=>{this.scrollBottom()});
 	},
 	beforeDestroy() {
 		clearInterval(this.timer);

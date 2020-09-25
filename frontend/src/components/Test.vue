@@ -36,6 +36,7 @@
 <script>
 import UserService from "../services/UserService";
 import FirepitService from "../services/FirepitService";
+import MessageService from "../services/MessageService";
 
 export default {
 	name: "Test",
@@ -125,6 +126,20 @@ export default {
 					id: 1,
 				},
 			],
+			messagesList: [
+				{ content: "Salut, j'arrive tout juste et j'adore déjà le principe de cet endroit !", firepitId: 1, userId: "1" },
+				{ content: "Hey ! En plus on peut même s'envoyer des URL, paraît-il ! http://example.com/", firepitId: 1, userId: "2" },
+				{
+					content:
+						"Sérieux ? Attends, j'essaye avec une image ! https://www.traveldoo.com/wp-content/uploads/2019/09/thumbs-up-2056022_1920-300x188.jpg",
+					firepitId: 1,
+					userId: "1",
+				},
+				{ content: "Salut, c'est ici pour échanger avec les autres élèves ?", firepitId: 2, userId: "3" },
+				{ content: "Hola ! 🥖🧙‍♂️✨", firepitId: 2, userId: "4" },
+				{ content: "cc sava", firepitId: 2, userId: "5" },
+				{ content: "First !", firepitId: 3, userId: "4" },
+			],
 		};
 	},
 	methods: {
@@ -139,19 +154,22 @@ export default {
 			}
 		},
 		createMessages() {
-			console.warn("Méthode createMessages pas encore implémentée, Work in progress");
+			console.warn("Méthode createMessages lancée");
+			for (let msg of this.messagesList) {
+				MessageService.createMessageFromParams(this,msg.content, msg.firepitId, msg.userId);
+			}
 		},
 		createUsers() {
 			console.warn("Méthode createUsers lancée");
 			for (let user of this.userList) {
 				// window.setTimeout(() => {
-					console.log("Création du compte: " + user.prenom + " " + user.nom);
-					this.email = user.email;
-					this.password = user.password;
-					this.prenom = user.prenom;
-					this.nom = user.nom;
-					this.poste = user.poste;
-					UserService.createTestUser(this);
+				console.log("Création du compte: " + user.prenom + " " + user.nom);
+				this.email = user.email;
+				this.password = user.password;
+				this.prenom = user.prenom;
+				this.nom = user.nom;
+				this.poste = user.poste;
+				UserService.createTestUser(this);
 				// }, 3000);
 			}
 		},

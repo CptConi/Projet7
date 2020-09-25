@@ -10,7 +10,7 @@ export default {
 		} else if (dt < 3600000) {
 			return "depuis " + dt.getMinutes() + " minutes";
 		} else if (dt < 86400000) {
-			return "depuis " + dt.getHours() + " minutes";
+			return "depuis " + dt.getHours() + " heures";
         } else {
             return "le " + date.getDay + date.getMonth + date.getFullYear;
         }
