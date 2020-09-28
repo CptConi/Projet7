@@ -3,11 +3,15 @@ const messageURL = "http://localhost:8080/message";
 export default {
 	createMessage(objRef) {
 		objRef.$http
-			.post(messageURL, {
-				content: objRef.message,
-				firepitId: objRef.firepit.id,
-				utilisateurId: objRef.user.id,
-			})
+			.post(
+				messageURL,
+				{
+					content: objRef.message,
+					firepitId: objRef.firepit.id,
+					utilisateurId: objRef.user.id,
+				},
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				if (response.status === 201) {
 					// Message envoyé.
@@ -38,7 +42,7 @@ export default {
 	getMessagesByFirepit(objRef, pId) {
 		const URL = messageURL + "/fromfirepit";
 		objRef.$http
-			.get(URL + "/" + pId)
+			.get(URL + "/" + pId, {headers: {Authorization: objRef.user.token}})
 			.then((response) => {
 				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList

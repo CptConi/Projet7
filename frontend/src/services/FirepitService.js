@@ -19,7 +19,11 @@ export default {
 
 	createFirepit(objRef) {
 		objRef.$http
-			.post(firepitURL, { sujet: objRef.form.sujet, portee: objRef.portee, utilisateurId: objRef.user.id })
+			.post(
+				firepitURL,
+				{ sujet: objRef.form.sujet, portee: objRef.portee, utilisateurId: objRef.user.id },
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				if (response.status === 201) {
 					console.log("Firepit créé :'" + response.data.sujet + "'");
@@ -34,7 +38,7 @@ export default {
 	//Return one Firepit
 	getOne(objRef, pId) {
 		objRef.$http
-			.get(firepitURL + "/" + pId)
+			.get(firepitURL + "/" + pId, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.currentFirepit = response.body;
 				objRef.loading = false;
@@ -47,7 +51,7 @@ export default {
 	//Return entire Firepit list
 	getAll(objRef) {
 		objRef.$http
-			.get(firepitURL)
+			.get(firepitURL, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.reqResponse = response.body;
 			})
@@ -59,10 +63,14 @@ export default {
 	//Update Firepit [Sujet / portee] in DB
 	update(objRef) {
 		objRef.$http
-			.update(firepitURL + "/" + objRef.firepit.id, {
-				sujet: objRef.firepit.sujet,
-				portee: objRef.firepit.portee,
-			})
+			.update(
+				firepitURL + "/" + objRef.firepit.id,
+				{
+					sujet: objRef.firepit.sujet,
+					portee: objRef.firepit.portee,
+				},
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				console.log(response.body.message);
 			})
@@ -74,7 +82,7 @@ export default {
 	//Delete firepit in DB
 	destroy(objRef) {
 		objRef.$http
-			.delete(firepitURL + "/" + objRef.firepit.id)
+			.delete(firepitURL + "/" + objRef.firepit.id, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				console.log(response.body.message);
 			})

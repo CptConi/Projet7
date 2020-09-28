@@ -6,7 +6,7 @@ export default {
 	createTestUser(objRef) {
 		const URL = userURL + "/create";
 		objRef.$http
-			.save(URL, {
+			.post(URL, {
 				email: objRef.email,
 				password: objRef.password,
 				prenom: objRef.prenom,
@@ -27,7 +27,7 @@ export default {
 	//Return one user
 	getOne(objRef, pId) {
 		objRef.$http
-			.get(userURL + "/" + pId)
+			.get(userURL + "/" + pId, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.reqResponse = response.body;
 			})
@@ -39,7 +39,7 @@ export default {
 	//Return entire users list
 	getAll(objRef) {
 		objRef.$http
-			.get(userURL)
+			.get(userURL, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.reqResponse = response.body;
 			})
@@ -60,7 +60,8 @@ export default {
 					prenom: objRef.prenom,
 					nom: objRef.nom,
 					poste: objRef.poste,
-				}
+				},
+				{ headers: { Authorization: objRef.user.token } }
 			)
 			.then((response) => {
 				console.log(response.body.message);
@@ -73,7 +74,11 @@ export default {
 	//Delete > Update to empty
 	updateDelete(objRef) {
 		objRef.$http
-			.update(userURL + "/" + objRef.user.id, { email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" })
+			.update(
+				userURL + "/" + objRef.user.id,
+				{ email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" },
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				console.log(response.body.message);
 			})
@@ -85,7 +90,7 @@ export default {
 	//Delete user in DB
 	destroy(objRef) {
 		objRef.$http
-			.delete(userURL + "/" + objRef.user.id)
+			.delete(userURL + "/" + objRef.user.id, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				console.log(response.body.message);
 			})

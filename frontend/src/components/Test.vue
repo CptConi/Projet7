@@ -126,7 +126,7 @@ export default {
 			],
 			messagesList: [
 				{ content: "Salut, j'arrive tout juste et j'aime déjà beaucoup le principe de cet endroit !", firepitId: 1, userId: "1" },
-				{ content: "Hey ! En plus on peut même s'envoyer des URL, regade ça ! http://example.com/", firepitId: 1, userId: "2" },
+				{ content: "Hey ! En plus on peut même s'envoyer des URL, regarde ça ! http://example.com/", firepitId: 1, userId: "2" },
 				{
 					content:
 						"Sérieux ? Attends, j'essaye avec une image ! https://www.traveldoo.com/wp-content/uploads/2019/09/thumbs-up-2056022_1920-300x188.jpg",
@@ -160,7 +160,6 @@ export default {
 		createUsers() {
 			console.warn("Méthode createUsers lancée");
 			for (let user of this.userList) {
-				// window.setTimeout(() => {
 				console.log("Création du compte: " + user.prenom + " " + user.nom);
 				this.email = user.email;
 				this.password = user.password;
@@ -168,7 +167,6 @@ export default {
 				this.nom = user.nom;
 				this.poste = user.poste;
 				UserService.createTestUser(this);
-				// }, 3000);
 			}
 		},
 		goToAuth() {
