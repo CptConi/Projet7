@@ -2,9 +2,16 @@
 	<div class="home">
 		<h1 id="mainTitle" class="display-1">Firepit</h1>
 		<transition name="fade" mode="out-in">
-			<h2 class="mt-3" v-if="existingAccount" key=1>🔥 Il reste une place autour du feu 🔥</h2>
-			<h2 class="mt-3" v-else key=2>🔥 Bienvenue sur Firepit 🔥</h2>
+			<h2 class="mt-3" v-if="existingAccount" key="1">🔥 Il reste une place autour du feu 🔥</h2>
+			<h2 class="mt-3" v-else key="2">🔥 Bienvenue sur Firepit 🔥</h2>
 		</transition>
+		<b-container>
+			<b-row>
+				<b-col>
+					<b-alert v-show="errorMessage" show variant="danger" dismissible>{{ errorMessage }}</b-alert>
+				</b-col>
+			</b-row>
+		</b-container>
 		<AuthForm></AuthForm>
 		<FirepitAnimated />
 	</div>
@@ -25,7 +32,7 @@ export default {
 		return {};
 	},
 	computed: {
-		...mapState(["existingAccount"]),
+		...mapState(["existingAccount", "errorMessage"]),
 		displayTitle() {
 			if (this.existingAccount) {
 				return "🔥 Il reste une place autour du feu 🔥";

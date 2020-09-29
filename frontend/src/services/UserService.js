@@ -51,8 +51,8 @@ export default {
 	//Update user [firstname / lastname / job] in DB
 	update(objRef) {
 		objRef.$http
-			.update(
-				userURL,
+			.put(
+				userURL
 				+"/" + objRef.user.id,
 
 				{
@@ -74,7 +74,7 @@ export default {
 	//Delete > Update to empty
 	updateDelete(objRef) {
 		objRef.$http
-			.update(
+			.put(
 				userURL + "/" + objRef.user.id,
 				{ email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" },
 				{ headers: { Authorization: objRef.user.token } }

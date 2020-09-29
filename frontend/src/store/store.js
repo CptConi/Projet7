@@ -3,10 +3,11 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
 	//====================================STATE=============================
 	state: {
 		existingAccount: true,
+		isAuth: false,
 		user: {
 			email: "",
 			token: "",
@@ -16,6 +17,8 @@ export default new Vuex.Store({
 			id: "",
 		},
 		firepit: { id: "" },
+		errorMessage: "",
+		warningMessage: "",
 	},
 	//==================================GETTERS=============================
 	getters: {},
@@ -54,6 +57,26 @@ export default new Vuex.Store({
 		SET_FIREPIT_ID(state, pId) {
 			state.firepit.id = pId;
 		},
+		//----------------
+		SET_AUTH(state) {
+			state.isAuth = true;
+		},
+		UNSET_AUTH(state) {
+			state.isAuth = false;
+		},
+		//------------------
+		SET_ERROR_MESSAGE(state, message) {
+			state.errorMessage = message;
+		},
+		UNSET_ERROR_MESSAGE(state) {
+			state.errorMessage = "";
+		},
+		SET_WARNING_MESSAGE(state, message) {
+			state.warningMessage = message;
+		},
+		UNSET_WARNING_MESSAGE(state) {
+			state.warningMessage = "";
+		},
 	},
 	//==================================ACTIONS=============================
 	actions: {
@@ -81,6 +104,30 @@ export default new Vuex.Store({
 		setFirepitId(context, pId) {
 			context.commit("SET_FIREPIT_ID", pId);
 		},
+		isLoggedIn() {
+			return this.isAuth;
+		},
+		setAuth(context, payload) {
+			if (payload) {
+				context.commit("SET_AUTH");
+			} else {
+				context.commit("UNSET_AUTH");
+			}
+		},
+		setErrorMessage(context, message) {
+			context.commit("SET_ERROR_MESSAGE", message);
+		},
+		unsetErrorMessage(context) {
+			context.commit("UNSET_ERROR_MESSAGE");
+		},
+		setWarningMessage(context, message) {
+			context.commit("SET_WARNING_MESSAGE", message);
+		},
+		unsetWarningMessage(context) {
+			context.commit("UNSET_WARNING_MESSAGE");
+		},
 	},
 	modules: {},
 });
+
+export default store;

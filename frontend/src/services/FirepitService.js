@@ -4,7 +4,11 @@ export default {
 	// !!!!!!!!!!!!!!!!!!!!!!! TEST METHODS !!!!!!!!!!!!!!!!!!!!
 	createTestFirepit(objRef) {
 		objRef.$http
-			.post(firepitURL, { sujet: objRef.sujet, portee: objRef.portee, utilisateurId: objRef.user.id })
+			.post(
+				firepitURL,
+				{ sujet: objRef.sujet, portee: objRef.portee, utilisateurId: objRef.user.id },
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				if (response.status === 201) {
 					console.log("Firepit créé :'" + response.data.sujet + "'");
@@ -42,9 +46,11 @@ export default {
 			.then((response) => {
 				objRef.currentFirepit = response.body;
 				objRef.loading = false;
+				objRef.authTokenCheck = response.status;
 			})
 			.catch((responseError) => {
 				console.log("An error occured while trying to communicate with Database", responseError);
+				objRef.authTokenCheck = responseError.status;
 			});
 	},
 
@@ -54,16 +60,19 @@ export default {
 			.get(firepitURL, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.reqResponse = response.body;
+				objRef.loader = false;
+				objRef.authTokenCheck = response.status
 			})
 			.catch((responseError) => {
 				console.log("An error occured while trying to communicate with Database", responseError);
+				objRef.authTokenCheck = responseError.status;
 			});
 	},
 
 	//Update Firepit [Sujet / portee] in DB
 	update(objRef) {
 		objRef.$http
-			.update(
+			.put(
 				firepitURL + "/" + objRef.firepit.id,
 				{
 					sujet: objRef.firepit.sujet,

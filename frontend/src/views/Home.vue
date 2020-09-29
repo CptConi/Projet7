@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Navbar   class="sticky-top"></Navbar>
+		<Navbar class="sticky-top"></Navbar>
 		<!-- FIREPITS // POSTS -->
 		<b-container>
 			<!-- New Firepit -->
@@ -45,6 +45,7 @@
 import FirepitService from "../services/FirepitService";
 import { mapState, mapActions } from "vuex";
 import LS from "../services/StorageManager";
+import Auth from "../services/Auth";
 
 import Navbar from "../components/Navbar";
 import NewFirePitModal from "../components/NewFirepitModal";
@@ -52,11 +53,13 @@ import FirepitAnimated from "../components/Firepit-Animated";
 import Firepit from "../components/Firepit";
 
 export default {
+	name: "Home",
 	data() {
 		return {
 			refreshSpin: false,
 			reqResponse: "",
 			loader: true,
+			authTokenCheck: "",
 		};
 	},
 	components: { Firepit, FirepitAnimated, Navbar, NewFirePitModal },
@@ -67,7 +70,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions(["userInitFromParams"]),
+		...mapActions(["userInitFromParams", "setErrorMessage"]),
 		refreshFirepits() {
 			FirepitService.getAll(this);
 		},
@@ -80,20 +83,26 @@ export default {
 				this.loader = false;
 			}
 		},
+		authTokenCheck() {
+			if (Auth.isTokenExpired(this.authTokenCheck)) {
+				this.setErrorMessage('Veuillez vous connecter pour accéder à votre espace de discussion Firepit')
+				this.$router.push({ name: "Authentification" });
+			}
+		},
+	},
+	//==========================HOOKS===============================
+
+	beforeMount() {
+		//Mise à jour des infos contenues dans VueX via LocalStorage
+		LS.initUser();
+		this.userInitFromParams(LS.user);
 	},
 	mounted() {
 		this.$user = this.$resource("user{/id}");
 		this.$firepit = this.$resource("firepit{/id}");
 
 		FirepitService.getAll(this);
-
-		//Mise à jour des infos contenues dans VueX via LocalStorage
-		LS.initUser();
-		this.userInitFromParams(LS.user);
 	},
-	// beforeRouteEnter (to, from, next) {
-		//Verification de l'Authentification 
-	// }
 };
 </script>
 

@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
 	try {
-		const token = req.headers.authorization.split(" ")[1];
+		const token = req.headers.authorization;
 		const decodedToken = jwt.verify(token, "0F63B0D55976EEDCD6ED195A53000F570A161762");
 		const email = decodedToken.email;
 		if (req.body.email && req.body.email !== email) {

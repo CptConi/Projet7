@@ -11,8 +11,17 @@ export default {
 			return "depuis " + dt.getMinutes() + " minutes";
 		} else if (dt < 86400000) {
 			return "depuis " + dt.getHours() + " heures";
-        } else {
-            return "le " + date.getDay + date.getMonth + date.getFullYear;
-        }
+		} else {
+			return "le " + date.getDay + date.getMonth + date.getFullYear;
+		}
+	},
+
+	formatHour(pDate) {
+		let date = new Date(pDate);
+		let now = Date.now();
+		let dt = new Date(now - date);
+
+		if (dt < 86400000) return date.getHours() + ":" + date.getMinutes();
+		else return date.getDay + date.getMonth;
 	},
 };

@@ -3,7 +3,7 @@
 		<b-alert show dismissible>
 			<p for="email">Vous êtes connecté(e) en tant que:</p>
 			<h3 v-if="user.email">{{ user.email }}</h3>
-			<h3 v-else>{{email}}</h3>
+			<h3 v-else>{{ email }}</h3>
 		</b-alert>
 
 		<b-form class="profile__Form">
@@ -26,9 +26,12 @@
 				Je valide ces informations
 			</b-button>
 		</b-form>
-		<b-button variant="outline-danger" class="mt-2 mx-auto" size="sm" @click.prevent="deleteAccount">
-			Supprimer le profil
-		</b-button>
+		<b-button-group class="mt-2">
+			<b-button variant="outline-warning" size="sm" @click.stop="disconnectUser">Déconnexion</b-button>
+			<b-button variant="outline-danger" size="sm" @click.stop="deleteAccount">
+				Supprimer le profil
+			</b-button>
+		</b-button-group>
 	</div>
 </template>
 
@@ -53,7 +56,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(["userUpdateCommonInfos", "userInitFromParams"]),
+		...mapActions(["userUpdateCommonInfos", "userInitFromParams", 'setAuth']),
 		submitChanges() {
 			userService.update(this);
 			LS.set("prenom", this.prenom);
@@ -72,9 +75,12 @@ export default {
 				this.$router.push({ name: "Authentification" });
 			}
 		},
-		closeSettings() {
-			this.$emit("close-settings");
+		disconnectUser(){
+			LS.unset('token');
+			this.setAuth(false);
+			this.$router.push({name: "Authentification"});
 		},
+	
 	},
 	computed: {
 		...mapState(["user"]),
@@ -85,8 +91,8 @@ export default {
 	mounted() {
 		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
-		this.prenom = this.user.prenom
-		this.nom = this.user.nom
+		this.prenom = this.user.prenom;
+		this.nom = this.user.nom;
 		this.poste = this.user.poste;
 	},
 };

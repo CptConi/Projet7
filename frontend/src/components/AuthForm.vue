@@ -2,7 +2,7 @@
 	<div class="AuthForm">
 		<b-container>
 			<transition name="fade" mode="out-in">
-				<div v-if="!existingAccount" key=1>
+				<div v-if="!existingAccount" key="1">
 					<b-form class="my-5">
 						<b-form-group
 							label="Votre adresse email:"
@@ -13,14 +13,14 @@
 							<b-form-input id="email" v-model="email" type="email" required placeholder="Email"></b-form-input>
 						</b-form-group>
 						<b-form-group label="Votre mot de passe:" id="input-group-2" label-for="password">
-							<b-form-input id="password" v-model="password" type="password" required placeholder="Mot de passe" ></b-form-input>
+							<b-form-input id="password" v-model="password" type="password" required placeholder="Mot de passe"></b-form-input>
 						</b-form-group>
 
 						<b-button variant="success" size="lg" class="mt-3" @click.prevent="signup">Créer un compte</b-button>
 					</b-form>
 					<a @click.prevent="asAnAccount">J'ai déjà un compte !</a>
 				</div>
-				<div v-else key=2>
+				<div v-else key="2">
 					<b-form class="my-5">
 						<b-form-group
 							label="Votre adresse email:"
@@ -67,6 +67,7 @@ export default {
 			nom: "",
 			poste: "",
 			logSuccess: false,
+			errorMessage: "",
 		};
 	},
 	computed: {
@@ -91,17 +92,24 @@ export default {
 				LS.set("nom", this.user.nom);
 				LS.set("poste", this.user.poste);
 				LS.set("id", this.user.id);
+
+				this.setAuth(true);
 				this.$router.push({ name: "Home" });
 			}
 		},
+		errorMessage(){
+			this.setErrorMessage(this.errorMessage);
+		}
 	},
 	methods: {
-		...mapActions(["userInitFromParams", "accountDoNotExists", "accountExists"]),
+		...mapActions(["userInitFromParams", "accountDoNotExists", "accountExists", "setAuth", "setErrorMessage", "unsetErrorMessage"]),
 		signup() {
 			auth.signup(this);
+			this.unsetErrorMessage();
 		},
 		logIn() {
 			auth.logIn(this);
+			this.unsetErrorMessage();
 		},
 		asAnAccount() {
 			if (this.existingAccount) {
@@ -123,5 +131,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

@@ -20,6 +20,7 @@ export default {
 			})
 			.catch((responseError) => {
 				console.log("ERREUR D'AUTHENTIFICATION : \n", responseError.body.error);
+				objRef.errorMessage = 'Echec de l\'authentification : ' +responseError.body.error
 			});
 	},
 
@@ -36,5 +37,13 @@ export default {
 			.catch((responseError) => {
 				console.log("ERREUR SERVEUR", responseError);
 			});
+	},
+
+	isTokenExpired(status) {
+		if (status === 401) {
+			return true
+		} else {
+			return false
+		}
 	},
 };

@@ -42,9 +42,9 @@ class LocalStorageManager {
 		return localStorage.getItem(LOCALSTORAGE_NAME + "_" + pKey);
 	}
 
-	// getAll() {
-	// 	return JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME));
-	// }
+	unset(pKey) {
+		localStorage.removeItem(LOCALSTORAGE_NAME + "_" + pKey);
+	}
 }
 
 export default new LocalStorageManager();

@@ -25,7 +25,6 @@
 						</b-button-group>
 					</b-row>
 				</b-col>
-				
 			</b-row>
 		</b-container>
 	</div>
@@ -35,6 +34,7 @@
 import UserService from "../services/UserService";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
+import { mapState } from "vuex";
 
 export default {
 	name: "Test",
@@ -46,7 +46,7 @@ export default {
 			prenom: "",
 			nom: "",
 			poste: "",
-			user: { id: "", email: "" },
+			userTest: { id: "", email: "" },
 			userList: [
 				{
 					email: "severus.snape@poudlard.uk",
@@ -140,6 +140,9 @@ export default {
 			],
 		};
 	},
+	computed: {
+		...mapState(['user'])
+	},
 	methods: {
 		createFirepits() {
 			console.warn("Méthode createFirepits lancée");
@@ -147,14 +150,14 @@ export default {
 			for (let firepit of this.firepitList) {
 				this.sujet = firepit.sujet;
 				this.portee = firepit.portee;
-				this.user.id = firepit.id;
+				this.userTest.id = firepit.id;
 				FirepitService.createTestFirepit(this);
 			}
 		},
 		createMessages() {
 			console.warn("Méthode createMessages lancée");
 			for (let msg of this.messagesList) {
-				MessageService.createMessageFromParams(this,msg.content, msg.firepitId, msg.userId);
+				MessageService.createMessageFromParams(this, msg.content, msg.firepitId, msg.userId);
 			}
 		},
 		createUsers() {

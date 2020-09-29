@@ -3,25 +3,26 @@
 		<b-container :class="style" class="mb-3">
 			<b-row>
 				<small class="auteur font-italic">
-					{{ auteur }}
+					{{ formatedDate }}  -  {{ auteur }}
 				</small>
 			</b-row>
 			<b-row :id="formatedId">
 				<p class="message col-6" v-html="formatedContent"></p>
 			</b-row>
-			<!-- <b-row>
-				<div class="message messageImage__container col-6" v-if="image" v-html="image"></div>
-			</b-row> -->
+			<b-row>
+				<small></small>
+			</b-row>
 		</b-container>
 	</div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import DateManager from "../services/DateManager";
 
 export default {
 	name: "Message",
-	props: { content: String, prenom: String, nom: String, utilisateurId: Number, id: Number },
+	props: { content: String, prenom: String, nom: String, date: String, utilisateurId: Number, id: Number },
 	data() {
 		return {
 			image: "",
@@ -50,6 +51,9 @@ export default {
 		formatedId() {
 			return "messageID_" + this.id;
 		},
+		formatedDate(){
+			return DateManager.formatHour(this.date);
+		}
 	},
 	methods: {
 		urlify(pText) {
@@ -58,14 +62,17 @@ export default {
 				this.url = url;
 				if (!this.isThisAnImage(url)) {
 					//Classic URL
-					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0,30)+"..."+ "</a>";
+					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0, 30) + "..." + "</a>";
 				} else {
 					//Image URL
 					this.image =
-						`<a href="` + url + `" target="_blank" class="">` +  `<img class="img-fluid" style="position=relative;" src="` +
+						`<a href="` +
+						url +
+						`" target="_blank" class="">` +
+						`<img class="img-fluid" style="position=relative;" src="` +
 						url +
 						`" ></a>`;
-					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0,30)+"..." + "</a>";
+					return '<a href="' + url + '" target="_blank" class="link">' + url.substring(0, 30) + "..." + "</a>";
 				}
 			});
 		},
@@ -93,7 +100,6 @@ export default {
 			padding-top: 0.3rem;
 			padding-bottom: 0.3rem;
 			overflow-wrap: break-word;
-			
 		}
 	}
 	&__received {
@@ -110,16 +116,16 @@ export default {
 			overflow-wrap: break-word;
 		}
 	}
-	& img{
+	& img {
 		position: relative;
-		bottom:0;
+		bottom: 0;
 		z-index: 1000;
 	}
 }
 
 .messageImage {
 	position: relative;
-	&__container{
+	&__container {
 		height: 100%;
 	}
 }

@@ -47,10 +47,13 @@ export default {
 				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList
 					objRef.messagesList = response.data;
+					objRef.authTokenCheck = response.status;
 				}
 			})
 			.catch((responseError) => {
 				console.log("ERREUR SERVEUR", responseError);
+					objRef.authTokenCheck = responseError.status;
+
 			});
 	},
 };

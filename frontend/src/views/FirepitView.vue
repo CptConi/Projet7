@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div  class="sticky-top">
+		<div class="sticky-top">
 			<Navbar></Navbar>
 			<b-container fluid class="sticky-top" id="top-panel">
 				<b-row class="mb-2">
@@ -28,6 +28,7 @@
 							:content="msg.content"
 							:prenom="msg.utilisateur.prenom || 'Utilisateur '"
 							:nom="msg.utilisateur.nom || 'Supprimé'"
+							:date="msg.createdAt"
 							:utilisateurId="msg.utilisateurId"
 							:id="msg.id"
 						></Message>
@@ -50,6 +51,7 @@ import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
 import DateManager from "../services/DateManager";
 import LS from "../services/StorageManager";
+import Auth from "../services/Auth";
 
 import Navbar from "../components/Navbar";
 import MessageSender from "../components/MessageSender";
@@ -63,6 +65,7 @@ export default {
 			messagesList: [],
 			timer: "",
 			loading: true,
+			authTokenCheck: "",
 		};
 	},
 	computed: {
@@ -82,8 +85,16 @@ export default {
 			}
 		},
 	},
+	watch: {
+		authTokenCheck() {
+			if (Auth.isTokenExpired(this.authTokenCheck)) {
+				this.setErrorMessage("Veuillez vous connecter pour accéder à votre espace de discussion Firepit");
+				this.$router.push({ name: "Authentification" });
+			}
+		},
+	},
 	methods: {
-		...mapActions(["setFirepitId", "userInitFromParams"]),
+		...mapActions(["setFirepitId", "userInitFromParams", "setErrorMessage"]),
 
 		getAllMessages() {
 			MessageService.getMessagesByFirepit(this, this.firepit.id);
@@ -92,8 +103,12 @@ export default {
 			window.scrollTo(0, document.body.scrollHeight);
 		},
 	},
+	//=============================================HOOKS========================================
 	beforeMount() {
 		this.setFirepitId(this.$route.params.id);
+		//Mise à jour des infos contenues dans VueX via LocalStorage
+		LS.initUser();
+		this.userInitFromParams(LS.user);
 	},
 	mounted() {
 		this.$firepit = this.$resource("firepit{/id}");
@@ -105,10 +120,6 @@ export default {
 			console.log("FirepitView Component currently refreshing messagesList");
 			this.getAllMessages();
 		}, 3000);
-
-		//Mise à jour des infos contenues dans VueX via LocalStorage
-		LS.initUser();
-		this.userInitFromParams(LS.user);
 		this.$nextTick(() => {
 			this.scrollBottom();
 		});
@@ -116,9 +127,6 @@ export default {
 	beforeDestroy() {
 		clearInterval(this.timer);
 	},
-	// beforeRouteEnter (to, from, next) {
-		//Verification de l'Authentification 
-	// }
 };
 </script>
 
