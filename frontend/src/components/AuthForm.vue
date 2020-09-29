@@ -26,7 +26,7 @@
 							label="Votre adresse email:"
 							id="input-group-1"
 							label-for="email"
-							description="C'est votre adresse mail qui sera utilisée en tant qu'identifiant de connexion"
+							description="Votre adresse mail sera utilisée comme identifiant de connexion"
 						>
 							<b-form-input id="email" v-model="email" type="email" required placeholder="Email"></b-form-input>
 						</b-form-group>
@@ -97,9 +97,9 @@ export default {
 				this.$router.push({ name: "Home" });
 			}
 		},
-		errorMessage(){
+		errorMessage() {
 			this.setErrorMessage(this.errorMessage);
-		}
+		},
 	},
 	methods: {
 		...mapActions(["userInitFromParams", "accountDoNotExists", "accountExists", "setAuth", "setErrorMessage", "unsetErrorMessage"]),
