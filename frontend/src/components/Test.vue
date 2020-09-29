@@ -26,6 +26,11 @@
 					</b-row>
 				</b-col>
 			</b-row>
+			<b-container>
+				<b-row>
+					<b-alert v-show="warningMessage && isVisible" show variant="warning" class="mx-auto">{{ warningMessage }}</b-alert>
+				</b-row>
+			</b-container>
 		</b-container>
 	</div>
 </template>
@@ -34,7 +39,7 @@
 import UserService from "../services/UserService";
 import FirepitService from "../services/FirepitService";
 import MessageService from "../services/MessageService";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "Test",
@@ -141,11 +146,12 @@ export default {
 		};
 	},
 	computed: {
-		...mapState(['user'])
+		...mapState(["user", "warningMessage"]),
 	},
 	methods: {
+		...mapActions(["setWarningMessage", "unsetWarningMessage"]),
 		createFirepits() {
-			console.warn("Méthode createFirepits lancée");
+			this.setWarningMessage("Méthode createFirepits lancée");
 			//TEST:
 			for (let firepit of this.firepitList) {
 				this.sujet = firepit.sujet;
@@ -155,13 +161,13 @@ export default {
 			}
 		},
 		createMessages() {
-			console.warn("Méthode createMessages lancée");
+			this.setWarningMessage("Méthode createMessages lancée");
 			for (let msg of this.messagesList) {
 				MessageService.createMessageFromParams(this, msg.content, msg.firepitId, msg.userId);
 			}
 		},
 		createUsers() {
-			console.warn("Méthode createUsers lancée");
+			this.setWarningMessage("Méthode createUsers lancée");
 			for (let user of this.userList) {
 				console.log("Création du compte: " + user.prenom + " " + user.nom);
 				this.email = user.email;
