@@ -24,11 +24,15 @@ export default {
 
 	createMessageFromParams(objRef, pMessage, pFirepitId, pUserId) {
 		objRef.$http
-			.post(messageURL, {
-				content: pMessage,
-				firepitId: pFirepitId,
-				utilisateurId: pUserId,
-			})
+			.post(
+				messageURL,
+				{
+					content: pMessage,
+					firepitId: pFirepitId,
+					utilisateurId: pUserId,
+				},
+				{ headers: { Authorization: objRef.user.token } }
+			)
 			.then((response) => {
 				if (response.status === 201) {
 					// Message envoyé.
@@ -42,7 +46,7 @@ export default {
 	getMessagesByFirepit(objRef, pId) {
 		const URL = messageURL + "/fromfirepit";
 		objRef.$http
-			.get(URL + "/" + pId, {headers: {Authorization: objRef.user.token}})
+			.get(URL + "/" + pId, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				if (response.status === 200) {
 					// Stockage de la liste des messages récupérés de l'ID pId dans $parent.messagesList
@@ -52,8 +56,7 @@ export default {
 			})
 			.catch((responseError) => {
 				console.log("ERREUR SERVEUR", responseError);
-					objRef.authTokenCheck = responseError.status;
-
+				objRef.authTokenCheck = responseError.status;
 			});
 	},
 };
