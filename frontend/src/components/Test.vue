@@ -200,7 +200,7 @@ export default {
 
 #showPanel {
 	position: fixed;
-	top: 60px;
+	top: 95px;
 	left: 10px;
 	color: white;
 	z-index: 1000000000;

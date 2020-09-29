@@ -5,7 +5,7 @@ import store from "../store/store";
 import Authentification from "../views/Authentification.vue";
 import Home from "../views/Home.vue";
 import FirepitView from "../views/FirepitView";
-
+import Identity from "../views/Identity";
 
 Vue.use(VueRouter);
 
@@ -35,6 +35,14 @@ const routes = [
 		},
 	},
 	{
+		path: "/identity",
+		name: "Identity",
+		component: Identity,
+		meta: {
+			requiresAuth: true,
+		},
+	},
+	{
 		path: "*",
 		name: "WrongURL",
 		redirect: "/",
@@ -50,7 +58,7 @@ const router = new VueRouter({
 router.beforeEach = (to, from, next) => {
 	if (to.matched.some((record) => record.meta.requiresAuth) && !store.state.isAuth) {
 		console.log("Cette route nécessite une authentification");
-		next({name: 'Authentification'})
+		next({ name: "Authentification" });
 	} else {
 		next();
 	}
