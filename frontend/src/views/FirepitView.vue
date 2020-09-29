@@ -26,8 +26,7 @@
 							v-for="msg in messagesList"
 							:key="msg.id"
 							:content="msg.content"
-							:prenom="msg.utilisateur.prenom || 'Utilisateur '"
-							:nom="msg.utilisateur.nom || 'Supprimé'"
+							:auteur="msg.utilisateur"
 							:date="msg.createdAt"
 							:utilisateurId="msg.utilisateurId"
 							:id="msg.id"
@@ -41,7 +40,7 @@
 				</b-col>
 			</b-row>
 		</b-container>
-		<MessageSender class="fixed-bottom shadow-lg" v-on:messageSent="scrollBottom"></MessageSender>
+		<MessageSender class="fixed-bottom shadow-lg z-index-mid" v-on:messageSent="scrollBottom"></MessageSender>
 	</div>
 </template>
 
@@ -72,7 +71,7 @@ export default {
 		...mapState(["firepit", "user"]),
 		auteurFirepit() {
 			if (this.currentFirepit.utilisateur == null) {
-				return "Utilisateur non trouvé";
+				return "Utilisateur supprimé";
 			} else {
 				return this.currentFirepit.utilisateur.prenom + " " + this.currentFirepit.utilisateur.nom;
 			}
@@ -144,5 +143,9 @@ export default {
 
 .loaderSpinner {
 	transform: translateY(200px);
+}
+
+.z-index-mid{
+	z-index: 1000;
 }
 </style>

@@ -12,9 +12,9 @@ module.exports = (app) => {
 
 	router.get("/", utilisateur.getUsers);
 
-	router.put("/:id", utilisateur.update);
+	router.put("/:id", auth, utilisateur.update);
 
-	router.delete("/:id", utilisateur.delete);
+	router.delete("/:id", auth, utilisateur.delete);
 
 	//Test create users route
 	router.post("/create", utilisateur.createTestUser);

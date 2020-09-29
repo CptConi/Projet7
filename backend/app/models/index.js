@@ -28,6 +28,7 @@ db.utilisateur.hasMany(db.firepit, { as: "firepit" });
 db.firepit.belongsTo(db.utilisateur, {
 	foreignKey: "utilisateurId",
 	as: "utilisateur",
+	allowNull: false,
 });
 
 db.firepit.hasMany(db.message, { as: "message" });
@@ -39,6 +40,7 @@ db.utilisateur.hasMany(db.message, { as: "message" });
 db.message.belongsTo(db.utilisateur, {
 	foreignKey: "utilisateurId",
 	as: "utilisateur",
+	allowNull: false,
 });
 
 // db.utilisateur.hasMany(db.thumbup);

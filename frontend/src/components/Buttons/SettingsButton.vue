@@ -13,7 +13,7 @@
 			width="75%"
 		>
 			<div class="p-5"></div>
-			<Settings></Settings>
+			<Settings class="z-index-top"></Settings>
 		</b-sidebar>
 
 		<!-- HOME -->
@@ -36,5 +36,9 @@ export default {
 		outline: none;
 
 	}
+}
+
+.z-index-top{
+	z-index: 100000000000;
 }
 </style>

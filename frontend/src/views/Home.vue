@@ -26,8 +26,7 @@
 					v-for="fp in reqResponse"
 					:key="fp.id"
 					:sujet="fp.sujet"
-					:prenom="fp.utilisateur.prenom"
-					:nom="fp.utilisateur.nom"
+					:auteur="fp.utilisateur"
 					:date="fp.createdAt"
 					:id="fp.id"
 				></Firepit>

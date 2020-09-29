@@ -56,7 +56,7 @@ export default {
 		};
 	},
 	methods: {
-		...mapActions(["userUpdateCommonInfos", "userInitFromParams", 'setAuth']),
+		...mapActions(["userUpdateCommonInfos", "userInitFromParams", "setAuth", "setErrorMessage"]),
 		submitChanges() {
 			userService.update(this);
 			LS.set("prenom", this.prenom);
@@ -71,16 +71,21 @@ export default {
 		deleteAccount() {
 			if (window.confirm("Etes-vous certain de vouloir supprimer votre compte ?")) {
 				// Il faut en fait effectuer un update en retirant toutes les infos pour empêcher la reconnection au compte.
-				userService.updateDelete(this);
-				this.$router.push({ name: "Authentification" });
+				userService.destroy(this);
+				LS.unset("nom");
+				LS.unset("prenom");
+				LS.unset("email");
+				LS.unset("id");
+				LS.unset("poste");
+				this.setErrorMessage("Le compte " + this.user.email + " a bien été supprimé");
+				this.disconnectUser(this);
 			}
 		},
-		disconnectUser(){
-			LS.unset('token');
+		disconnectUser() {
+			LS.unset("token");
 			this.setAuth(false);
-			this.$router.push({name: "Authentification"});
+			this.$router.push({ name: "Authentification" });
 		},
-	
 	},
 	computed: {
 		...mapState(["user"]),

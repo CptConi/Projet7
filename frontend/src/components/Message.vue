@@ -2,9 +2,7 @@
 	<div>
 		<b-container :class="style" class="mb-3">
 			<b-row>
-				<small class="auteur font-italic">
-					{{ formatedDate }}  -  {{ auteur }}
-				</small>
+				<small class="auteur font-italic"> {{ formatedDate }} - {{ formatedAuteur }} </small>
 			</b-row>
 			<b-row :id="formatedId">
 				<p class="message col-6" v-html="formatedContent"></p>
@@ -22,7 +20,7 @@ import DateManager from "../services/DateManager";
 
 export default {
 	name: "Message",
-	props: { content: String, prenom: String, nom: String, date: String, utilisateurId: Number, id: Number },
+	props: { content: String, auteur: Object, date: String, utilisateurId: Number, id: Number },
 	data() {
 		return {
 			image: "",
@@ -37,8 +35,12 @@ export default {
 			let formatedMessage = this.urlify(this.content);
 			return formatedMessage + this.image;
 		},
-		auteur() {
-			return this.prenom + " " + this.nom;
+		formatedAuteur() {
+			if (this.auteur) {
+				return this.auteur.prenom + " " + this.auteur.nom;
+			} else {
+				return "Utilisateur supprimé";
+			}
 		},
 		style() {
 			if (this.utilisateurId == this.user.id) {
@@ -51,9 +53,9 @@ export default {
 		formatedId() {
 			return "messageID_" + this.id;
 		},
-		formatedDate(){
+		formatedDate() {
 			return DateManager.formatHour(this.date);
-		}
+		},
 	},
 	methods: {
 		urlify(pText) {
