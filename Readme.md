@@ -21,7 +21,7 @@ et de remplacer la l20 par:
 
 ## Test panel:
 
-Pour une utilisation plus simple, j'ai mis à disposition un panel de test qui peut se toggle pour une meilleure expérience d'utilisation.  
+Pour une utilisation/validation plus simple, j'ai mis à disposition un panel de test toggle-able.  
 **Le serveur utilisant un système d'authentification, merci de créer un compte avant l'utilisation des fonctionnalités du pannel de test pour éviter de recevoir un code erreur 401 du serveur et ainsi vous retrouver à la page de login.**  
   
 Dans ce panel, vous trouverez tout ce qu'il faut pour avoir un aperçu de l'application dans son ensemble:  
