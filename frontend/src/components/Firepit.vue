@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<b-card-group deck class="justify-content-center ">
-			<b-card class="mb-4">
+			<b-card class="mb-4 FP-card">
 				<b-card-title class="h2">{{ sujet }}</b-card-title>
 				<b-card-text>
 					<p>Créé par: {{ formatedAuteur }}</p>
@@ -44,5 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.FP-card{
+	backdrop-filter: blur(5px);
+}
 </style>
