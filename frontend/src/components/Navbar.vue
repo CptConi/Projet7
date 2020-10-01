@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<b-container fluid>
-			<b-navbar toggleable="md" type="dark" variant="dark">
+			<b-navbar toggleable="md" type="dark" variant="dark" class="highZ-index">
 				<b-navbar-brand id="branding" :to="{ name: 'Home' }">🔥Firepit</b-navbar-brand>
 				<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 				<b-collapse id="nav-collapse" is-nav>
@@ -33,5 +33,9 @@ export default {
 #branding {
 	font-family: "Kaushan script";
 	letter-spacing: 2px;
+}
+
+.highZ-index{
+	z-index: 2000;
 }
 </style>

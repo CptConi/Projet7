@@ -8,16 +8,18 @@
 			</b-row>
 		</b-container>
 		<FirepitAnimated></FirepitAnimated>
+		<Footer></Footer>
 	</div>
 </template>
 
 <script>
 import FirepitAnimated from "../components/Firepit-Animated";
 import Settings from "../components/Settings";
+import Footer from '../components/Footer'
 import { mapState, mapActions } from "vuex";
 
 export default {
-	components: { Settings, FirepitAnimated },
+	components: { Settings, FirepitAnimated, Footer },
 	computed: {
 		...mapState(["isAuth"]),
 	},

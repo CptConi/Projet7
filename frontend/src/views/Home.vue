@@ -37,6 +37,7 @@
 			<NewFirePitModal></NewFirePitModal>
 		</b-container>
 		<FirepitAnimated></FirepitAnimated>
+		<Footer></Footer>
 	</div>
 </template>
 
@@ -47,6 +48,7 @@ import LS from "../services/StorageManager";
 import Auth from "../services/Auth";
 
 import Navbar from "../components/Navbar";
+import Footer from '../components/Footer'
 import NewFirePitModal from "../components/NewFirepitModal";
 import FirepitAnimated from "../components/Firepit-Animated";
 import Firepit from "../components/Firepit";
@@ -61,7 +63,7 @@ export default {
 			authTokenCheck: "",
 		};
 	},
-	components: { Firepit, FirepitAnimated, Navbar, NewFirePitModal },
+	components: { Firepit, FirepitAnimated, Navbar, NewFirePitModal, Footer },
 	computed: {
 		...mapState(["user"]),
 		spinAnimation() {
@@ -105,10 +107,15 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .grow {
 	&:hover {
 		transform: scale(1.05);
 	}
+}
+.addFirepit {
+	width: 90px;
+	height: 90px;
+	color: white;
 }
 </style>

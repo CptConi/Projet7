@@ -159,4 +159,8 @@ export default {
 	padding: 1.5em;
 	background-color: rgba(0, 0, 0, 0.15);
 }
+@media (max-width: 576px) {  
+  h3 {font-size:1rem;} /*1rem = 16px*/
+}
+
 </style>

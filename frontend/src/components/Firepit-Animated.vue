@@ -1,21 +1,26 @@
 <template>
-    <img src="../assets/firepitAnimated.gif" alt="Animated firepit GIF">
+	<!-- <img src="" alt="Animated firepit GIF" id="firepitAnimated" /> -->
+	<div id="firepitAnimated"></div>
 </template>
 
 <script>
 export default {
-    name: 'FirepitAnimated'
-}
+	name: "FirepitAnimated",
+};
 </script>
 
 <style lang="scss">
-    img{
-        width:30vh;
-        position:absolute;
-        bottom:2em;
-        left:50%;
-        transform: translateX(-50%);
-        z-index: -1;
-        opacity: 0.5;
-    }
+#firepitAnimated {
+	position: fixed;
+	background-size: contain;
+	background-repeat: no-repeat;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 62%;
+	opacity: 0.5;
+	width: 30vh;
+	height: 100%;
+	z-index: -1;
+	background-image: url("../assets/firepitAnimated.gif");
+}
 </style>

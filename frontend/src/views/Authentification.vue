@@ -2,8 +2,8 @@
 	<div class="home">
 		<h1 id="mainTitle" class="display-1">Firepit</h1>
 		<transition name="fade" mode="out-in">
-			<h2 class="mt-3" v-if="existingAccount" key="1">🔥 Il reste une place autour du feu 🔥</h2>
-			<h2 class="mt-3" v-else key="2">🔥 Bienvenue sur Firepit 🔥</h2>
+			<h2 class="mt-3 d-none d-sm-inline" v-if="existingAccount" key="1">🔥 Il reste une place autour du feu 🔥</h2>
+			<h2 class="mt-3 d-none d-sm-inline" v-else key="2">🔥 Bienvenue sur Firepit 🔥</h2>
 		</transition>
 		<b-container>
 			<b-row>
@@ -14,6 +14,7 @@
 		</b-container>
 		<AuthForm></AuthForm>
 		<FirepitAnimated />
+		<Footer></Footer>
 	</div>
 </template>
 
@@ -21,25 +22,19 @@
 // @ is an alias to /src
 import AuthForm from "../components/AuthForm";
 import FirepitAnimated from "@/components/Firepit-Animated.vue";
+import Footer from '../components/Footer'
 
 import LS from "../services/StorageManager";
 import { mapState, mapActions } from "vuex";
 
 export default {
 	name: "Authentification",
-	components: { AuthForm, FirepitAnimated },
+	components: { AuthForm, FirepitAnimated, Footer },
 	data() {
 		return {};
 	},
 	computed: {
 		...mapState(["existingAccount", "errorMessage"]),
-		displayTitle() {
-			if (this.existingAccount) {
-				return "🔥 Il reste une place autour du feu 🔥";
-			} else {
-				return "🔥 Bienvenue sur Firepit 🔥";
-			}
-		},
 	},
 
 	methods: {

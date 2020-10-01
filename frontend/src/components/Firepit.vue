@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<b-card-group deck class="justify-content-center">
+		<b-card-group deck class="justify-content-center ">
 			<b-card class="mb-4">
 				<b-card-title class="h2">{{ sujet }}</b-card-title>
 				<b-card-text>
@@ -44,9 +44,5 @@ export default {
 </script>
 
 <style lang="scss">
-.addFirepit {
-	width: 90px;
-	height: 90px;
-	color: white;
-}
+
 </style>
