@@ -8,7 +8,7 @@
 
 		<b-form class="profile__Form">
 			<b-form-group label="Votre Prénom:" id="input-group-1" label-for="prenom">
-				<b-form-input id="prenom" v-model="prenom" type="text" :state="validPrenom" placeholder="Prénom"></b-form-input>
+				<b-form-input id="prenom" v-model="prenom" type="text" :state="validFirst" placeholder="Prénom"></b-form-input>
 			</b-form-group>
 			<b-form-group
 				label="Votre nom:"
@@ -16,12 +16,12 @@
 				label-for="nom"
 				description="Il s'agit d'un outil de communication professionel. Merci d'utiliser votre véritable identitée."
 			>
-				<b-form-input id="nom" v-model="nom" type="text" :state="validNom" placeholder="Nom"></b-form-input>
+				<b-form-input id="nom" v-model="nom" type="text" :state="validLast" placeholder="Nom"></b-form-input>
 			</b-form-group>
 			<b-form-group description="Votre poste au sein de Groupomania">
-				<b-form-select v-model="poste" :options="options" :state="validPoste"></b-form-select
+				<b-form-select v-model="poste" :options="options" :state="validJob"></b-form-select
 			></b-form-group>
-			<p v-show="errorMessage" class="text-danger">{{errorMessage}}</p>
+			<p v-show="errorMessage" class="text-danger">{{ errorMessage }}</p>
 			<b-button variant="success" class="ml-auto mt-4" size="lg" @click.prevent="submitChanges">
 				Je valide ces informations
 			</b-button>
@@ -46,6 +46,9 @@ export default {
 			prenom: "",
 			nom: "",
 			poste: "",
+			validFirst: null,
+			validLast: null,
+			validJob:null,
 			options: [
 				{ value: null, text: "Votre poste au sein de la société", disabled: true },
 				{ value: 1, text: "Employé" },
@@ -56,11 +59,18 @@ export default {
 		};
 	},
 	props: { identityView: { type: Boolean, default: false } },
-	methods: {
+	computed: {
+		...mapState(["user", "errorMessage"]),
+		email() {
+			return LS.get("email");
+		},
+		
+	},
+		methods: {
 		...mapActions(["userUpdateCommonInfos", "userInitFromParams", "setAuth", "setErrorMessage", "unsetErrorMessage"]),
 		submitChanges() {
 			this.unsetErrorMessage();
-			if (this.validPrenom && this.validNom && this.validPoste) {
+			if (this.validateInputs()) {
 				userService.update(this);
 				LS.set("prenom", this.prenom);
 				LS.set("nom", this.nom);
@@ -95,12 +105,6 @@ export default {
 			this.setAuth(false);
 			this.$router.push({ name: "Authentification" });
 		},
-	},
-	computed: {
-		...mapState(["user", "errorMessage"]),
-		email() {
-			return LS.get("email");
-		},
 		validPrenom() {
 			let regex = new RegExp(/^[a-z ,.'-]+$/i);
 			let validLenght;
@@ -128,6 +132,17 @@ export default {
 				return false;
 			}
 		},
+		validateInputs(){
+			this.validFirst = this.validPrenom();
+			this.validLast = this.validNom();
+			this.validJob = this.validPoste();
+
+			if(this.validFirst && this.validLast && this.validJob){
+				return true;
+			}else{
+				return false;
+			}
+		}
 	},
 	mounted() {
 		this.$user = this.$resource("user{/id}");

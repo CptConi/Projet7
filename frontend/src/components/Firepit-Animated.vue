@@ -16,5 +16,6 @@ export default {
         left:50%;
         transform: translateX(-50%);
         z-index: -1;
+        opacity: 0.5;
     }
 </style>

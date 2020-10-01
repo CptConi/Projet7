@@ -27,7 +27,7 @@ export default {
 	beforeMount() {
 		if (!this.isAuth) {
 			this.setErrorMessage("Vous ne pouvez pas accéder à la page de profil sans être authentifié");
-			this.$router.push({ name: "Authentification" });
+			// this.$router.push({ name: "Authentification" });
 		} 
 	},
 };
