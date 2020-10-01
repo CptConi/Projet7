@@ -30,4 +30,5 @@ Dans ce panel, vous trouverez tout ce qu'il faut pour avoir un aperçu de l'appl
 -   Un générateur automatique de post (appelés ici Firepits)
 -   Un générateur de messages.
   
-Ces outils sont à utiliser dans l'ordre. Merci de patienter quelques secondes entre chaque clic sur les boutons du panel, le serveur appréciera.
+Ces outils de test sont à utiliser dans l'ordre. Merci de patienter un minimum entre chaque clic sur les boutons du panel, le serveur appréciera.
+Pour apprécier le layout final, vous pouvez toggle le panel de test par le biais du bouton associé: 🛠
