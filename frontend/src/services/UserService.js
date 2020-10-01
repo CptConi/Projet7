@@ -71,22 +71,6 @@ export default {
 			});
 	},
 
-	//Delete > Update to empty
-	updateDelete(objRef) {
-		objRef.$http
-			.put(
-				userURL + "/" + objRef.user.id,
-				{ email: "", password: "", nom: objRef.user.nom + " (Utilisateur supprimé)" },
-				{ headers: { Authorization: objRef.user.token } }
-			)
-			.then((response) => {
-				console.log(response.body.message);
-			})
-			.catch((responseError) => {
-				console.log(responseError);
-			});
-	},
-
 	//Delete user in DB
 	destroy(objRef) {
 		objRef.$http

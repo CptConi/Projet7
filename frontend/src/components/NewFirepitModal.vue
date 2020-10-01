@@ -79,13 +79,9 @@ export default {
 				firepitId,
 				this.user.id
 			);
-			// Once firepit created, we can navigate to it
+			// Une fois le firepit créé, on peut naviguer vers la page de ce firepit.
 			this.$router.push({ name: "Firepitview", params: { id: firepitId } });
 		},
-	},
-	mounted() {
-		this.$firepit = this.$resource("firepit{/id}");
-		this.$message = this.$resource("message{/id}");
 	},
 };
 </script>

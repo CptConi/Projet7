@@ -135,10 +135,8 @@ export default {
 			}
 		},
 	},
+	//=============================================HOOKS========================================
 	mounted() {
-		this.$signup = this.$resource("user/signup");
-		this.$login = this.$resource("user/login");
-
 		//Auto-fill email input
 		if (LS.get("email")) {
 			this.email = LS.get("email");

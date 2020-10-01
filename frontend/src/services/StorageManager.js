@@ -33,8 +33,6 @@ class LocalStorageManager {
 	}
 
 	set(pKey, pValue) {
-		// console.log("[LocalStorage Manager]", "\nSetting Key: " + pKey, "\nWith value: " + pValue);
-
 		localStorage.setItem(LOCALSTORAGE_NAME + "_" + pKey, pValue);
 	}
 

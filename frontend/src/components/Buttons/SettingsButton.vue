@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- SETTINGS -->
 		<b-button variant="outline" v-b-toggle.settings-sidebar class="text-white settings__btn"
 			><b-icon-file-person class="settings__btn"></b-icon-file-person
 		>Profil</b-button>
@@ -15,9 +14,6 @@
 			<div class="p-5"></div>
 			<Settings class="z-index-top"></Settings>
 		</b-sidebar>
-
-		<!-- HOME -->
-		
 	</div>
 </template>
 

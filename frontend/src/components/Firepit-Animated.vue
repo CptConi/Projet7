@@ -1,5 +1,4 @@
 <template>
-	<!-- <img src="" alt="Animated firepit GIF" id="firepitAnimated" /> -->
 	<div id="firepitAnimated"></div>
 </template>
 

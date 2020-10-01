@@ -43,9 +43,6 @@ export default {
 			this.$emit('messageSent');
 		},
 	},
-	mounted() {
-		this.$message = this.$resource("message{/id}");
-	},
 };
 </script>
 

@@ -29,8 +29,6 @@ export default {
 	computed: {
 		...mapState(["user"]),
 		formatedContent() {
-			//Formatage du contenu du message
-
 			//On vérifie si une url est présente dans le content:
 			let formatedMessage = this.urlify(this.content);
 			return formatedMessage + this.image;
@@ -44,9 +42,10 @@ export default {
 		},
 		style() {
 			if (this.utilisateurId == this.user.id) {
-				//C'est vous qui avez envoyé le message
+				//Message envoyé
 				return "message__sent";
 			} else {
+				//Message reçu
 				return "message__received";
 			}
 		},
@@ -58,6 +57,7 @@ export default {
 		},
 	},
 	methods: {
+		// Mets en forme si présence d'URL ( + ajout image dans le contenu du message si besoin )
 		urlify(pText) {
 			var urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
 			return pText.replace(urlRegex, (url) => {
@@ -123,17 +123,6 @@ export default {
 		bottom: 0;
 		z-index: 1000;
 	}
-}
-
-.messageImage {
-	position: relative;
-	&__container {
-		height: 100%;
-	}
-}
-
-#messageImage {
-	position: fixed;
 }
 
 .link {

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import AuthForm from "../components/AuthForm";
 import FirepitAnimated from "@/components/Firepit-Animated.vue";
 import Footer from '../components/Footer'
@@ -40,6 +39,7 @@ export default {
 	methods: {
 		...mapActions(["accountExists", "accountDoNotExists"]),
 	},
+	//=============================================HOOKS========================================
 	mounted() {
 		if (LS.asAccount) {
 			this.accountExists();

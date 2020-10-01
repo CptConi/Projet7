@@ -110,9 +110,6 @@ export default {
 		this.userInitFromParams(LS.user);
 	},
 	mounted() {
-		this.$firepit = this.$resource("firepit{/id}");
-		this.$message = this.$resource("message");
-		this.$messageFromFirepit = this.$resource("message/fromfirepit{/id}");
 		FirepitService.getOne(this, this.firepit.id);
 		//loop de refresh des messages:
 		this.timer = window.setInterval(() => {

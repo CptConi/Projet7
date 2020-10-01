@@ -136,7 +136,7 @@ export default {
 					content:
 						"Sérieux ? Attends, j'essaye avec une image ! https://www.traveldoo.com/wp-content/uploads/2019/09/thumbs-up-2056022_1920-300x188.jpg",
 					firepitId: 1,
-					userId: "1",
+					userId: "5",
 				},
 				{ content: "Salut, c'est ici pour échanger avec les autres élèves ?", firepitId: 2, userId: "3" },
 				{ content: "Hola ! 🥖🧙‍♂️✨", firepitId: 2, userId: "4" },
@@ -178,31 +178,16 @@ export default {
 				UserService.createTestUser(this);
 			}
 		},
-		goToAuth() {
-			this.$router.push({ name: "Authentification" });
-		},
-	},
-	mounted() {
-		this.$firepit = this.$resource("firepit{/id}");
-		this.$message = this.$resource("message{/id}");
-		this.$user = this.$resource("user{/id}");
-		this.$createUser = this.$resource("user/create");
 	},
 };
 </script>
 
 <style scoped lang="scss">
-.home-button {
-	width: 18px;
-	height: 18px;
-	color: white;
-}
-
 #showPanel {
 	position: fixed;
 	top: 95px;
 	left: 10px;
 	color: white;
-	z-index: 1000000000;
+	z-index: 3000;
 }
 </style>

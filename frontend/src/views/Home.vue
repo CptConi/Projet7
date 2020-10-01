@@ -99,9 +99,6 @@ export default {
 		this.userInitFromParams(LS.user);
 	},
 	mounted() {
-		this.$user = this.$resource("user{/id}");
-		this.$firepit = this.$resource("firepit{/id}");
-
 		FirepitService.getAll(this);
 	},
 };

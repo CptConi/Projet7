@@ -144,8 +144,8 @@ export default {
 			}
 		}
 	},
+	//=============================================HOOKS========================================
 	mounted() {
-		this.$user = this.$resource("user{/id}");
 		//Auto-fill inputs
 		this.prenom = this.user.prenom;
 		this.nom = this.user.nom;
