@@ -29,7 +29,7 @@ export default {
 
 #GroupomaniaFooter{
 	background-color: #222034;
-	z-index: 2000;
+	z-index: 1000;
 }
 
 #Groupomania-logo{

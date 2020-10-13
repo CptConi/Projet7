@@ -16,7 +16,6 @@ Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
 	
-// Vue.prototype.$http.default.baseURL = "http://localhost:8080";
 
 Vue.use(VueResource);
 
