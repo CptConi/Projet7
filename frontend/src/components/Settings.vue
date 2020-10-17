@@ -61,10 +61,6 @@ export default {
 	props: { identityView: { type: Boolean, default: false } },
 	computed: {
 		...mapState(["user", "errorMessage"]),
-		email() {
-			return LS.get("email");
-		},
-		
 	},
 		methods: {
 		...mapActions(["userUpdateCommonInfos", "userInitFromParams", "setAuth", "setErrorMessage", "unsetErrorMessage"]),
@@ -72,9 +68,6 @@ export default {
 			this.unsetErrorMessage();
 			if (this.validateInputs()) {
 				userService.update(this);
-				LS.set("prenom", this.prenom);
-				LS.set("nom", this.nom);
-				LS.set("poste", this.poste);
 				this.userUpdateCommonInfos({
 					prenom: this.prenom,
 					nom: this.nom,
@@ -91,11 +84,6 @@ export default {
 			if (window.confirm("Etes-vous certain de vouloir supprimer votre compte ?")) {
 				// Il faut en fait effectuer un update en retirant toutes les infos pour empêcher la reconnection au compte.
 				userService.destroy(this);
-				LS.unset("nom");
-				LS.unset("prenom");
-				LS.unset("email");
-				LS.unset("id");
-				LS.unset("poste");
 				this.setErrorMessage("Le compte " + this.user.email + " a bien été supprimé");
 				this.disconnectUser(this);
 			}

@@ -23,8 +23,7 @@ import AuthForm from "../components/AuthForm";
 import FirepitAnimated from "@/components/Firepit-Animated.vue";
 import Footer from '../components/Footer'
 
-import LS from "../services/StorageManager";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
 	name: "Authentification",
@@ -33,20 +32,13 @@ export default {
 		return {};
 	},
 	computed: {
-		...mapState(["existingAccount", "errorMessage"]),
+		...mapState(["errorMessage"]),
 	},
 
 	methods: {
-		...mapActions(["accountExists", "accountDoNotExists"]),
+
 	},
-	//=============================================HOOKS========================================
-	mounted() {
-		if (LS.asAccount) {
-			this.accountExists();
-		} else {
-			this.accountDoNotExists();
-		}
-	},
+
 };
 </script>
 

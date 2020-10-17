@@ -53,6 +53,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import auth from "../services/Auth";
+import userService from '../services/UserService'
 import LS from "../services/StorageManager";
 
 export default {
@@ -77,6 +78,7 @@ export default {
 		logSuccess() {
 			if (this.logSuccess) {
 				if (this.prenom == null || this.nom == null || this.poste == null) {
+					userService.getOne(this, this.id)
 					let userInfos = {
 						email: this.email,
 						token: this.token,
@@ -84,9 +86,7 @@ export default {
 					};
 					this.userInitFromParams(userInfos);
 
-					LS.set("email", this.user.email);
 					LS.set("token", this.user.token);
-					LS.set("id", this.user.id);
 
 					this.setAuth(true);
 					this.$router.push({ name: "Identity" });
@@ -101,13 +101,7 @@ export default {
 					};
 					this.userInitFromParams(userInfos);
 
-					LS.set("email", this.user.email);
 					LS.set("token", this.user.token);
-					LS.set("prenom", this.user.prenom);
-					LS.set("nom", this.user.nom);
-					LS.set("poste", this.user.poste);
-					LS.set("id", this.user.id);
-
 					this.setAuth(true);
 					this.$router.push({ name: "Home" });
 				}
@@ -135,13 +129,7 @@ export default {
 			}
 		},
 	},
-	//=============================================HOOKS========================================
-	mounted() {
-		//Auto-fill email input
-		if (LS.get("email")) {
-			this.email = LS.get("email");
-		}
-	},
+	
 };
 </script>
 
