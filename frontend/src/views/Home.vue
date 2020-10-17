@@ -94,9 +94,8 @@ export default {
 	//==========================HOOKS===============================
 
 	beforeMount() {
-		//Mise à jour des infos contenues dans VueX via LocalStorage
+		//Mise à jour des infos token contenues dans VueX via LocalStorage
 		LS.initUser();
-		this.userInitFromParams(LS.user);
 	},
 	mounted() {
 		FirepitService.getAll(this);

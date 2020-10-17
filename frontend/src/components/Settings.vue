@@ -72,9 +72,7 @@ export default {
 			this.unsetErrorMessage();
 			if (this.validateInputs()) {
 				userService.update(this);
-				LS.set("prenom", this.prenom);
-				LS.set("nom", this.nom);
-				LS.set("poste", this.poste);
+				
 				this.userUpdateCommonInfos({
 					prenom: this.prenom,
 					nom: this.nom,

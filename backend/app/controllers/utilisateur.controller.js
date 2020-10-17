@@ -60,7 +60,7 @@ exports.getUser = (req, res) => {
 	Utilisateur.findOne({ where: { id: req.params.id } })
 		.then((data) => res.send(data))
 		.catch((err) => {
-			err.message || "Error while retrieving users with id= " + id;
+			err.message || "Error while retrieving user with id= " + id;
 		});
 };
 

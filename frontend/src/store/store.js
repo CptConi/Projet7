@@ -26,7 +26,14 @@ const store = new Vuex.Store({
 	mutations: {
 		//User
 		SET_USER(state, pUser) {
-			state.user = pUser;
+			state.user = {
+				email: pUser.email,
+				token: pUser.token,
+				prenom: pUser.prenom,
+				nom: pUser.nom,
+				poste: pUser.poste,
+				id: pUser.id,
+			}
 		},
 		SET_EMAIL(state, pEmail) {
 			state.user.email = pEmail;
@@ -81,7 +88,12 @@ const store = new Vuex.Store({
 	//==================================ACTIONS=============================
 	actions: {
 		userInitFromParams(context, pUser) {
-			context.commit("SET_USER", pUser);
+			context.commit("SET_EMAIL", pUser.email);
+			context.commit("SET_TOKEN", pUser.token);
+			context.commit("SET_PRENOM",pUser.prenom);
+			context.commit("SET_NOM",pUser.nom);
+			context.commit("SET_POSTE", pUser.poste);
+			context.commit("SET_ID", pUser.id);
 		},
 		userUpdateLoginInfos(context, pInfos) {
 			//Update mail and Token infos into store

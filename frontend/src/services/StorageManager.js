@@ -11,7 +11,7 @@ class LocalStorageManager {
 	};
 
 	asAccount() {
-		if (localStorage.getItem(LOCALSTORAGE_NAME + '_email')) {
+		if (localStorage.getItem(LOCALSTORAGE_NAME + '_token')) {
 			return true;
 		} else {
 			return false;
@@ -19,17 +19,8 @@ class LocalStorageManager {
 	}
 
 	initUser() {
-		this.user.email = this.get("email");
-		this.user.nom = this.get("nom");
-		this.user.prenom = this.get("prenom");
-		this.user.id = this.get("id");
-		this.user.token = this.get("token");
-		this.user.poste = this.get("poste");
-	}
 
-	initVuexUser(refObj) {
-		this.initUser();
-		refObj.userInitFromParams(this.user);
+		this.user.token = this.get("token");
 	}
 
 	set(pKey, pValue) {

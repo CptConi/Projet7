@@ -29,7 +29,7 @@ export default {
 		objRef.$http
 			.get(userURL + "/" + pId, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
-				objRef.reqResponse = response.body;
+				objRef.userResponse = response.body;
 			})
 			.catch((responseError) => {
 				console.log("An error occured while trying to communicate with Database", responseError);
