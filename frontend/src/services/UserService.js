@@ -25,9 +25,9 @@ export default {
 
 	// ------------------------PROD-----------------------------
 	//Return one user
-	getOne(objRef, pId) {
+	getOne(objRef, pToken) {
 		objRef.$http
-			.get(userURL + "/" + pId, { headers: { Authorization: objRef.user.token } })
+			.get(userURL, { token: pToken }, { headers: { Authorization: objRef.user.token } })
 			.then((response) => {
 				objRef.userResponse = response.body;
 			})
