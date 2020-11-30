@@ -3,6 +3,7 @@
 ## Backend server:
 
 Important ! Le serveur Backend doit être lancé en premier, sinon le frontend utilisera le port 8080 à la place du backend.
+Vous le trouverez dans un repo séparé, par ici : <a href="https://github.com/CptConi/Projet7-backend">Backend</a>
 
 `nodemon server` / `node server` depuis le dossier _/backend_
 
